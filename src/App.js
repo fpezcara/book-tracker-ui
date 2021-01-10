@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import Form from "./components/Form";
 
+
 const App = () => {
-  const [selectedBook, setSelectedBook] = useState("");
+  const [searchedTerm, setSearchedTerm] = useState("");
 
   return (
     <div className="App">
       <div className="searchedBook">
-        <Form selectedBook={selectedBook} setSelectedBook={setSelectedBook} />
+        <Form searchedTerm={searchedTerm} setSearchedTerm={setSearchedTerm} />
       </div>
     </div>
   );
