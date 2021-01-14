@@ -1,16 +1,19 @@
-import React, { useState } from "react";
-import Form from "./components/Form";
-
+import React from "react";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import Home from "./components/Home/Home";
+import SearchBook from "./components/Search/SearchBook";
 
 const App = () => {
-  const [searchedTerm, setSearchedTerm] = useState("");
-
   return (
-    <div className="App">
-      <div className="searchedBook">
-        <Form searchedTerm={searchedTerm} setSearchedTerm={setSearchedTerm} />
-      </div>
-    </div>
+    <Router>
+      <nav>
+        <h1>Book Tracker</h1>
+      </nav>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/search/:type" component={SearchBook} />
+      </Switch>
+    </Router>
   );
 };
 
