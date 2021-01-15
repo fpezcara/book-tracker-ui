@@ -1,58 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import SearchBook from "../Search/SearchBook";
 import { useHistory, useParams } from "react-router-dom";
 
-const Form = ({ searchInput, setSearchInput }) => {
-  const history = useHistory();
-  console.log(history);
-  const [searchedTerm, setSearchedTerm] = useState("");
-  const addBookHandler = (e) => {
-    setSearchedTerm(e.target.value);
+const Form = () => {
+  const [searchInput, setSearchInput] = useState("");
+  const [triggerSearch, setTriggerSearch] = useState(false);
+  const [selectType, setSelectType] = useState("");
+  const [data, setData] = useState("");
+  console.log(useParams());
+  const inputTextHandler = (e) => {
+    setSearchInput(e.target.value);
+    setTriggerSearch(true)
   };
-  const params = useParams();
-
-  console.log(params);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSearchInput({ term: searchedTerm, triggerSearch: true });
-    history.push("/hola");
+    // setData(searchInput.text)
+    // history.push(`/search/${selectType}`);
   };
+  console.log(searchInput);
 
   const statusHandler = (e) => {
-    switch (e.target.value) {
-      case "author":
-        console.log("buscare en author");
-        // aca tengo que poner que el search se haga en autor, tal vez guardar esto en un estado, asi despues puedo usarlo en submit cuando el usuario aprieta submit
-        break;
-      case "isbn":
-        console.log("buscare en isbn");
-        break;
-      default:
-        console.log("buscare en title");
-        break;
-    }
+    setSelectType(e.target.value);
   };
 
-  // switch (status) {
-  //   case "completed":
-  //     setFilteredTodos(todos.filter((todo) => todo.completed));
-  //     break;
-  //   case "uncompleted":
-  //     setFilteredTodos(todos.filter((todo) => !todo.completed));
-  //     break;
-  //   default:
-  //     setFilteredTodos(todos);
-  //     break;
-  // }
   return (
     <>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          onChange={addBookHandler}
-          value={searchedTerm}
+          // onChange={(e) => setData(e.target.value)}
+          onChange={inputTextHandler}
+          value={searchInput}
           placeholder="Search by Title, Author or ISBN"
         />
         <select onChange={statusHandler}>
@@ -62,7 +42,7 @@ const Form = ({ searchInput, setSearchInput }) => {
         </select>
         <AddCircleIcon onClick={() => console.log("fui clickeado")} />
       </form>
-      {searchInput.triggerSearch && <SearchBook searchInput={searchInput} />}
+      {triggerSearch && <SearchBook selectType={selectType} searchInput={searchInput} />}
     </>
   );
 };
