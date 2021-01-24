@@ -7,9 +7,7 @@ const urlName = process.env.REACT_APP_TITLE_URL;
 
 const SearchBook = ({ selectType, searchInput, triggerSearch }) => {
   const [triggeredApi, setTriggeredApi] = useState("");
-  const [selectedBook, setSelectedBook] = useState(null);
-  const [addedBook, setAddedBook] = useState([]);
-
+  const [addedBooks, setAddedBooks] = useState([]);
   const urls = {
     searchByTitle: "intitle",
     searchByAuthor: "inauthor",
@@ -49,10 +47,8 @@ const SearchBook = ({ selectType, searchInput, triggerSearch }) => {
           <div key={i}>
             <SearchResults
               result={result.volumeInfo}
-              addedBook={addedBook}
-              setAddedBook={setAddedBook}
-              selectedBook={selectedBook}
-              setSelectedBook={setSelectedBook}
+              addedBooks={addedBooks}
+              setAddedBooks={setAddedBooks}
             />
           </div>
         ))}
