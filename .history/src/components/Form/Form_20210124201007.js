@@ -6,6 +6,7 @@ const Form = () => {
   const [searchInput, setSearchInput] = useState("");
   const [triggerSearch, setTriggerSearch] = useState(false);
   const [selectType, setSelectType] = useState("title");
+  const [bookSelected, setBookSelected] = useState(null);
 
   // const [addedBooks, setAddedBooks] = useState([]); //despues buscar si es una buena idea hacer un estado separado con booksNowReading, booksAlreadyRead, booksWishlist
 

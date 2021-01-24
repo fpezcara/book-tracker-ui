@@ -5,10 +5,16 @@ import SearchResults from "./SearchResults";
 const apiKey = process.env.REACT_APP_API_KEY;
 const urlName = process.env.REACT_APP_TITLE_URL;
 
-const SearchBook = ({ selectType, searchInput, triggerSearch }) => {
+const SearchBook = ({
+  selectType,
+  searchInput,
+  triggerSearch,
+  selectedBook,
+  setSelectedBook,
+}) => {
   const [triggeredApi, setTriggeredApi] = useState("");
   const [selectedBook, setSelectedBook] = useState(null);
-  const [addedBook, setAddedBook] = useState([]);
+  const [addedBooks, setAddedBooks] = useState([]);
 
   const urls = {
     searchByTitle: "intitle",
@@ -49,10 +55,9 @@ const SearchBook = ({ selectType, searchInput, triggerSearch }) => {
           <div key={i}>
             <SearchResults
               result={result.volumeInfo}
-              addedBook={addedBook}
-              setAddedBook={setAddedBook}
+              addedBooks={addedBooks}
+              setAddedBooks={setAddedBooks}
               selectedBook={selectedBook}
-              setSelectedBook={setSelectedBook}
             />
           </div>
         ))}
