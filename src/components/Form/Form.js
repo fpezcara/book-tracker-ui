@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import SearchBook from "../Search/SearchBook";
 
-const Form = () => {
-  const [searchInput, setSearchInput] = useState("");
-  const [triggerSearch, setTriggerSearch] = useState(false);
-  const [selectType, setSelectType] = useState("title");
-
+const Form = ({
+  searchInput,
+  setSearchInput,
+  setTriggerSearch,
+  setSelectType,
+}) => {
   // const [addedBooks, setAddedBooks] = useState([]); //despues buscar si es una buena idea hacer un estado separado con booksNowReading, booksAlreadyRead, booksWishlist
 
   const inputTextHandler = (e) => {
@@ -40,12 +40,6 @@ const Form = () => {
         </select>
         <AddCircleIcon onClick={() => console.log("fui clickeado")} />
       </form>
-      <SearchBook
-        selectType={selectType}
-        searchInput={searchInput}
-        statusHandler={statusHandler}
-        triggerSearch={triggerSearch}
-      />
     </>
   );
 };

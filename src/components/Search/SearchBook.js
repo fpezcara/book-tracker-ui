@@ -46,15 +46,14 @@ const SearchBook = ({ selectType, searchInput, triggerSearch }) => {
       {triggerSearch &&
         searchResult.items &&
         searchResult.items.map((result, i) => (
-          <div key={i}>
-            <SearchResults
-              result={result.volumeInfo}
-              addedBook={addedBook}
-              setAddedBook={setAddedBook}
-              selectedBook={selectedBook}
-              setSelectedBook={setSelectedBook}
-            />
-          </div>
+          <SearchResults
+            result={result.volumeInfo}
+            addedBook={addedBook}
+            setAddedBook={setAddedBook}
+            selectedBook={selectedBook}
+            setSelectedBook={setSelectedBook}
+            key={i}
+          />
         ))}
     </>
   );
