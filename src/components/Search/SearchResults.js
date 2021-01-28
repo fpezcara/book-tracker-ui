@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { SearchContainer } from "../../styles/Search";
 
 const SearchResults = ({
   result,
@@ -15,38 +16,45 @@ const SearchResults = ({
   };
   console.log(selectedBook);
   return (
-    <div onClick={addBookHandler}>
-      <ul>
-        <li>
-          <span>{result.title}</span>
-        </li>
-        <li>
-          <span>{result.author}</span>
-        </li>
-        <li>
-          <img
-            src={
-              result.imageLinks
-                ? result.imageLinks.smallThumbnail
-                : "https://books.google.com/books/content?id=Pzw3AwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
-            }
-          />
-        </li>
-      </ul>
-    </div>
+    <SearchContainer onClick={addBookHandler}>
+      <button>
+        <table>
+          <tr>
+            <th>{result.title}</th>
+          </tr>
+          <tr>
+            <img
+              src={
+                result.imageLinks
+                  ? result.imageLinks.smallThumbnail
+                  : "https://books.google.com/books/content?id=Pzw3AwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
+              }
+            />
+          </tr>
+        </table>
+      </button>
+    </SearchContainer>
   );
 };
 
-export default SearchResults;
+// {
+/* <ul>
+<li>
+  <span>{result.title}</span>
+</li>
+<li>
+  <span>{result.author}</span>
+</li>
+<li>
+  <img
+    src={
+      result.imageLinks
+        // ? result.imageLinks.smallThumbnail
+        : "https://books.google.com/books/content?id=Pzw3AwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
+    }
+  />
+</li>
+</ul> */
+// }
 
-// title={result.volumeInfo.title}
-// author={result.volumeInfo.authors}
-// img={
-//   result.volumeInfo.imageLinks &&
-//   (result.volumeInfo.imageLinks.smallThumbnail || "N/A")
-// }
-// pagesTotal={result.volumeInfo.pageCount}
-// isbn={
-//   result.volumeInfo.industryIdentifiers &&
-//   (result.volumeInfo.industryIdentifiers[0].identifier || "N/A")
-// }
+export default SearchResults;
