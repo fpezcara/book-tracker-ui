@@ -23,7 +23,6 @@ const Home = () => {
         selectType={selectType}
         searchInput={searchInput}
         triggerSearch={triggerSearch}
-        setTriggerSearch={setTriggerSearch}
       />
       <BookLists />
     </HomeContainer>

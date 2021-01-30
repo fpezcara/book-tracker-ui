@@ -14,7 +14,7 @@ export const SearchContainer = styled.div`
     /* justify-content: flex-start; */
   }
   img {
-    width: 5em;
-    height: auto;
+    width: 2em;
+    height: 2em;
   }
 `;

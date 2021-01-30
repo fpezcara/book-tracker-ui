@@ -12,20 +12,21 @@ const Home = () => {
 
   return (
     <HomeContainer>
-      <NavBar />
-      <Form
-        searchInput={searchInput}
-        setTriggerSearch={setTriggerSearch}
-        setSelectType={setSelectType}
-        setSearchInput={setSearchInput}
-      />
-      <SearchBook
-        selectType={selectType}
-        searchInput={searchInput}
-        triggerSearch={triggerSearch}
-        setTriggerSearch={setTriggerSearch}
-      />
-      <BookLists />
+      <div>
+        <NavBar />
+        <Form
+          searchInput={searchInput}
+          setTriggerSearch={setTriggerSearch}
+          setSelectType={setSelectType}
+          setSearchInput={setSearchInput}
+        />
+        <SearchBook
+          selectType={selectType}
+          searchInput={searchInput}
+          triggerSearch={triggerSearch}
+        />
+        <BookLists />
+      </div>
     </HomeContainer>
   );
 };
