@@ -15,7 +15,7 @@ const SearchResults = ({
     setSelectedBook(result);
     console.log("que es esto");
   };
-
+  console.log(selectedBook);
   return (
     <SearchContainer onClick={selectBookHandler}>
       <button>

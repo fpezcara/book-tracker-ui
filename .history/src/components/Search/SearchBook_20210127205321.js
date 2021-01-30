@@ -5,12 +5,7 @@ import SearchResults from "./SearchResults";
 const apiKey = process.env.REACT_APP_API_KEY;
 const urlName = process.env.REACT_APP_TITLE_URL;
 
-const SearchBook = ({
-  selectType,
-  searchInput,
-  triggerSearch,
-  setTriggerSearch,
-}) => {
+const SearchBook = ({ selectType, searchInput, triggerSearch }) => {
   const [triggeredApi, setTriggeredApi] = useState("");
   const [selectedBook, setSelectedBook] = useState(null);
   const [addedBook, setAddedBook] = useState([]);
@@ -33,10 +28,7 @@ const SearchBook = ({
         setTriggeredApi(urls.searchByTitle);
         break;
     }
-    setTriggerSearch(false);
   }, [selectType]);
-
-  console.log(searchInput);
 
   const searchResult = useFetch(
     `${urlName}${triggeredApi}:${searchInput}&orderBy=relevance&key=${apiKey}`
@@ -48,7 +40,7 @@ const SearchBook = ({
   //       console.log(result.volumeInfo.industryIdentifiers && result.volumeInfo)
   //     );
   // }
-  console.log(triggerSearch);
+
   return (
     <>
       {triggerSearch &&

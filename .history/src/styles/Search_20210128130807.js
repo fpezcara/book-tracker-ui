@@ -15,6 +15,6 @@ export const SearchContainer = styled.div`
   }
   img {
     width: 5em;
-    height: auto;
+    height: 5em;
   }
 `;

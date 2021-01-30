@@ -9,15 +9,15 @@ const SearchResults = ({
   setSelectedBook,
 }) => {
   // console.log(result.imageLinks && (result.imageLinks.smallThumbnail || "N/A"));
-  const selectBookHandler = () => {
+  const addBookHandler = () => {
     // este es el paso previo a que el usuario apriete el boton de add
     setAddedBook([...addedBook, result]);
     setSelectedBook(result);
     console.log("que es esto");
   };
-
+  console.log(selectedBook);
   return (
-    <SearchContainer onClick={selectBookHandler}>
+    <SearchContainer onClick={addBookHandler}>
       <button>
         <table>
           <tbody>

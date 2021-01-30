@@ -9,15 +9,14 @@ const SearchResults = ({
   setSelectedBook,
 }) => {
   // console.log(result.imageLinks && (result.imageLinks.smallThumbnail || "N/A"));
-  const selectBookHandler = () => {
+  const addBookHandler = () => {
     // este es el paso previo a que el usuario apriete el boton de add
     setAddedBook([...addedBook, result]);
     setSelectedBook(result);
-    console.log("que es esto");
   };
-
+  console.log(selectedBook);
   return (
-    <SearchContainer onClick={selectBookHandler}>
+    <SearchContainer onClick={addBookHandler}>
       <button>
         <table>
           <tbody>
@@ -25,15 +24,13 @@ const SearchResults = ({
               <th>{result.title}</th>
             </tr>
             <tr>
-              <th>
-                <img
-                  src={
-                    result.imageLinks
-                      ? result.imageLinks.smallThumbnail
-                      : "https://books.google.com/books/content?id=Pzw3AwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
-                  }
-                />
-              </th>
+              <img
+                src={
+                  result.imageLinks
+                    ? result.imageLinks.smallThumbnail
+                    : "https://books.google.com/books/content?id=Pzw3AwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
+                }
+              />
             </tr>
           </tbody>
         </table>
