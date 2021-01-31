@@ -13,7 +13,6 @@ const SearchResults = ({
     // este es el paso previo a que el usuario apriete el boton de add
     setAddedBook([...addedBook, result]);
     setSelectedBook(result);
-    console.log("que es esto");
   };
 
   return (
