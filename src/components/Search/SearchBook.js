@@ -33,10 +33,10 @@ const SearchBook = ({
         setTriggeredApi(urls.searchByTitle);
         break;
     }
-    setTriggerSearch(false);
   }, [selectType]);
 
   console.log(searchInput);
+  console.log("trigger search,", triggerSearch);
 
   const searchResult = useFetch(
     `${urlName}${triggeredApi}:${searchInput}&orderBy=relevance&key=${apiKey}`

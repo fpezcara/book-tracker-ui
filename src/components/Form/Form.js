@@ -10,7 +10,7 @@ const Form = ({
   // const [addedBooks, setAddedBooks] = useState([]); //despues buscar si es una buena idea hacer un estado separado con booksNowReading, booksAlreadyRead, booksWishlist
 
   const inputTextHandler = (e) => {
-    setSearchInput(e.target.value);
+    setSearchInput(e.target.value.trim());
     setTriggerSearch(true);
   };
 
