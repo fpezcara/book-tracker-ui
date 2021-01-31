@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import Form from "./components/Form";
-import SearchBook from "./components/SearchBook";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import BookLists from "./components/Book/BookLists";
+import Home from "./components/Home/Home";
+// import SearchBook from "./components/Search/SearchBook";
 
 const App = () => {
-  const [searchedBook, setSearchedBook] = useState("");
-
   return (
-    <div className="App">
-      <div className="searchedBook">
-        <Form searchedBook={searchedBook} setSearchedBook={setSearchedBook} />
-        <SearchBook searchedBook={searchedBook} />
-      </div>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/book-lists/:name" component={BookLists} />
+      </Switch>
+    </Router>
   );
 };
 
