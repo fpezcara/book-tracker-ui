@@ -4,12 +4,13 @@ import useFetch from "../hooks/useFetch";
 const apiKey = process.env.REACT_APP_API_KEY;
 const urlTitle = process.env.REACT_APP_TITLE_URL;
 
-const SearchBook = ({searchedTerm}) => {
+const SearchBook = ({ searchedBook }) => {
   //   const [data, setData] = useState([]);
+  console.log(searchedBook);
 
-   useFetch(
-    `${urlTitle}inauthor:${searchedTerm}&orderBy=relevance&key=${apiKey}`
-  )
+  const info = useFetch(
+    `${urlTitle}inauthor:${searchedBook}&orderBy=relevance&key=${apiKey}`
+  );
   // const searchedResult = () => {
 
   // }
@@ -28,7 +29,9 @@ const SearchBook = ({searchedTerm}) => {
   //     `${urlTitle}isbn:${searchedTitle}&orderBy=relevance&key=${apiKey}`
   //   );
 
+  console.log(info);
 
+  return <div>Hola</div>;
 };
 
 export default SearchBook;

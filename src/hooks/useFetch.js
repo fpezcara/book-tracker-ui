@@ -11,7 +11,7 @@ const useFetch = (url) => {
     fetchApi();
   }, [url]);
 
-  return data
+  return data;
 };
 
 export default useFetch;
