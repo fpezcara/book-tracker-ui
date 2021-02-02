@@ -10,7 +10,7 @@ const BookLists = () => {
   console.log(params);
 
   // hacer un switch para si elige tal, que se me agregue a ese estado. Fijarme donde agregar estos.  Tal vez puedo agregarlo directamente al react router dom
-  return <div>Estoy en book list</div>;
+  return <div></div>;
 };
 
 export default BookLists;

@@ -10,8 +10,8 @@ const useFetch = (url) => {
       setData(data);
     };
     fetchApi();
+    console.log(url);
   }, [url]);
-  console.log(data);
 
   return data;
 };

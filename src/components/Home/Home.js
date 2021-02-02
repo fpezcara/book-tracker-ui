@@ -3,7 +3,7 @@ import Form from "../Form/Form";
 import SearchBook from "../Search/SearchBook";
 import BookLists from "../Book/BookLists";
 import NavBar from "../NavBar/NavBar";
-import { HomeContainer } from "../../styles/Home";
+import { HomeContainer, SearchContainer } from "../../styles/Home.js";
 
 const Home = () => {
   const [triggerSearch, setTriggerSearch] = useState(false);
@@ -13,18 +13,21 @@ const Home = () => {
   return (
     <HomeContainer>
       <NavBar />
-      <Form
-        searchInput={searchInput}
-        setTriggerSearch={setTriggerSearch}
-        setSelectType={setSelectType}
-        setSearchInput={setSearchInput}
-      />
-      <SearchBook
-        selectType={selectType}
-        searchInput={searchInput}
-        triggerSearch={triggerSearch}
-        setTriggerSearch={setTriggerSearch}
-      />
+      <SearchContainer>
+        <Form
+          searchInput={searchInput}
+          setTriggerSearch={setTriggerSearch}
+          setSelectType={setSelectType}
+          setSearchInput={setSearchInput}
+          triggerSearch={triggerSearch}
+        />
+        <SearchBook
+          selectType={selectType}
+          searchInput={searchInput}
+          triggerSearch={triggerSearch}
+          setTriggerSearch={setTriggerSearch}
+        />
+      </SearchContainer>
       <BookLists />
     </HomeContainer>
   );

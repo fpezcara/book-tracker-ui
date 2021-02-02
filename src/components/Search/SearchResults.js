@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { SearchContainer } from "../../styles/Search";
+import React from "react";
+import { SearchContainer, SearchResult } from "../../styles/Search";
+import imageNotAvailable from "../../assets/image-not-available.svg";
 
 const SearchResults = ({
   result,
   addedBook,
   setAddedBook,
-  selectedBook,
   setSelectedBook,
+  searchInput,
+  id,
 }) => {
   // console.log(result.imageLinks && (result.imageLinks.smallThumbnail || "N/A"));
   const selectBookHandler = () => {
@@ -14,30 +16,36 @@ const SearchResults = ({
     setAddedBook([...addedBook, result]);
     setSelectedBook(result);
   };
+  console.log(id);
 
   return (
-    <SearchContainer onClick={selectBookHandler}>
-      <button>
-        <table>
+    <>
+      {/* necesito agregar un boton para cuando el usuario lo aprieta se me muestran 5 resultados mas, y asi sucesivamente, puedo poner id < x y esta x setearla para que cuando el usuario apriete se vaya sumando 5, (cada vez que el usario apriete more que la x sume 5) */}
+      {searchInput !== "" && id < 8 && (
+        <SearchResult onClick={selectBookHandler}>
+          {/* <button> */}
           <tbody>
             <tr>
-              <th>{result.title}</th>
-            </tr>
-            <tr>
-              <th>
+              <td>
                 <img
                   src={
                     result.imageLinks
                       ? result.imageLinks.smallThumbnail
-                      : "https://books.google.com/books/content?id=Pzw3AwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
+                      : imageNotAvailable
                   }
                 />
-              </th>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span>{result.title}</span>
+              </td>
             </tr>
           </tbody>
-        </table>
-      </button>
-    </SearchContainer>
+          {/* </button> */}
+        </SearchResult>
+      )}
+    </>
   );
 };
 
