@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import SearchResults from "./SearchResults";
+import { TableSearchBook } from "../../styles/Search";
 
 const apiKey = process.env.REACT_APP_API_KEY;
 const urlName = process.env.REACT_APP_TITLE_URL;
 
-const SearchBook = ({
-  selectType,
-  searchInput,
-  triggerSearch,
-  setTriggerSearch,
-}) => {
+const SearchBook = ({ selectType, searchInput, triggerSearch }) => {
   const [triggeredApi, setTriggeredApi] = useState("");
   const [selectedBook, setSelectedBook] = useState(null);
   const [addedBook, setAddedBook] = useState([]);
@@ -35,9 +31,6 @@ const SearchBook = ({
     }
   }, [selectType]);
 
-  console.log(searchInput);
-  console.log("trigger search,", triggerSearch);
-
   const searchResult = useFetch(
     `${urlName}${triggeredApi}:${searchInput}&orderBy=relevance&key=${apiKey}`
   );
@@ -50,7 +43,7 @@ const SearchBook = ({
   // }
   console.log(triggerSearch);
   return (
-    <>
+    <TableSearchBook>
       {triggerSearch &&
         searchResult.items &&
         searchResult.items.map((result, i) => (
@@ -60,10 +53,12 @@ const SearchBook = ({
             setAddedBook={setAddedBook}
             selectedBook={selectedBook}
             setSelectedBook={setSelectedBook}
+            searchInput={searchInput} 
             key={i}
+            id={i}
           />
         ))}
-    </>
+    </TableSearchBook>
   );
 };
 

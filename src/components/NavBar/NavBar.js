@@ -1,9 +1,10 @@
 import React from "react";
+import { NavTitle } from "../../styles/NavBar";
 
 const NavBar = () => {
   return (
     <nav>
-      <h1>Book Tracker</h1>
+      <NavTitle>Book Tracker</NavTitle>
     </nav>
   );
 };
