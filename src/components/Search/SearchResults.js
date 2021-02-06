@@ -1,72 +1,58 @@
-import React from "react";
-import { SearchContainer, SearchResult } from "../../styles/Search";
+import React, { useState } from "react";
 import imageNotAvailable from "../../assets/image-not-available.svg";
+import { TableBodySearchResults } from "../../styles/Search";
 
+// este nombre lo podria cambiar a dropdown list
 const SearchResults = ({
   result,
-  addedBook,
-  setAddedBook,
+  selectedBook,
   setSelectedBook,
   searchInput,
   id,
 }) => {
-  // console.log(result.imageLinks && (result.imageLinks.smallThumbnail || "N/A"));
+  const [focusedBook, setFocusedBook] = useState(false);
+
+  // const bookId =
+  //   result.industryIdentifiers[0].identifier ||
+  //   result.industryIdentifiers[1].identifier;
   const selectBookHandler = () => {
-    // este es el paso previo a que el usuario apriete el boton de add
-    setAddedBook([...addedBook, result]);
-    setSelectedBook(result);
+    // setSelectedBook([
+    //   { ...selectedBook, book: { ...result, result }, id: bookId && bookId },
+    // ]);
+
+    setSelectedBook([...selectedBook, result]);
+    setFocusedBook(!focusedBook);
   };
-  console.log(id);
 
   return (
     <>
       {/* necesito agregar un boton para cuando el usuario lo aprieta se me muestran 5 resultados mas, y asi sucesivamente, puedo poner id < x y esta x setearla para que cuando el usuario apriete se vaya sumando 5, (cada vez que el usario apriete more que la x sume 5) */}
       {searchInput !== "" && id < 8 && (
-        <SearchResult onClick={selectBookHandler}>
-          {/* <button> */}
-          <tbody>
-            <tr>
-              <td>
-                <img
-                  src={
-                    result.imageLinks
-                      ? result.imageLinks.smallThumbnail
-                      : imageNotAvailable
-                  }
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span>{result.title}</span>
-              </td>
-            </tr>
-          </tbody>
-          {/* </button> */}
-        </SearchResult>
+        <TableBodySearchResults
+          onClick={selectBookHandler}
+          $focusedBook={focusedBook}
+        >
+          <tr>
+            <td>
+              <img
+                alt={result.title}
+                src={
+                  result.imageLinks
+                    ? result.imageLinks.smallThumbnail
+                    : imageNotAvailable
+                }
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span>{result.title}</span>
+            </td>
+          </tr>
+        </TableBodySearchResults>
       )}
     </>
   );
 };
-
-// {
-/* <ul>
-<li>
-  <span>{result.title}</span>
-</li>
-<li>
-  <span>{result.author}</span>
-</li>
-<li>
-  <img
-    src={
-      result.imageLinks
-        // ? result.imageLinks.smallThumbnail
-        : "https://books.google.com/books/content?id=Pzw3AwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
-    }
-  />
-</li>
-</ul> */
-// }
 
 export default SearchResults;

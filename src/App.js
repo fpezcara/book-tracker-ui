@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import BookLists from "./components/Book/BookLists";
+import BookLists from "./components/BookLists/BookLists";
 import Home from "./components/Home/Home";
 // import SearchBook from "./components/Search/SearchBook";
-
 const App = () => {
   return (
     <Router>

@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import { Add } from "@styled-icons/ionicons-sharp/Add";
 
-export const ContainerForm = styled.div`
+export const ContainerForm = styled.section`
   display: flex;
   justify-content: space-around;
+  font-family: "Work Sans", sans-serif;
+
   form {
     display: flex;
     align-items: center;
