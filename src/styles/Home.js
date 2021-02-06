@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HomeContainer = styled.div`
+export const HomeContainer = styled.section`
   display: flex;
   /* background-color: #e0f2f1; */
   flex-direction: column;
@@ -8,7 +8,7 @@ export const HomeContainer = styled.div`
   font-family: "Work Sans", sans-serif;
 `;
 
-export const SearchContainer = styled.div`
+export const SearchContainer = styled.article`
   display: flex;
   flex-direction: column;
   align-items: flex-start;

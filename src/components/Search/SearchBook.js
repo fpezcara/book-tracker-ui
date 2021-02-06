@@ -6,10 +6,14 @@ import { TableSearchBook } from "../../styles/Search";
 const apiKey = process.env.REACT_APP_API_KEY;
 const urlName = process.env.REACT_APP_TITLE_URL;
 
-const SearchBook = ({ selectType, searchInput, triggerSearch }) => {
+const SearchBook = ({
+  selectType,
+  searchInput,
+  triggerSearch,
+  selectedBook,
+  setSelectedBook,
+}) => {
   const [triggeredApi, setTriggeredApi] = useState("");
-  const [selectedBook, setSelectedBook] = useState(null);
-  const [addedBook, setAddedBook] = useState([]);
 
   const urls = {
     searchByTitle: "intitle",
@@ -34,14 +38,6 @@ const SearchBook = ({ selectType, searchInput, triggerSearch }) => {
   const searchResult = useFetch(
     `${urlName}${triggeredApi}:${searchInput}&orderBy=relevance&key=${apiKey}`
   );
-
-  // {
-  //   searchResult.items &&
-  //     searchResult.items.map((result) =>
-  //       console.log(result.volumeInfo.industryIdentifiers && result.volumeInfo)
-  //     );
-  // }
-  console.log(triggerSearch);
   return (
     <TableSearchBook>
       {triggerSearch &&
@@ -49,11 +45,9 @@ const SearchBook = ({ selectType, searchInput, triggerSearch }) => {
         searchResult.items.map((result, i) => (
           <SearchResults
             result={result.volumeInfo}
-            addedBook={addedBook}
-            setAddedBook={setAddedBook}
             selectedBook={selectedBook}
             setSelectedBook={setSelectedBook}
-            searchInput={searchInput} 
+            searchInput={searchInput}
             key={i}
             id={i}
           />

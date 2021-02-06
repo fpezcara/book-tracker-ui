@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import Form from "../Form/Form";
 import SearchBook from "../Search/SearchBook";
-import BookLists from "../Book/BookLists";
+import BookLists from "../BookLists/BookLists";
 import NavBar from "../NavBar/NavBar";
+
 import { HomeContainer, SearchContainer } from "../../styles/Home.js";
 
 const Home = () => {
   const [triggerSearch, setTriggerSearch] = useState(false);
   const [selectType, setSelectType] = useState("title");
   const [searchInput, setSearchInput] = useState("");
+  const [selectedBook, setSelectedBook] = useState([]);
+  const [addedBook, setAddedBook] = useState([]);
 
   return (
     <HomeContainer>
@@ -16,19 +19,22 @@ const Home = () => {
       <SearchContainer>
         <Form
           searchInput={searchInput}
+          setSearchInput={setSearchInput}
           setTriggerSearch={setTriggerSearch}
           setSelectType={setSelectType}
-          setSearchInput={setSearchInput}
-          triggerSearch={triggerSearch}
+          selectedBook={selectedBook}
+          addedBook={addedBook}
+          setAddedBook={setAddedBook}
         />
         <SearchBook
           selectType={selectType}
           searchInput={searchInput}
           triggerSearch={triggerSearch}
-          setTriggerSearch={setTriggerSearch}
+          selectedBook={selectedBook}
+          setSelectedBook={setSelectedBook}
         />
       </SearchContainer>
-      <BookLists />
+      <BookLists addedBook={addedBook} />
     </HomeContainer>
   );
 };
