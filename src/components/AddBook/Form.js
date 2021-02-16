@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import { ContainerForm, AddIcon } from "../../styles/Form";
-import ConfirmationModal from "../Modal/ConfirmationModal";
+import SearchBook from "../Search/SearchBook";
 
-const Form = ({
-  searchInput,
-  setSearchInput,
-  setTriggerSearch,
-  setSelectType,
-  selectedBook,
-  addedBook,
-  setAddedBook,
-}) => {
-  const [openModal, setOpenModal] = useState(false);
+const Form = ({ setAddedBook, setOpenModal }) => {
+  const [triggerSearch, setTriggerSearch] = useState(false);
+  const [selectType, setSelectType] = useState("title");
+  const [searchInput, setSearchInput] = useState("");
+  const [selectedBook, setSelectedBook] = useState([]);
 
   const inputTextHandler = (e) => {
     setSearchInput(e.target.value);
@@ -28,14 +23,9 @@ const Form = ({
 
   const addBookHandler = () => {
     setAddedBook(Array.from(new Set(selectedBook)));
-    let bookTitle = addedBook.map((book) => book.title);
     setTriggerSearch(false);
     setOpenModal(true);
-    console.log("booktitle,", bookTitle);
   };
-
-  console.log("added book,", addedBook);
-
   return (
     <ContainerForm>
       <form onSubmit={handleSubmit}>
@@ -52,14 +42,17 @@ const Form = ({
         </select>
         <AddIcon onClick={addBookHandler} />
         {/* cuando toco el add que me redireccion a la lista (booklists) donde estoy y de ahi saco la info que tengo que ver como mandar para ahi  */}
+
+        {/* tal vez hacer un componente distinto para el form que se llame form y pongo todo lo qeu esta en el form y adentro de eso pongon searchbook
+      despues eso lo agrego a aca - el componente, y la carpeta se puede llamar AddBook, tal vez crear AddBook */}
       </form>
-      {openModal && (
-        <>
-          {addedBook.map((book, i) => (
-            <ConfirmationModal title={book.title} authors={book.authors} />
-          ))}
-        </>
-      )}
+      <SearchBook
+        selectType={selectType}
+        searchInput={searchInput}
+        triggerSearch={triggerSearch}
+        selectedBook={selectedBook}
+        setSelectedBook={setSelectedBook}
+      />
     </ContainerForm>
   );
 };

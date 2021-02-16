@@ -2,14 +2,9 @@ import styled from "styled-components";
 
 export const ModalContainer = styled.section`
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
   font-family: "Work Sans", sans-serif;
-  opacity: 1;
-  transition: opacity linear 0.5s;
-  /* width: 100%;
-  height: 100%; */
-  background: rgba(0, 0, 0, 0.5);
+  background-color: blue;
+  z-index: 1000;
   article {
     font-size: 14px;
     width: 30em;
@@ -29,10 +24,18 @@ export const ModalContainer = styled.section`
 export const ModalText = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 30em;
   margin-top: 2em;
+  &.fade-in {
+    opacity: 1;
+    transition: opacity linear 0.5s; // super slow to see fade works
+  }
+  &.fade-out {
+    opacity: 0;
+    transition: opacity linear 0.5s; // super slow to see fade works
+  }
 
   span {
     display: flex;

@@ -1,11 +1,11 @@
 import React from "react";
-import { NavTitle } from "../../styles/NavBar";
+import { Nav}from "../../styles/NavBar";
 
 const NavBar = () => {
   return (
-    <nav>
-      <NavTitle>Book Tracker</NavTitle>
-    </nav>
+    <Nav>
+      <h1>Book Tracker</h1>
+    </Nav>
   );
 };
 

@@ -1,15 +1,20 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import BookLists from "./components/BookLists/BookLists";
+import { BookTrackerProvider } from "./components/Context/BookTrackerContext";
 import Home from "./components/Home/Home";
-// import SearchBook from "./components/Search/SearchBook";
+import NavBar from "./components/NavBar/NavBar";
+import AddBook from "./components/AddBook/AddBook";
+
 const App = () => {
   return (
     <Router>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/book-lists/:name" component={BookLists} />
-      </Switch>
+      <BookTrackerProvider>
+        <NavBar />
+        <Switch>
+          <Route exact path="/book-lists/:name" component={Home} />
+          <Route exact path="/book-lists/:name/add-book" component={AddBook} />
+        </Switch>
+      </BookTrackerProvider>
     </Router>
   );
 };

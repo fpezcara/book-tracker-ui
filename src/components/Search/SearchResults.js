@@ -3,6 +3,7 @@ import imageNotAvailable from "../../assets/image-not-available.svg";
 import { TableBodySearchResults } from "../../styles/Search";
 
 // este nombre lo podria cambiar a dropdown list
+// tal vez poner el modal de confirmacion aca al seleccionar el libro que me diga "do u wish to add this book" o algo asi
 const SearchResults = ({
   result,
   selectedBook,
@@ -16,10 +17,6 @@ const SearchResults = ({
   //   result.industryIdentifiers[0].identifier ||
   //   result.industryIdentifiers[1].identifier;
   const selectBookHandler = () => {
-    // setSelectedBook([
-    //   { ...selectedBook, book: { ...result, result }, id: bookId && bookId },
-    // ]);
-
     setSelectedBook([...selectedBook, result]);
     setFocusedBook(!focusedBook);
   };
