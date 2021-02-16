@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
-const ShowBookList = ({ addedBook }) => {
-  // console.log("showlist,", addedBook);
-  return <div>booklist</div>;
+const ShowBookList = () => {
+  return (
+    <section>
+      {" "}
+      <article></article>{" "}
+    </section>
+  );
 };
 
 export default ShowBookList;

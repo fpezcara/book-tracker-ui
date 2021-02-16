@@ -20,7 +20,7 @@ const SearchBook = ({
     searchByAuthor: "inauthor",
     searchByIsbn: "isbn",
   };
-
+  // console.log("children", children);
   useEffect(() => {
     switch (selectType) {
       case "author":

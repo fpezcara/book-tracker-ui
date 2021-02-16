@@ -1,40 +1,36 @@
-import React, { useState } from "react";
-import Form from "../Form/Form";
-import SearchBook from "../Search/SearchBook";
-import BookLists from "../BookLists/BookLists";
-import NavBar from "../NavBar/NavBar";
+import React, { useState, useContext } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import BookListsSelect from "./BookListsSelect";
+import TableBooks from "./TableBooks";
 
-import { HomeContainer, SearchContainer } from "../../styles/Home.js";
+import { HomeContainer, BookListContainer } from "../../styles/Home.js";
+import { BookTrackerContext } from "../Context/BookTrackerContext";
 
 const Home = () => {
-  const [triggerSearch, setTriggerSearch] = useState(false);
-  const [selectType, setSelectType] = useState("title");
-  const [searchInput, setSearchInput] = useState("");
-  const [selectedBook, setSelectedBook] = useState([]);
-  const [addedBook, setAddedBook] = useState([]);
+  const history = useHistory();
+  const params = useParams();
+
+  const [currentList, setCurrentList] = useState("reading");
+  const [bookLists, setBookLists] = useContext(BookTrackerContext);
+  const addButtonHandler = () => {
+    history.push(`/book-lists/${params.name}/add-book`);
+  };
 
   return (
     <HomeContainer>
-      <NavBar />
-      <SearchContainer>
-        <Form
-          searchInput={searchInput}
-          setSearchInput={setSearchInput}
-          setTriggerSearch={setTriggerSearch}
-          setSelectType={setSelectType}
-          selectedBook={selectedBook}
-          addedBook={addedBook}
-          setAddedBook={setAddedBook}
+      <nav>
+        <h3>{currentList.charAt(0).toUpperCase() + currentList.slice(1)}</h3>
+        <BookListsSelect
+          currentList={currentList}
+          setCurrentList={setCurrentList}
+          bookLists={bookLists}
+          setBookLists={setBookLists}
         />
-        <SearchBook
-          selectType={selectType}
-          searchInput={searchInput}
-          triggerSearch={triggerSearch}
-          selectedBook={selectedBook}
-          setSelectedBook={setSelectedBook}
-        />
-      </SearchContainer>
-      <BookLists addedBook={addedBook} />
+        <button onClick={addButtonHandler}>Add Book</button>
+      </nav>
+      <BookListContainer>
+        <TableBooks bookLists={bookLists} params={params} />
+      </BookListContainer>
     </HomeContainer>
   );
 };
