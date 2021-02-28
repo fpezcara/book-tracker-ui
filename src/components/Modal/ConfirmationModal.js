@@ -5,26 +5,25 @@ import { BookTrackerContext } from "../Context/BookTrackerContext";
 
 const ConfirmationModal = ({ book, title, authors, setOpenModal }) => {
   const history = useHistory();
-  const params = useParams();
+  const {name} = useParams();
   const [bookLists, setBookLists] = useContext(BookTrackerContext);
 
   const addButtonlHandler = (e) => {
     // console.log(params);
-    history.push(`/book-lists/${params.name}`);
     setOpenModal(false);
-
     setBookLists(
       [...bookLists],
       bookLists.filter(
-        (list) => list.listUrl === params.name && list.books.push(book)
+        (list) => list.listUrl === name && list.books.push(book)
       )
     );
+    history.push(`/book-lists/${name}`);
   };
   const cancelButtonHandler = (e) => {
     setOpenModal(false);
-    history.push(`/book-lists/${params.name}`);
+    history.push(`/book-lists/${name}`);
   };
-
+  console.log(name);
   return (
     <ModalContainer>
       <article>

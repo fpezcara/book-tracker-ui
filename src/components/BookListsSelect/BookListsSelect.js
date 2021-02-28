@@ -1,18 +1,19 @@
 import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { BookTrackerContext } from "../Context/BookTrackerContext";
 
-const BookListsSelect = ({ currentList, setCurrentList }) => {
-  // tal vez guardar esto en la carpeta que se llama BookList
-  const [bookLists, setBookLists] = useContext(BookTrackerContext);
+const BookListsSelect = () => {
+  const [bookLists] = useContext(BookTrackerContext);
   const history = useHistory();
+  const { name } = useParams();
+  // const [currentList, setCurrentList] = useState("reading");
+
   const bookListsHandler = ({ target }) => {
-    setCurrentList(target.value);
     history.push(`/book-lists/${target.value}`);
-    // history.push(`/book-lists/${target.value}`);
   };
+
   return (
-    <select value={currentList} onChange={bookListsHandler}>
+    <select value={name} onChange={bookListsHandler}>
       {bookLists.map((list, i) => (
         <option key={i} value={list.listUrl}>
           {list.listName}

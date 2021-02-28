@@ -3,9 +3,8 @@ import { Add } from "@styled-icons/ionicons-sharp/Add";
 
 export const ContainerForm = styled.section`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   font-family: "Work Sans", sans-serif;
-
   form {
     display: flex;
     align-items: center;

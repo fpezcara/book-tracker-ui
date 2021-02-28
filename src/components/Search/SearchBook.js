@@ -15,22 +15,16 @@ const SearchBook = ({
 }) => {
   const [triggeredApi, setTriggeredApi] = useState("");
 
-  const urls = {
-    searchByTitle: "intitle",
-    searchByAuthor: "inauthor",
-    searchByIsbn: "isbn",
-  };
-  // console.log("children", children);
   useEffect(() => {
     switch (selectType) {
       case "author":
-        setTriggeredApi(urls.searchByAuthor);
+        setTriggeredApi("inauthor");
         break;
       case "isbn":
-        setTriggeredApi(urls.searchByIsbn);
+        setTriggeredApi("isbn");
         break;
       default:
-        setTriggeredApi(urls.searchByTitle);
+        setTriggeredApi("intitle");
         break;
     }
   }, [selectType]);
