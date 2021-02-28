@@ -4,6 +4,7 @@ export const HomeContainer = styled.section`
   display: flex;
   flex-direction: column;
   font-family: "Work Sans", sans-serif;
+  height: 100%;
   nav {
     display: flex;
     width: 100%;

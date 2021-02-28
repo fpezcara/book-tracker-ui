@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ModalContainer = styled.section`
+export const ModalContainer = styled.article`
   display: flex;
   font-family: "Work Sans", sans-serif;
   background-color: blue;

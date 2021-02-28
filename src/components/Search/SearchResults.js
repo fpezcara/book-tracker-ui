@@ -28,7 +28,7 @@ const SearchResults = ({
         <TableBodySearchResults
           onClick={selectBookHandler}
           $focusedBook={focusedBook}
-        >
+          >
           <tr>
             <td>
               <img
