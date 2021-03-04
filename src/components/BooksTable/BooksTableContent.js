@@ -3,7 +3,6 @@ import imageNotAvailable from "../../assets/image-not-available.svg";
 import { DeleteIcon } from "../../styles/BooksTable";
 
 const BooksTableContent = ({ bookList }) => {
-console.log(bookList)
   return (
     <>
       {bookList && bookList.books.length > 0 ? (
@@ -28,7 +27,7 @@ console.log(bookList)
         ))
       ) : (
         <tr>
-          <td>No books have been added.</td>
+          <td colSpan="4">No books have been added.</td>
         </tr>
       )}
     </>

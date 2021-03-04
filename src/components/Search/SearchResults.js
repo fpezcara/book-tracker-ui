@@ -9,16 +9,17 @@ const SearchResults = ({
   selectedBook,
   setSelectedBook,
   searchInput,
+  setOpenModal,
+  setTriggerSearch,
   id,
 }) => {
   const [focusedBook, setFocusedBook] = useState(false);
 
-  // const bookId =
-  //   result.industryIdentifiers[0].identifier ||
-  //   result.industryIdentifiers[1].identifier;
   const selectBookHandler = () => {
     setSelectedBook([...selectedBook, result]);
     setFocusedBook(!focusedBook);
+    setTriggerSearch(false);
+    setOpenModal(true);
   };
 
   return (
@@ -28,7 +29,7 @@ const SearchResults = ({
         <TableBodySearchResults
           onClick={selectBookHandler}
           $focusedBook={focusedBook}
-          >
+        >
           <tr>
             <td>
               <img

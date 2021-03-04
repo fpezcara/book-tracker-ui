@@ -1,11 +1,11 @@
 import React from "react";
-import { Nav}from "../../styles/NavBar";
+import { Header } from "../../styles/NavBar";
 
 const NavBar = () => {
   return (
-    <Nav>
+    <Header>
       <h1>Book Tracker</h1>
-    </Nav>
+    </Header>
   );
 };
 

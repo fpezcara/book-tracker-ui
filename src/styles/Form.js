@@ -1,14 +1,9 @@
 import styled from "styled-components";
-import { Add } from "@styled-icons/ionicons-sharp/Add";
 
-export const ContainerForm = styled.section`
+export const FormStyled = styled.form`
   display: flex;
-  justify-content: center;
-  font-family: "Work Sans", sans-serif;
-  form {
-    display: flex;
-    align-items: center;
-  }
+  align-items: center;
+
   input {
     font-family: "Work Sans", sans-serif;
     font-size: 14px;
@@ -34,10 +29,4 @@ export const ContainerForm = styled.section`
     height: 2.7em;
     border-color: #8c9eff;
   }
-`;
-
-export const AddIcon = styled(Add)`
-  width: 35px;
-  color: #536dfe;
-  margin-left: 1.5em;
 `;

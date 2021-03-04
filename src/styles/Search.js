@@ -7,9 +7,9 @@ export const TableSearchBook = styled.table`
   flex-direction: column;
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
-  margin: 0 11em 0 0;
+  /* margin: 0 11em 0 0; */
   padding: 0;
-
+ 
 `;
 
 export const TableBodySearchResults = styled.tbody`

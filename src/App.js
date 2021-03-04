@@ -11,7 +11,6 @@ const App = () => {
     <Router>
       <BookTrackerProvider>
         <NavBar />
-
         <Switch>
           <Route exact path="/book-lists/:name" component={Home} />
           <Route exact path="/book-lists/:name/add-book" component={AddBook} />
