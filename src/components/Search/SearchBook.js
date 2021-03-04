@@ -6,12 +6,15 @@ import { TableSearchBook } from "../../styles/Search";
 const apiKey = process.env.REACT_APP_API_KEY;
 const urlName = process.env.REACT_APP_TITLE_URL;
 
+// cambiar nombre a dropdownlist
 const SearchBook = ({
   selectType,
   searchInput,
   triggerSearch,
   selectedBook,
   setSelectedBook,
+  setOpenModal,
+  setTriggerSearch,
 }) => {
   const [triggeredApi, setTriggeredApi] = useState("");
 
@@ -42,6 +45,8 @@ const SearchBook = ({
             selectedBook={selectedBook}
             setSelectedBook={setSelectedBook}
             searchInput={searchInput}
+            setOpenModal={setOpenModal}
+            setTriggerSearch={setTriggerSearch}
             key={i}
             id={i}
           />

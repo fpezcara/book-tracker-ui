@@ -1,12 +1,8 @@
 import React from "react";
-import { BookTrackerContext } from "../Context/BookTrackerContext";
 import { BooksTableContainer } from "../../styles/BooksTable";
-
 import BooksTableContent from "./BooksTableContent";
 
-const BooksTable = ({bookList}) => {
-
-  console.log(bookList)
+const BooksTable = ({ bookList }) => {
   return (
     <BooksTableContainer>
       <tbody>
@@ -15,6 +11,7 @@ const BooksTable = ({bookList}) => {
           <th>Title</th>
           <th>Author</th>
           <th>Pages</th>
+          <th></th>
         </tr>
         <BooksTableContent bookList={bookList} />
       </tbody>
