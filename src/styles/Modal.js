@@ -3,8 +3,7 @@ import styled from "styled-components";
 export const ModalContainer = styled.article`
   display: flex;
   font-family: "Work Sans", sans-serif;
-  background-color: blue;
-  z-index: 1000;
+  background-color: red;
   article {
     font-size: 14px;
     width: 30em;
@@ -13,12 +12,11 @@ export const ModalContainer = styled.article`
     padding: 20px;
     border-radius: 20px;
     position: absolute;
-    top: 22%;
-    right: 35.5%;
+    top: 15em;
+    left: 38em;
+    z-index: 1000;
     background-color: #fff;
-    margin-bottom: 200px;
   }
-  /* } */
 `;
 
 export const ModalText = styled.div`
@@ -28,14 +26,6 @@ export const ModalText = styled.div`
   align-items: center;
   width: 30em;
   margin-top: 2em;
-  &.fade-in {
-    opacity: 1;
-    transition: opacity linear 0.5s; // super slow to see fade works
-  }
-  &.fade-out {
-    opacity: 0;
-    transition: opacity linear 0.5s; // super slow to see fade works
-  }
 
   span {
     display: flex;
@@ -58,28 +48,30 @@ export const ModalText = styled.div`
 
 export const ModalButton = styled.div`
   display: flex;
-  justify-content: center;
-  align-items:center;
-  width: 30em;
-  margin-top: 2em;
+  justify-content: space-between;
+  align-items: center;
+  width: 25em;
+  margin: 2em;
 
   .button {
-    width: 6em;
+    width: 10em;
     font-family: "Work Sans", sans-serif;
     font-weight: 400;
     font-size: 12px;
     padding: 0.5em;
     border: 0.2em solid #fff;
     color: #ffffff;
-
-    /* border-color: white; */
   }
 
-  .add {
+  .accept {
     background-color: #28a745;
-    }
+    position: relative;
+    bottom: 2px;
+  }
 
   .cancel {
     background-color: #dc3545;
-=  }
+    position: relative;
+    bottom: 2px;
+  }
 `;

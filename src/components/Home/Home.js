@@ -7,7 +7,7 @@ import { HomeContainer, BookListContainer } from "../../styles/Home.js";
 
 const Home = () => {
   const { name } = useParams();
-  const [bookLists] = useContext(BookTrackerContext);
+  const [bookLists, setBookLists] = useContext(BookTrackerContext);
 
   return (
     <HomeContainer>
@@ -18,7 +18,11 @@ const Home = () => {
             <>
               <HomeNav name={name} />
               <BookListContainer>
-                <BooksTable bookList={bookList} />
+                <BooksTable
+                  bookList={bookList}
+                  bookLists={bookLists}
+                  setBookLists={setBookLists}
+                />
               </BookListContainer>
             </>
           ))}

@@ -4,7 +4,7 @@ import { DeleteOutline } from "@styled-icons/material-rounded/DeleteOutline";
 export const BooksTableContainer = styled.table`
   margin: 6em 2em;
   position: absolute;
-  left: 20em;
+  left: 30em;
   width: 60em;
   font-size: 14px;
   text-align: center;

@@ -14,17 +14,17 @@ export const AddBookContainer = styled.article`
 
   button {
     background-color: #2196f3;
-    border: none;
     border-radius: 16px;
     color: white;
-    padding: 4px 15px;
+    padding: 0.6em;
+    border: 0.2em solid #fff;
     text-align: center;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
     cursor: pointer;
     position: absolute;
     top: 10px;
-    left: 10px; 
+    left: 10px;
   }
 `;

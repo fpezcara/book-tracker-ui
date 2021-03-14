@@ -21,12 +21,6 @@ const Form = ({
     setSelectType(e.target.value);
   };
 
-  // const addBookHandler = () => {
-  //   setAddedBook(Array.from(new Set(selectedBook)));
-  //   setTriggerSearch(false);
-  //   setOpenModal(true);
-  // };
-
   return (
     <FormStyled onSubmit={handleSubmit}>
       <input
