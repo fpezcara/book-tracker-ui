@@ -6,20 +6,19 @@ import { TableBodySearchResults } from "../../styles/Search";
 // tal vez poner el modal de confirmacion aca al seleccionar el libro que me diga "do u wish to add this book" o algo asi
 const SearchResults = ({
   result,
-  selectedBook,
-  setSelectedBook,
   searchInput,
   setOpenModal,
   setTriggerSearch,
+  setAddedBook,
   id,
 }) => {
   const [focusedBook, setFocusedBook] = useState(false);
 
   const selectBookHandler = () => {
-    setSelectedBook([...selectedBook, result]);
     setFocusedBook(!focusedBook);
     setTriggerSearch(false);
     setOpenModal(true);
+    setAddedBook([result]);
   };
 
   return (
@@ -49,6 +48,7 @@ const SearchResults = ({
           </tr>
         </TableBodySearchResults>
       )}
+
     </>
   );
 };
