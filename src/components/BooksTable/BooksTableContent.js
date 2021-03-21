@@ -2,36 +2,13 @@ import React, { useState } from "react";
 import imageNotAvailable from "../../assets/image-not-available.svg";
 import { DeleteIcon } from "../../styles/BooksTable";
 
-const BooksTableContent = ({
-  bookList,
-  bookLists,
-  setBookLists,
-  setOpenModal,
-  setBookToDelete
-}) => {
+const BooksTableContent = ({ bookList, setOpenModal, setBookToDelete }) => {
   const [deletedBooksArray, setDeletedBooksArray] = useState([]);
   // agregar el context aca para poder modificar el setBooklist y eliminar el array de books
 
-  // console.log(bookList.books);
-
   const handleDelete = (bookToDelete) => {
-    setDeletedBooksArray(
-      bookLists
-        .filter((list) => list === bookList)
-        .map((list) =>
-          list.books.filter((book) => book !== bookToDelete).map((book) => book)
-        )
-    );
     setOpenModal(true);
     setBookToDelete(bookToDelete);
-
-    // console.log(deletedBooksArray && deletedBooksArray);
-    // console.log(bookList);
-
-    // setState({
-    //   ...state,
-    //   [e.target.name]: [...state[e.target.name], e.target.value],
-    // });
   };
 
   return (

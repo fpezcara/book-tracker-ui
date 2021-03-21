@@ -35,7 +35,6 @@ const SearchBook = ({
   const searchResult = useFetch(
     `${urlName}${triggeredApi}:${searchInput}&orderBy=relevance&key=${apiKey}`
   );
-
   return (
     <>
       <TableSearchBook>

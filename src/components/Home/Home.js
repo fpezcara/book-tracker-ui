@@ -8,12 +8,15 @@ import { HomeContainer, BookListContainer } from "../../styles/Home.js";
 const Home = () => {
   const { name } = useParams();
   const [bookLists, setBookLists] = useContext(BookTrackerContext);
+  console.log("home", bookLists);
+
+  // el bookLists.filter que lo repito mucgas veces lo podria hacer un hook o algo asi para reusar
 
   return (
     <HomeContainer>
       {bookLists &&
         bookLists
-          .filter((bookList) => bookList.listUrl.includes(name))
+          .filter((bookList) => bookList.listUrl === name)
           .map((bookList) => (
             <>
               <HomeNav name={name} />

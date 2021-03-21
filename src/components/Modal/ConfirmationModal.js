@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { ModalContainer, ModalText, ModalButton } from "../../styles/Modal";
 import { useHistory, useParams } from "react-router-dom";
 import { BookTrackerContext } from "../Context/BookTrackerContext";
@@ -9,16 +9,29 @@ const ConfirmationModal = ({ message, book, title, authors, setOpenModal }) => {
   const [bookLists, setBookLists] = useContext(BookTrackerContext);
 
   const acceptButtonHandler = () => {
-    setOpenModal(false);
+    const booksArrayUpdated = bookLists
+      .find((list) => list.listUrl === name)
+      .books.filter((bookOnList) => bookOnList !== book);
+
     message === "add"
       ? setBookLists(
           [...bookLists],
-          bookLists.filter(
-            (list) => list.listUrl === name && list.books.push(book)
+          bookLists.map((list) =>
+            list.listUrl === name ? list.books.push(book) : list
           )
         )
-      : console.log("eliminar");
+      : setBookLists(
+          bookLists.map((list) =>
+            list.listUrl === name
+              ? {
+                  ...list,
+                  books: booksArrayUpdated,
+                }
+              : list
+          )
+        );
 
+    setOpenModal(false);
     history.push(`/book-lists/${name}`);
   };
 
@@ -34,7 +47,7 @@ const ConfirmationModal = ({ message, book, title, authors, setOpenModal }) => {
           <span className="message"> Do you want to {message}:</span>
           <span className="title"> {title}?</span>
           {authors && <span className="author">by {authors} </span>}
-          {/* arreglar authors para si son mas de una */}
+          {/*arreglar authors para si son mas de una */}
         </ModalText>
         <ModalButton>
           <button
