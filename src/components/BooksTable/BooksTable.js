@@ -3,9 +3,11 @@ import { BooksTableContainer } from "../../styles/BooksTable";
 import BooksTableContent from "./BooksTableContent";
 import ConfirmationModal from "../Modal/ConfirmationModal";
 
-const BooksTable = ({ bookList, bookLists, setBookLists }) => {
+const BooksTable = ({ bookList }) => {
   const [openModal, setOpenModal] = useState(false);
   const [bookToDelete, setBookToDelete] = useState({});
+  const [bookUpdated, setBookUpdated] = useState([]);
+  console.log(bookUpdated);
 
   return (
     <>
@@ -20,8 +22,6 @@ const BooksTable = ({ bookList, bookLists, setBookLists }) => {
           </tr>
           <BooksTableContent
             bookList={bookList}
-            bookLists={bookLists}
-            setBookLists={setBookLists}
             setOpenModal={setOpenModal}
             setBookToDelete={setBookToDelete}
           />
