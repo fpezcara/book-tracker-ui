@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { DeleteOutline } from "@styled-icons/material-rounded/DeleteOutline";
 
-export const BooksTableContainer = styled.table`
+export const TableContainer = styled.table`
   margin: 6em 2em;
   position: absolute;
   left: 26em;

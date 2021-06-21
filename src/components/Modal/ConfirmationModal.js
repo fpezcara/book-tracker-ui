@@ -1,72 +1,70 @@
-import React, { useState, useContext } from "react";
-import { ModalContainer, ModalText, ModalButton } from "../../styles/Modal";
+import React, { useContext } from "react";
+import {
+  ModalContainer,
+  ModalText,
+  ModalButton,
+} from "../../styles/Modal.style";
 import { useHistory, useParams } from "react-router-dom";
-import { BookTrackerContext } from "../Context/BookTrackerContext";
 
-const ConfirmationModal = ({ message, book, title, authors, setOpenModal }) => {
+import BookTrackerContext from "../../context/book-tracker-context";
+
+const ConfirmationModal = ({
+  hideModal,
+  isVisible,
+  message,
+  book,
+  title,
+  authors,
+}) => {
   const history = useHistory();
+
+  const { addBook, deleteBook } = useContext(BookTrackerContext);
   const { name } = useParams();
-  const [bookLists, setBookLists] = useContext(BookTrackerContext);
 
-  const acceptButtonHandler = () => {
-    const booksArrayUpdated = bookLists
-      .find((list) => list.listUrl === name)
-      .books.filter((bookOnList) => bookOnList !== book);
-
-    message === "add"
-      ? setBookLists(
-          [...bookLists],
-          bookLists.map((list) =>
-            list.listUrl === name ? list.books.push(book) : list
-          )
-        )
-      : setBookLists(
-          bookLists.map((list) =>
-            list.listUrl === name
-              ? {
-                  ...list,
-                  books: booksArrayUpdated,
-                }
-              : list
-          )
-        );
-
-    setOpenModal(false);
-    history.push(`/book-lists/${name}`);
+  const onChangeHandler = ({ target }) => {
+    // message === "add" ? addBook(book) : deleteBook(book);
+    history.push(`/${name}`);
+    message === "add" ? addBook(book) : deleteBook(book);
+    hideModal();
+    console.log(message);
   };
 
-  const cancelButtonHandler = (e) => {
-    setOpenModal(false);
-    history.push(`/book-lists/${name}`);
-  };
+  console.log(book);
 
+  // aca reemplazar los buttons por el componente Button
   return (
-    <ModalContainer>
-      <article>
-        <ModalText>
-          <span className="message"> Do you want to {message}:</span>
-          <span className="title"> {title}?</span>
-          {authors && <span className="author">by {authors} </span>}
-          {/*arreglar authors para si son mas de una */}
-        </ModalText>
-        <ModalButton>
-          <button
-            onClick={acceptButtonHandler}
-            className="button accept"
-            type="submit"
-          >
-            Accept
-          </button>
-          <button
-            onClick={cancelButtonHandler}
-            className="button cancel"
-            type="submit"
-          >
-            Cancel
-          </button>
-        </ModalButton>
-      </article>
-    </ModalContainer>
+    <>
+      {isVisible ? (
+        <ModalContainer>
+          <article>
+            <ModalText>
+              <span className="message"> Do you want to {message}:</span>
+              <span className="title"> {title}?</span>
+              {authors && <span className="author">by {authors} </span>}
+              {/*arreglar authors para si son mas de una */}
+            </ModalText>
+            <ModalButton>
+              <button
+                name="accept"
+                onClick={onChangeHandler}
+                className="button accept"
+                type="submit"
+              >
+                Accept
+              </button>
+              <button
+                name="cancel"
+                onClick={onChangeHandler}
+                className="button cancel"
+                type="submit"
+              >
+                Cancel
+              </button>
+            </ModalButton>
+          </article>
+        </ModalContainer>
+      ) : null}
+    </>
   );
 };
 

@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-export const AddBookWrapper = styled.section`
+export const AddBookWrapper = styled.div`
   display: flex;
   justify-content: center;
 `;
 
-export const AddBookContainer = styled.article`
+export const AddBookContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
