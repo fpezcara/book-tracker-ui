@@ -1,23 +1,18 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import Form from "../Form/Form";
-import SearchBook from "../Search/SearchBook";
-import { AddBookWrapper, AddBookContainer } from "../../styles/AddBook";
+import DropdownList from "../DropdownList/DropdownList";
+import ConfirmationModal from "../Modal/ConfirmationModal";
+
+import { AddBookWrapper, AddBookContainer } from "../../styles/AddBook.style";
 
 const AddBook = () => {
   const [selectType, setSelectType] = useState("title");
   const [triggerSearch, setTriggerSearch] = useState(false);
   const [searchInput, setSearchInput] = useState("");
-  const history = useHistory();
-
-  const handleClick = () => {
-    history.goBack();
-  };
 
   return (
     <AddBookWrapper>
       <AddBookContainer>
-        <button onClick={handleClick}>Go back</button>
         <Form
           selectType={selectType}
           setSelectType={setSelectType}
@@ -25,8 +20,7 @@ const AddBook = () => {
           searchInput={searchInput}
           setSearchInput={setSearchInput}
         />
-
-        <SearchBook
+        <DropdownList
           selectType={selectType}
           searchInput={searchInput}
           triggerSearch={triggerSearch}
