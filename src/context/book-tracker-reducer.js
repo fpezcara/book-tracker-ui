@@ -4,7 +4,6 @@ import {
   CURRENT_BOOKLIST,
 } from "./book-tracker-actions";
 const BookTrackerReducer = (state, action) => {
-  console.log(state.currentBookList);
   switch (action.type) {
     case ADD_BOOK:
       return {

@@ -8,13 +8,15 @@ import { Header } from "../../../styles/Home.style";
 const HomeHeader = () => {
   const { name } = useParams();
   const { state } = useContext(BookTrackerContext);
-  const { bookLists, updateCurrentBookList } = state;
+  const { bookLists, currentBookList } = state;
 
   return (
     <Header>
       <section>
         <BookListsSelect bookLists={bookLists}>
-          <h3>{name.charAt(0).toUpperCase() + name.slice(1)}</h3>
+          <h3>
+            {currentBookList.charAt(0).toUpperCase() + currentBookList.slice(1)}
+          </h3>
         </BookListsSelect>
       </section>
 

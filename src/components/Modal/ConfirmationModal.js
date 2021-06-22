@@ -39,7 +39,7 @@ const ConfirmationModal = ({
               {authors && (
                 <span className="author">
                   {` by ${authors.map((author, i) =>
-                    i > 1 ? `${author}, ` : author
+                    i > 1 ? `${author} , ` : author
                   )}
                   `}
                 </span>
