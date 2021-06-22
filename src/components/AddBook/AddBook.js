@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Form from "../Form/Form";
 import DropdownList from "../DropdownList/DropdownList";
-import ConfirmationModal from "../Modal/ConfirmationModal";
 
 import { AddBookWrapper, AddBookContainer } from "../../styles/AddBook.style";
 
