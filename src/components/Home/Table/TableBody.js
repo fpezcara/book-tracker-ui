@@ -1,17 +1,17 @@
 import React, { useContext } from "react";
 import imageNotAvailable from "../../../assets/image-not-available.svg";
-import useBookList from "../../../hooks/useBookList";
 
 import BookTrackerContext from "../../../context/book-tracker-context";
 
 import { DeleteIcon } from "../../../styles/Table.style";
 
 const TableBody = ({ showModal, setBookToDelete }) => {
-  const {  state } = useContext(BookTrackerContext);
+  const { state } = useContext(BookTrackerContext);
   const { bookLists, currentBookList } = state;
 
-  const bookList = useBookList(bookLists);
-
+  const bookList = bookLists.find(
+    (bookList) => bookList.listUrl === currentBookList
+  );
   const handleDelete = (bookSelected) => {
     setBookToDelete(bookSelected);
     showModal();
@@ -19,7 +19,7 @@ const TableBody = ({ showModal, setBookToDelete }) => {
 
   return (
     <tbody>
-      {bookList && bookList.books.length > 0 ? (
+      {bookList.books.length > 0 ? (
         bookList.books.map((book) => (
           <tr key={book.title} value={book}>
             <td>
@@ -33,7 +33,13 @@ const TableBody = ({ showModal, setBookToDelete }) => {
               />
             </td>
             <td>{book.title || "N/A"}</td>
-            <td>{book.authors ? book.authors : "N/A"}</td>
+            <td>
+              {book.authors
+                ? book.authors.map((author, i) =>
+                    i > 1 ? `${author} , ` : author
+                  )
+                : "N/A"}
+            </td>
             <td>{book.pageCount ? book.pageCount : "N/A"}</td>
             <td onClick={() => handleDelete(book)}>
               <DeleteIcon />
