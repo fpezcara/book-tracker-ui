@@ -4,7 +4,9 @@ import {
   ModalText,
   ModalButton,
 } from "../../styles/Modal.style";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
+import Button from "../Button/Button";
 
 import BookTrackerContext from "../../context/book-tracker-context";
 
@@ -16,22 +18,16 @@ const ConfirmationModal = ({
   title,
   authors,
 }) => {
-  const history = useHistory();
-
-  const { addBook, deleteBook } = useContext(BookTrackerContext);
+  const { updateCurrentBookList, addBook, deleteBook } =
+    useContext(BookTrackerContext);
   const { name } = useParams();
 
-  const onChangeHandler = ({ target }) => {
-    // message === "add" ? addBook(book) : deleteBook(book);
-    history.push(`/${name}`);
+  const onClickHandler = () => {
     message === "add" ? addBook(book) : deleteBook(book);
     hideModal();
-    console.log(message);
+    updateCurrentBookList(name);
   };
 
-  console.log(book);
-
-  // aca reemplazar los buttons por el componente Button
   return (
     <>
       {isVisible ? (
@@ -40,26 +36,30 @@ const ConfirmationModal = ({
             <ModalText>
               <span className="message"> Do you want to {message}:</span>
               <span className="title"> {title}?</span>
-              {authors && <span className="author">by {authors} </span>}
-              {/*arreglar authors para si son mas de una */}
+              {authors && (
+                <span className="author">
+                  {` by ${authors.map((author, i) =>
+                    i > 1 ? `${author}, ` : author
+                  )}
+                  `}
+                </span>
+              )}
             </ModalText>
             <ModalButton>
-              <button
+              <Button
                 name="accept"
-                onClick={onChangeHandler}
                 className="button accept"
-                type="submit"
-              >
-                Accept
-              </button>
-              <button
+                value={`/${name}`}
+                onClickHandler={onClickHandler}
+                title="Accept"
+              />
+              <Button
                 name="cancel"
-                onClick={onChangeHandler}
                 className="button cancel"
-                type="submit"
-              >
-                Cancel
-              </button>
+                value={`/${name}`}
+                onClickHandler={onClickHandler}
+                title="Cancel"
+              />
             </ModalButton>
           </article>
         </ModalContainer>
