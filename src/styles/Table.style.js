@@ -21,8 +21,9 @@ export const TableContainer = styled.table`
     padding: 0.6em;
   }
   td {
-    padding: 3em;
+    padding: 1.5em;
     word-wrap: break-word;
+    white-space: normal;
   }
   img {
     width: 4em;

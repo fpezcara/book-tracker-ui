@@ -1,12 +1,10 @@
 import React, { useContext } from "react";
-import { useParams } from "react-router-dom";
 import BookListsSelect from "./BookListsSelect";
 import Button from "../../Button/Button";
 import BookTrackerContext from "../../../context/book-tracker-context";
 import { Header } from "../../../styles/Home.style";
 
 const HomeHeader = () => {
-  const { name } = useParams();
   const { state } = useContext(BookTrackerContext);
   const { bookLists, currentBookList } = state;
 
@@ -21,7 +19,7 @@ const HomeHeader = () => {
       </section>
 
       <section>
-        <Button value={`/${name}/add-book`} title="Add book" />
+        <Button value={`/${currentBookList}/add-book`} title="Add book" />
       </section>
     </Header>
   );
