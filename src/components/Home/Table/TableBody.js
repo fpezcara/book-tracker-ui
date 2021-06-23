@@ -35,9 +35,7 @@ const TableBody = ({ showModal, setBookToDelete }) => {
             <td>{book.title || "N/A"}</td>
             <td>
               {book.authors
-                ? book.authors.map((author, i) =>
-                    i > 1 ? `${author} , ` : author
-                  )
+                ? book.authors.map((author, i) => (i ? ", " : "") + author)
                 : "N/A"}
             </td>
             <td>{book.pageCount ? book.pageCount : "N/A"}</td>

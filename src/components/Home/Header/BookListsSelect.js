@@ -6,9 +6,6 @@ import Select from "../../Select/Select";
 
 const BookListsSelect = ({ children, bookLists }) => {
   const { updateCurrentBookList, state } = useContext(BookTrackerContext);
-
-  // const { bookLists } = state;
-
   const history = useHistory();
   const bookListValue = bookLists.map((list) => list.listUrl);
 
@@ -17,7 +14,7 @@ const BookListsSelect = ({ children, bookLists }) => {
     updateCurrentBookList(newValue);
     history.push(`/${newValue}`);
   };
-  
+
   return (
     <>
       {children}

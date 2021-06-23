@@ -38,25 +38,20 @@ const ConfirmationModal = ({
               <span className="title"> {title}?</span>
               {authors && (
                 <span className="author">
-                  {` by ${authors.map((author, i) =>
-                    i > 1 ? `${author} , ` : author
-                  )}
-                  `}
+                  by {authors.map((author, i) => (i ? ", " : "") + author)}
                 </span>
               )}
             </ModalText>
             <ModalButton>
               <Button
-                name="accept"
                 className="button accept"
                 value={`/${name}`}
                 onClickHandler={onClickHandler}
                 title="Accept"
               />
               <Button
-                name="cancel"
                 className="button cancel"
-                value={`/${name}`}
+                value={`/${name}/add-book`}
                 onClickHandler={onClickHandler}
                 title="Cancel"
               />
