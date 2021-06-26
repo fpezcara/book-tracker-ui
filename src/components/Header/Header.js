@@ -1,5 +1,5 @@
 import React from "react";
-import { Nav } from "../../styles/NavBar.style";
+import { Nav } from "../../styles/Header.style";
 
 const Header = () => {
   return (
