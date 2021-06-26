@@ -3,13 +3,14 @@ import styled from "styled-components";
 export const HomeContainer = styled.main`
   display: flex;
   flex-direction: column;
-  /* align-items: space-between;
-  justify-content: space-between; */
+  align-items: space-between;
+  justify-content: space-evenly;
   font-family: "Work Sans", sans-serif;
   font-weight: 400;
   font-size: 15px;
   height: 100%;
   margin: 2em;
+  background-image: url("library.jpg");
 `;
 
 export const Header = styled.header`
@@ -52,26 +53,6 @@ export const Header = styled.header`
     }
   }
 `;
-// export const NavLeftSide = styled.section`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   background: red;
-//   h3 {
-//     font-size: 18px;
-//   }
-//   select {
-//     padding: 0.4em;
-//     margin: 0;
-//     width: 6.5em;
-//     border-radius: 0.5em;
-//     font-weight: 400;
-//     font-size: 12px;
-//   }
-//   select:focus {
-//     outline: none;
-//   }
-// `;
 
 export const NavRightSide = styled.section`
   display: flex;
