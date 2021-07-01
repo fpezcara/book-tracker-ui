@@ -5,7 +5,7 @@ import BookTrackerContext from "../../../context/book-tracker-context";
 import Select from "../../Select/Select";
 
 const BookListsSelect = ({ children, bookLists }) => {
-  const { updateCurrentBookList, state } = useContext(BookTrackerContext);
+  const { updateCurrentBookList } = useContext(BookTrackerContext);
   const history = useHistory();
   const bookListValue = bookLists.map((list) => list.listUrl);
 

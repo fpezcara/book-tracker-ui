@@ -6,8 +6,9 @@ import BookTrackerContext from "../../../context/book-tracker-context";
 import { DeleteIcon } from "../../../styles/Table.style";
 
 const TableBody = ({ showModal, setBookToDelete }) => {
-  const { state } = useContext(BookTrackerContext);
-  const { bookLists, currentBookList } = state;
+  const {
+    state: { bookLists, currentBookList },
+  } = useContext(BookTrackerContext);
 
   const bookList = bookLists.find(
     (bookList) => bookList.listUrl === currentBookList
@@ -21,7 +22,7 @@ const TableBody = ({ showModal, setBookToDelete }) => {
     <tbody>
       {bookList.books.length > 0 ? (
         bookList.books.map((book) => (
-          <tr key={book.title} value={book}>
+          <tr key={book.infoLink} value={book}>
             <td>
               <img
                 src={

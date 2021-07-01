@@ -5,8 +5,9 @@ import BookTrackerContext from "../../../context/book-tracker-context";
 import { Header } from "../../../styles/Home.style";
 
 const HomeHeader = () => {
-  const { state } = useContext(BookTrackerContext);
-  const { bookLists, currentBookList } = state;
+  const {
+    state: { bookLists, currentBookList },
+  } = useContext(BookTrackerContext);
 
   return (
     <Header>

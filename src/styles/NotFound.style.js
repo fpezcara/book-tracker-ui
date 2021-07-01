@@ -7,17 +7,6 @@ export const Container = styled.article`
   justify-content: space-between;
   padding: 0;
   margin: 0;
-  h3 {
-    font-size: 3em;
-    padding: 0;
-    margin: 0;
-  }
-  h4 {
-    font-size: 2em;
-    margin: 0;
-  }
-  img {
-  }
 `;
 
 export const Header = styled.header`

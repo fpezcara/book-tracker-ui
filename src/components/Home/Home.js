@@ -12,11 +12,10 @@ const Home = () => {
   const { state } = useContext(BookTrackerContext);
   const { bookLists } = state;
 
-  const correctLink = bookLists.some((item) => item.listUrl === name);
-
+  const linkMatches = bookLists.some((item) => item.listUrl === name);
   return (
     <HomeContainer>
-      {correctLink ? (
+      {linkMatches ? (
         <>
           <HomeHeader />
           <Table />

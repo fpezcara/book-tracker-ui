@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
@@ -17,10 +17,10 @@ const App = () => {
       <BookTrackerState>
         <Header />
         <Switch>
-          <Route exact path="/404" exact component={NotFound} />
+          <Route exact path="/404" component={NotFound} />
           <Route exact path="/:name/add-book" component={AddBook} />
-          <Route exact path="/" render={() => <Redirect to="/reading" />} />
           <Route exact path="/:name" component={Home} />
+          <Redirect from="/" to="reading" />
         </Switch>
       </BookTrackerState>
     </Router>
@@ -28,16 +28,3 @@ const App = () => {
 };
 
 export default App;
-// {
-/* <Router>
-<NavBar />
-<BookTrackerState>
-  <Switch>
-    <Route exact path="/:name/" component={Home}>
-      <Route exact path="add-book" component={AddBook} />
-    </Route>
-    <Route component={NotFound} />
-  </Switch>
-</BookTrackerState>
-</Router> */
-// }

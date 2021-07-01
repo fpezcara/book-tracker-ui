@@ -12,8 +12,9 @@ const DropdownElement = ({
   const selectBookHandler = () => {
     setTriggerSearch(false);
     showModal();
-    setAddedBook((prevState) => [...prevState, result]);
+    setAddedBook([result]);
   };
+
 
   return (
     <>
