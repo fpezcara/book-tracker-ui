@@ -3,14 +3,11 @@ import styled from "styled-components";
 export const HomeContainer = styled.main`
   display: flex;
   flex-direction: column;
-  align-items: space-between;
-  justify-content: space-evenly;
   font-family: "Work Sans", sans-serif;
   font-weight: 400;
   font-size: 15px;
   height: 100%;
   margin: 2em;
-  background-image: url("library.jpg");
 `;
 
 export const Header = styled.header`

@@ -10,10 +10,14 @@ const BookTrackerReducer = (state, action) => {
         ...state,
         bookLists: state.bookLists.map((bookList) =>
           bookList.listUrl === state.currentBookList
-            ? { ...bookList, books: [...bookList.books, action.payload] }
+            ? {
+                ...bookList,
+                books: [...bookList.books, action.payload],
+              }
             : bookList
         ),
       };
+
     case DELETE_BOOK:
       return {
         ...state,

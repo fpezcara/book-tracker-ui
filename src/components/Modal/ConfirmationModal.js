@@ -5,6 +5,7 @@ import {
   ModalButton,
 } from "../../styles/Modal.style";
 import { useParams } from "react-router-dom";
+import useUniqueBook from "../../hooks/useUniqueBook";
 
 import Button from "../Button/Button";
 
@@ -18,9 +19,16 @@ const ConfirmationModal = ({
   title,
   authors,
 }) => {
-  const { updateCurrentBookList, addBook, deleteBook } =
-    useContext(BookTrackerContext);
+  const {
+    updateCurrentBookList,
+    state: { currentBookList, bookLists },
+    addBook,
+    deleteBook,
+  } = useContext(BookTrackerContext);
+
   const { name } = useParams();
+
+  const isBookRepeated = useUniqueBook(bookLists, book, currentBookList);
 
   const onClickHandler = () => {
     message === "add" ? addBook(book) : deleteBook(book);
@@ -46,7 +54,7 @@ const ConfirmationModal = ({
               <Button
                 className="button accept"
                 value={`/${name}`}
-                onClickHandler={onClickHandler}
+                onClickHandler={!isBookRepeated && onClickHandler}
                 title="Accept"
               />
               <Button
