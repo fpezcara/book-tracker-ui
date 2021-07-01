@@ -31,14 +31,14 @@ const ConfirmationModal = ({
   const isBookRepeated = useUniqueBook(bookLists, book, currentBookList);
 
   const onClickHandler = () => {
-    message === "add" ? addBook(book) : deleteBook(book);
+    message === "add" && !isBookRepeated ? addBook(book) : deleteBook(book);
     hideModal();
     updateCurrentBookList(name);
   };
 
   return (
     <>
-      {isVisible ? (
+      {isVisible && (
         <ModalContainer>
           <article>
             <ModalText>
@@ -54,19 +54,19 @@ const ConfirmationModal = ({
               <Button
                 className="button accept"
                 value={`/${name}`}
-                onClickHandler={!isBookRepeated && onClickHandler}
+                onClickHandler={onClickHandler}
                 title="Accept"
               />
               <Button
                 className="button cancel"
-                value={`/${name}/add-book`}
+                value={message === "add" ? `/${name}` : `/${name}/add-book`}
                 onClickHandler={onClickHandler}
                 title="Cancel"
               />
             </ModalButton>
           </article>
         </ModalContainer>
-      ) : null}
+      )}
     </>
   );
 };
