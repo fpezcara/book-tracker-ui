@@ -10,16 +10,14 @@ const Table = () => {
   const { isVisible, toggleModal } = useModal();
 
   const [bookToDelete, setBookToDelete] = useState([]);
-
   return (
     <>
       <TableContainer>
         <TableHeader />
         <TableBody showModal={toggleModal} setBookToDelete={setBookToDelete} />
       </TableContainer>
-
       <ConfirmationModal
-        message={"delete"}
+        message={isVisible && "delete"}
         book={bookToDelete}
         title={bookToDelete.title}
         authors={bookToDelete.authors}

@@ -35,12 +35,11 @@ const ConfirmationModal = ({
     hideModal();
     updateCurrentBookList(name);
   };
-
   return (
     <>
       {isVisible && (
         <ModalContainer>
-          <article>
+          <div>
             <ModalText>
               <span className="message"> Do you want to {message}:</span>
               <span className="title"> {title}?</span>
@@ -55,16 +54,17 @@ const ConfirmationModal = ({
                 className="button accept"
                 value={`/${name}`}
                 onClickHandler={onClickHandler}
-                title="Accept"
+                title="accept"
               />
               <Button
                 className="button cancel"
-                value={message === "add" ? `/${name}` : `/${name}/add-book`}
-                onClickHandler={onClickHandler}
-                title="Cancel"
+                // value={message === "add" ? `/${name}` : `/${name}/add-book`}
+                value={""}
+                // onClickHandler={onClickHandler}
+                title="cancel"
               />
             </ModalButton>
-          </article>
+          </div>
         </ModalContainer>
       )}
     </>

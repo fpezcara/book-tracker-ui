@@ -6,7 +6,7 @@ const Select = ({ selectValue, optionValue, onChangeHandler }) => {
       {optionValue &&
         optionValue.map((optionAvailable, i) => (
           <option key={i} value={optionAvailable}>
-            {optionAvailable.charAt(0).toUpperCase() + optionAvailable.slice(1)}
+            {optionAvailable}
           </option>
         ))}
     </select>

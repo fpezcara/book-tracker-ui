@@ -11,7 +11,7 @@ const TableBody = ({ showModal, setBookToDelete }) => {
   } = useContext(BookTrackerContext);
 
   const bookList = bookLists.find(
-    (bookList) => bookList.listUrl === currentBookList
+    (bookL) => bookL.listUrl === currentBookList
   );
   const handleDelete = (bookSelected) => {
     setBookToDelete(bookSelected);
@@ -22,7 +22,7 @@ const TableBody = ({ showModal, setBookToDelete }) => {
     <tbody>
       {bookList.books.length > 0 ? (
         bookList.books.map((book) => (
-          <tr key={book.infoLink} value={book}>
+          <tr key={book.infoLink}>
             <td>
               <img
                 src={
@@ -47,7 +47,7 @@ const TableBody = ({ showModal, setBookToDelete }) => {
         ))
       ) : (
         <tr>
-          <td colSpan="4">No books have been added.</td>
+          <td colSpan={4}>No books have been added.</td>
         </tr>
       )}
     </tbody>
