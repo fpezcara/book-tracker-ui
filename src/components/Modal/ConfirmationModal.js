@@ -35,6 +35,7 @@ const ConfirmationModal = ({
     hideModal();
     updateCurrentBookList(name);
   };
+
   return (
     <>
       {isVisible && (
@@ -58,10 +59,8 @@ const ConfirmationModal = ({
               />
               <Button
                 className="button cancel"
-                // value={message === "add" ? `/${name}` : `/${name}/add-book`}
-                value={""}
-                // onClickHandler={onClickHandler}
                 title="cancel"
+                onClickHandler={hideModal}
               />
             </ModalButton>
           </div>
