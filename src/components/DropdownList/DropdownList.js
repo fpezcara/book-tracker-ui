@@ -33,16 +33,15 @@ const DropdownList = ({
     }
   }, [selectType]);
 
-  const searchResults = useFetch(
+  const { items } = useFetch(
     `${urlName}${typeSelected}:${searchInput}&orderBy=relevance&key=${apiKey}`
   );
-
   return (
     <>
       <Table>
         {triggerSearch &&
-          searchResults.items &&
-          searchResults.items.map((result, i) => (
+          items &&
+          items.map((result, i) => (
             <DropdownElement
               result={result.volumeInfo}
               searchInput={searchInput}

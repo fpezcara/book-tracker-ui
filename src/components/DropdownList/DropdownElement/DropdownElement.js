@@ -15,7 +15,6 @@ const DropdownElement = ({
     setAddedBook([result]);
   };
 
-
   return (
     <>
       {searchInput !== "" && id < 8 && (

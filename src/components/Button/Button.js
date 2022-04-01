@@ -1,16 +1,19 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
+import { StyledButton } from "../../styles/Button.style";
+
 const Button = ({ title, className, value, onClickHandler }) => {
   const { push } = useHistory();
   const onClickButton = () => {
-    push(value);
+    value && push(value);
     onClickHandler && onClickHandler();
   };
+
   return (
-    <button className={className} onClick={onClickButton}>
+    <StyledButton className={className} onClick={onClickButton}>
       {title}
-    </button>
+    </StyledButton>
   );
 };
 

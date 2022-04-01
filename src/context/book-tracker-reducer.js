@@ -5,6 +5,9 @@ import {
 } from "./book-tracker-actions";
 const BookTrackerReducer = (state, action) => {
   switch (action.type) {
+    case "init_stored":
+      return action.payload;
+
     case ADD_BOOK:
       return {
         ...state,

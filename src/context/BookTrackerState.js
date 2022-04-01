@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import BookTrackerContext from "./book-tracker-context";
 import BookTrackerReducer from "./book-tracker-reducer";
 
@@ -41,6 +41,21 @@ const BookTrackerState = ({ children }) => {
   };
 
   const [state, dispatch] = useReducer(BookTrackerReducer, initialState);
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("state"))) {
+      dispatch({
+        type: "init_stored",
+        payload: JSON.parse(localStorage.getItem("state")),
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (state !== initialState) {
+      localStorage.setItem("state", JSON.stringify(state));
+    }
+  }, [state]);
 
   const values = {
     state,

@@ -1,21 +1,16 @@
 import styled from "styled-components";
 
-export const ModalContainer = styled.article`
-  display: flex;
-  font-family: "Work Sans", sans-serif;
-  background-color: red;
-  article {
+export const ModalContainer = styled.div`
+  position: absolute;
+  box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 2em;
+
+  div {
     font-size: 14px;
-    width: 30em;
     height: auto;
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 20px;
-    position: absolute;
-    top: 15em;
-    left: 38em;
-    z-index: 1000;
-    background-color: #fff;
+    padding: 0.5em;
+    border-radius: 2em;
+    background: #f6ffff;
   }
 `;
 
@@ -52,15 +47,11 @@ export const ModalButton = styled.div`
   align-items: center;
   width: 25em;
   margin: 2em;
-
+  font-family: "Lato", sans-serif;
   .button {
     width: 10em;
-    font-family: "Work Sans", sans-serif;
     font-weight: 400;
     font-size: 12px;
-    padding: 0.5em;
-    border: 0.2em solid #fff;
-    color: #ffffff;
   }
 
   .accept {

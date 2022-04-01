@@ -6,13 +6,13 @@ import Select from "../../Select/Select";
 
 const BookListsSelect = ({ children, bookLists }) => {
   const { updateCurrentBookList } = useContext(BookTrackerContext);
-  const history = useHistory();
+  const { push } = useHistory();
   const bookListValue = bookLists.map((list) => list.listUrl);
 
   const bookListsHandler = ({ target }) => {
     const newValue = target.value;
     updateCurrentBookList(newValue);
-    history.push(`/${newValue}`);
+    push(`/${newValue}`);
   };
 
   return (

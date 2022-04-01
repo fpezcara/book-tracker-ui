@@ -2,7 +2,11 @@ import React, { useContext } from "react";
 import BookListsSelect from "./BookListsSelect";
 import Button from "../../Button/Button";
 import BookTrackerContext from "../../../context/book-tracker-context";
-import { Header } from "../../../styles/Home.style";
+import {
+  Header,
+  HeaderLeftSide,
+  HeaderRightSide,
+} from "../../../styles/Home.style";
 
 const HomeHeader = () => {
   const {
@@ -11,17 +15,19 @@ const HomeHeader = () => {
 
   return (
     <Header>
-      <section>
+      <HeaderLeftSide>
         <BookListsSelect bookLists={bookLists}>
-          <h3>
-            {currentBookList.charAt(0).toUpperCase() + currentBookList.slice(1)}
-          </h3>
+          <h3>{currentBookList}</h3>
         </BookListsSelect>
-      </section>
+      </HeaderLeftSide>
 
-      <section>
-        <Button value={`/${currentBookList}/add-book`} title="Add book" />
-      </section>
+      <HeaderRightSide>
+        <Button
+          value={`/${currentBookList}/add-book`}
+          title="Add book"
+          className="add-book"
+        />
+      </HeaderRightSide>
     </Header>
   );
 };

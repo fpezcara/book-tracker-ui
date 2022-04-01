@@ -9,8 +9,9 @@ import { HomeContainer } from "../../styles/Home.style.js";
 
 const Home = () => {
   const { name } = useParams();
-  const { state } = useContext(BookTrackerContext);
-  const { bookLists } = state;
+  const {
+    state: { bookLists },
+  } = useContext(BookTrackerContext);
 
   const linkMatches = bookLists.some((item) => item.listUrl === name);
   return (

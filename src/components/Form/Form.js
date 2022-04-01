@@ -1,7 +1,9 @@
 import React from "react";
 import Select from "../Select/Select";
+import Button from "../Button/Button";
+import { useHistory } from "react-router-dom";
 
-import { FormStyled } from "../../styles/Form.style";
+import { StyledForm } from "../../styles/Form.style";
 
 import { searchBy } from "../../assets/search-by-type";
 
@@ -12,32 +14,36 @@ const Form = ({
   searchInput,
   setSearchInput,
 }) => {
-  const onChangeHandler = ({ target }) => {
-    if (target.name === "input") {
-      setSearchInput(target.value);
+  const { goBack } = useHistory();
+  const onChangeHandler = ({ target: { value, name } }) => {
+    if (name === "input") {
+      setSearchInput(value);
       setTriggerSearch(true);
     } else {
-      setSelectType(target.value);
+      setSelectType(value);
     }
   };
 
   return (
-    <FormStyled>
-      <input
-        type="text"
-        name="input"
-        onChange={onChangeHandler}
-        value={searchInput}
-        placeholder="Search by Title, Author or ISBN. . ."
-      />
+    <>
+      <Button className="go-back" onClickHandler={goBack} title="go back" />
+      <StyledForm>
+        <input
+          type="text"
+          name="input"
+          onChange={onChangeHandler}
+          value={searchInput}
+          placeholder="Search by Title, Author or ISBN. . ."
+        />
 
-      <Select
-        name="select"
-        selectValue={selectType}
-        optionValue={searchBy.map((type) => type.value)}
-        onChangeHandler={onChangeHandler}
-      />
-    </FormStyled>
+        <Select
+          name="select"
+          selectValue={selectType}
+          optionValue={searchBy.map(({ value }) => value)}
+          onChangeHandler={onChangeHandler}
+        />
+      </StyledForm>
+    </>
   );
 };
 

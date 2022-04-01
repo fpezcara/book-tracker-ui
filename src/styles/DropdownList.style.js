@@ -6,18 +6,17 @@ export const Table = styled.table`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: Arial, Helvetica, sans-serif;
   padding: 0;
+  border-radius: 3em;
+
   tbody {
     display: flex;
-    font-family: "Work Sans", sans-serif;
     font-size: 12px;
     padding: 0;
     margin: 0;
-    border: 1px solid grey;
-    background-color: #eeeeee;
-    border-radius: 0.2em;
-    width: 29.8em;
+    border: none;
+    background-color: #fffffe;
+    width: 29.9em;
     height: 5em;
     overflow: hidden;
 
@@ -32,10 +31,16 @@ export const Table = styled.table`
       justify-content: flex-start;
       align-items: flex-start;
     }
+
     td {
       padding: 0;
       margin: 0;
       height: 5.3em;
+      cursor: pointer;
+    }
+
+    td:last-child {
+      border-radius: 3em;
     }
 
     img {
