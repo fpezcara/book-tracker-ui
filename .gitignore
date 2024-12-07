@@ -24,3 +24,7 @@ yarn-error.log*
 
 .env
 .eslintcache
+
+# IDEs
+/.idea
+/.vscode
