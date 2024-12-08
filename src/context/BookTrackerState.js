@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer, useEffect, useMemo } from "react";
 import BookTrackerContext from "./book-tracker-context";
 import BookTrackerReducer from "./book-tracker-reducer";
 
@@ -30,15 +30,16 @@ const BookTrackerState = ({ children }) => {
       payload: book,
     });
   };
-
-  const initialState = {
-    bookLists: [
-      { id: 1, listUrl: "reading", listName: "Reading", books: [] },
-      { id: 2, listUrl: "finished", listName: "Finished", books: [] },
-      { id: 3, listUrl: "wishlist", listName: "Wishlist", books: [] },
-    ],
-    currentBookList: "reading",
-  };
+  const initialState = useMemo(() => {
+    return {
+      bookLists: [
+        { id: 1, listUrl: "reading", listName: "Reading", books: [] },
+        { id: 2, listUrl: "finished", listName: "Finished", books: [] },
+        { id: 3, listUrl: "wishlist", listName: "Wishlist", books: [] },
+      ],
+      currentBookList: "reading",
+    };
+  }, []);
 
   const [state, dispatch] = useReducer(BookTrackerReducer, initialState);
 
@@ -55,7 +56,7 @@ const BookTrackerState = ({ children }) => {
     if (state !== initialState) {
       localStorage.setItem("state", JSON.stringify(state));
     }
-  }, [state]);
+  }, [state, initialState]);
 
   const values = {
     state,
