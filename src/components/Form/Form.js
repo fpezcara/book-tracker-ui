@@ -1,7 +1,6 @@
 import React from "react";
 import Select from "../Select/Select";
 import Button from "../Button/Button";
-import { useHistory } from "react-router-dom";
 
 import { StyledForm } from "../../styles/Form.style";
 
@@ -14,7 +13,6 @@ const Form = ({
   searchInput,
   setSearchInput,
 }) => {
-  const { goBack } = useHistory();
   const onChangeHandler = ({ target: { value, name } }) => {
     if (name === "input") {
       setSearchInput(value);
@@ -26,7 +24,7 @@ const Form = ({
 
   return (
     <>
-      <Button className="go-back" onClickHandler={goBack} title="go back" />
+      <Button className="go-back" value={-1} title="go back" />
       <StyledForm>
         <input
           type="text"

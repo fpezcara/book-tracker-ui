@@ -1,13 +1,12 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { StyledButton } from "../../styles/Button.style";
 
-const Button = ({ title, className, value, onClickHandler }) => {
-  const { push } = useHistory();
+const Button = ({ title, className, value }) => {
+  const navigate = useNavigate();
   const onClickButton = () => {
-    value && push(value);
-    onClickHandler && onClickHandler();
+    value && navigate(value);
   };
 
   return (
