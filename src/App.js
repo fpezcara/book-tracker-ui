@@ -20,7 +20,8 @@ const App = () => {
           <Route exact path="/404" component={NotFound} />
           <Route exact path="/:name/add-book" component={AddBook} />
           <Route exact path="/:name" component={Home} />
-          <Redirect from="/" to="reading" />
+          <Redirect from="/" to="/reading" />
+          <Route path="*" component={NotFound} />
         </Switch>
       </BookTrackerState>
     </Router>
