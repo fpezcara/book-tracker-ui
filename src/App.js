@@ -2,8 +2,8 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Switch,
-  Redirect,
+  Routes,
+  Navigate,
 } from "react-router-dom";
 import BookTrackerState from "./context/BookTrackerState";
 import Home from "./components/Home/Home";
@@ -16,13 +16,14 @@ const App = () => {
     <Router>
       <BookTrackerState>
         <Header />
-        <Switch>
-          <Route exact path="/404" component={NotFound} />
-          <Route exact path="/:name/add-book" component={AddBook} />
-          <Route exact path="/:name" component={Home} />
-          <Redirect from="/" to="/reading" />
-          <Route path="*" component={NotFound} />
-        </Switch>
+        <Routes>
+          <Route path="/404" element={<NotFound />} />
+          <Route path="/:name" element={<Home />} />
+          <Route path="/:name/add-book" element={<AddBook />} />
+          <Route path="/" element={<Navigate to="/reading" />} />
+
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </BookTrackerState>
     </Router>
   );

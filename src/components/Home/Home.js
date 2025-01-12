@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useParams, Redirect } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 
 import HomeHeader from "./Header/HomeHeader";
 import Table from "./Table/Table";
@@ -22,7 +22,7 @@ const Home = () => {
           <Table />
         </>
       ) : (
-        <Redirect to="/404" />
+        <Navigate to="/404" />
       )}
     </HomeContainer>
   );
