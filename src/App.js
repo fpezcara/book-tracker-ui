@@ -1,31 +1,15 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import BookTrackerState from "./context/BookTrackerState";
-import Home from "./components/Home/Home";
-import Header from "./components/Header/Header";
-import AddBook from "./components/AddBook/AddBook";
-import NotFound from "./components/NotFound/NotFound";
+import routesConfig from "./routesConfig";
 
 const App = () => {
-  return (
-    <Router>
-      <BookTrackerState>
-        <Header />
-        <Routes>
-          <Route path="/404" element={<NotFound />} />
-          <Route path="/:name" element={<Home />} />
-          <Route path="/:name/add-book" element={<AddBook />} />
-          <Route path="/" element={<Navigate to="/reading" />} />
+  const router = createBrowserRouter(routesConfig);
 
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BookTrackerState>
-    </Router>
+  return (
+    <BookTrackerState>
+      <RouterProvider router={router} />
+    </BookTrackerState>
   );
 };
 

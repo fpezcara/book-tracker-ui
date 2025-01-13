@@ -1,53 +1,42 @@
 import { render, screen, act } from "@testing-library/react";
+import { fireEvent } from "@testing-library/user-event";
 import App from "./App";
-import { createMemoryHistory } from "history";
-import { MemoryRouter, Router } from "react-router-dom";
+import { RouterProvider, createMemoryRouter } from "react-router-dom";
+import routesConfig from "./routesConfig";
 import BookTrackerState from "./context/BookTrackerState";
-
 describe("App", () => {
-  // test("redirects to /reading on first render", () => {
-
-  //   render(
-  //     <MemoryRouter>
-  //       <BookTrackerState>
-  //         <App />
-  //       </BookTrackerState>
-  //     </MemoryRouter>,
-  //   );
-
-  //   const bookTrackerTitle = screen.getByRole('heading', { level: 1 });
-  //   const bookList = screen.getByRole('heading', { level: 3 });
-  //   expect(bookTrackerTitle).toHaveTextContent(/book tracker/i);
-  //   expect(bookList).toHaveTextContent(/reading/i);
-  //   expect(screen.getByText(/no books have been added/i)).toBeInTheDocument();
-  // });
-
-  test("shows page not found when page does not exist", async () => {
-    const history = createMemoryHistory();
+  test("redirects to /reading on first render", () => {
+    const router = createMemoryRouter(routesConfig, {
+      initialEntries: ["/reading"],
+    });
 
     render(
-      <Router history={history}>
-        <BookTrackerState>
-          <App />
-        </BookTrackerState>
-      </Router>,
+      <BookTrackerState>
+        <RouterProvider router={router} />
+      </BookTrackerState>,
     );
-    console.log("before");
-    screen.debug();
+    const bookTrackerTitle = screen.getByRole("heading", { level: 1 });
+    const bookList = screen.getByRole("heading", { level: 3 });
+    expect(bookTrackerTitle).toHaveTextContent(/book tracker/i);
+    expect(bookList).toHaveTextContent(/reading/i);
+    expect(screen.getByText(/no books have been added/i)).toBeInTheDocument();
+  });
 
-    history.push("/random");
+  test("shows page not found when page does not exist", async () => {
+    const router = createMemoryRouter(routesConfig, {
+      initialEntries: ["/random"],
+    });
 
-    console.log("WHERE AM III", history.location);
-    console.log("after");
+    render(
+      <BookTrackerState>
+        <RouterProvider router={router} />
+      </BookTrackerState>,
+    );
 
-    screen.debug();
     await act(async () => {
-      // Wait for the 404 page to appear
       const goHomeText = await screen.findByText(/go home/i);
       expect(goHomeText).toBeInTheDocument();
       expect(screen.getByAltText("page not found")).toBeInTheDocument();
     });
-    // expect(screen.getByAltText('page not found')).toBeInTheDocument()
-    // expect(window.history.pathname).toBe('/404')
   });
 });
