@@ -34,8 +34,9 @@ const DropdownList = ({
   }, [selectType]);
 
   const { items } = useFetch(
-    `${urlName}${typeSelected}:${searchInput}&orderBy=relevance&key=${apiKey}`
+    `${urlName}${typeSelected}:${searchInput}&orderBy=relevance&key=${apiKey}`,
   );
+
   return (
     <>
       <Table>

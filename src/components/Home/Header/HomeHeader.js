@@ -26,6 +26,7 @@ const HomeHeader = () => {
           value={`/${currentBookList}/add-book`}
           title="Add book"
           className="add-book"
+          dataTestId="add-book-button"
         />
       </HeaderRightSide>
     </Header>

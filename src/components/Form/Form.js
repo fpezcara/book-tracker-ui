@@ -24,7 +24,12 @@ const Form = ({
 
   return (
     <>
-      <Button className="go-back" value={-1} title="go back" />
+      <Button
+        className="go-back"
+        value={-1}
+        title="go back"
+        dataTestId="go-back-button"
+      />
       <StyledForm>
         <input
           type="text"
@@ -32,6 +37,7 @@ const Form = ({
           onChange={onChangeHandler}
           value={searchInput}
           placeholder="Search by Title, Author or ISBN. . ."
+          data-testid="search-by-input"
         />
 
         <Select
@@ -39,6 +45,7 @@ const Form = ({
           selectValue={selectType}
           optionValue={searchBy.map(({ value }) => value)}
           onChangeHandler={onChangeHandler}
+          dataTestId={"search-by-options-select"}
         />
       </StyledForm>
     </>
