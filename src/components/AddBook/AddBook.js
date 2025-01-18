@@ -19,12 +19,14 @@ const AddBook = () => {
           searchInput={searchInput}
           setSearchInput={setSearchInput}
         />
-        <DropdownList
-          selectType={selectType}
-          searchInput={searchInput}
-          triggerSearch={triggerSearch}
-          setTriggerSearch={setTriggerSearch}
-        />
+        {!!searchInput && (
+          <DropdownList
+            selectType={selectType}
+            searchInput={searchInput}
+            triggerSearch={triggerSearch}
+            setTriggerSearch={setTriggerSearch}
+          />
+        )}
       </AddBookContainer>
     </AddBookWrapper>
   );
