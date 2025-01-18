@@ -22,6 +22,7 @@ const BookListsSelect = ({ children, bookLists }) => {
         selectValue={children.props.children}
         optionValue={bookListValue}
         onChangeHandler={bookListsHandler}
+        dataTestId="booklist-select"
       />
     </>
   );
