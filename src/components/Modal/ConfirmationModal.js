@@ -52,15 +52,17 @@ const ConfirmationModal = ({
             </ModalText>
             <ModalButton>
               <Button
+                title="accept"
                 className="button accept"
                 value={`/${name}`}
                 onClickHandler={onClickHandler}
-                title="accept"
+                dataTestId="confirmation-modal-accept-button"
               />
               <Button
-                className="button cancel"
                 title="cancel"
+                className="button cancel"
                 onClickHandler={hideModal}
+                dataTestId="confirmation-modal-cancel-button"
               />
             </ModalButton>
           </div>
