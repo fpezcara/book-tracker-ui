@@ -15,7 +15,7 @@
     "react-scripts": "^5.0.1",
     "styled-components": "^6.1.14",
     "styled-icons": "^10.35.0",
-    "vercel": "^40.1.0"
+    "vercel": "^41.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
