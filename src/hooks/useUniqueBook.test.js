@@ -47,20 +47,16 @@ const bookNotInBookList = {
   canonicalVolumeLink:
     "https://play.google.com/store/books/details?id=xfHiDwAAQBAJ",
 };
-describe("usUniqueBook hook", () => {
+describe("useUniqueBook hook", () => {
   it("returns true when book is not in booklist", () => {
-    const linkElement = useUniqueBook(
-      bookList,
-      bookList[0].books[0],
-      "reading",
-    );
-    expect(linkElement).toBeTruthy();
+    const result = useUniqueBook(bookList, bookList[0].books[0], "reading");
+
+    expect(result).toBeTruthy();
   });
 
   it("returns false when book is in booklist", () => {
-    const linkElement = useUniqueBook(bookList, bookNotInBookList, "reading");
-    expect(linkElement).toBeFalsy();
-  });
+    const result = useUniqueBook(bookList, bookNotInBookList, "reading");
 
-  // });
+    expect(result).toBeFalsy();
+  });
 });
