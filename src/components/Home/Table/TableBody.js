@@ -10,9 +10,7 @@ const TableBody = ({ showModal, setBookToDelete }) => {
     state: { bookLists, currentBookList },
   } = useContext(BookTrackerContext);
 
-  const bookList = bookLists.find(
-    (bookL) => bookL.listUrl === currentBookList
-  );
+  const bookList = bookLists.find((bookL) => bookL.listUrl === currentBookList);
   const handleDelete = (bookSelected) => {
     setBookToDelete(bookSelected);
     showModal();

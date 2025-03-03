@@ -13,7 +13,10 @@ export const Nav = styled.header`
     color: #121629;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    text-shadow: 0 2px 1px #f6ffff, -1px 3px 1px #f6ffff, -2px 5px 1px #fffffe;
+    text-shadow:
+      0 2px 1px #f6ffff,
+      -1px 3px 1px #f6ffff,
+      -2px 5px 1px #fffffe;
     text-align: center;
   }
 
