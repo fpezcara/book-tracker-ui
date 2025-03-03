@@ -14,6 +14,7 @@ const Home = () => {
   } = useContext(BookTrackerContext);
 
   const linkMatches = bookLists.some((item) => item.listUrl === name);
+
   return (
     <HomeContainer data-testid="home-container">
       {linkMatches ? (
