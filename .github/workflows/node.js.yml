@@ -88,5 +88,8 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
+      - name: Format
+        run: npm run format
+
       - name: Build
         run: npm run build

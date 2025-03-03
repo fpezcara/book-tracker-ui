@@ -23,7 +23,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "husky",
-    "format:fix": "prettier --write ."
+    "format:fix": "prettier --write .",
+    "format": "prettier --check ."
   },
   "eslintConfig": {
     "extends": [
