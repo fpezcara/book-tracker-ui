@@ -17,7 +17,7 @@ const BookTrackerReducer = (state, action) => {
                 ...bookList,
                 books: [...bookList.books, action.payload],
               }
-            : bookList
+            : bookList,
         ),
       };
 
@@ -30,7 +30,7 @@ const BookTrackerReducer = (state, action) => {
                 ...bookList,
                 books: bookList.books.filter((book) => book !== action.payload),
               }
-            : bookList
+            : bookList,
         ),
       };
     case CURRENT_BOOKLIST:

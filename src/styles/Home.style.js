@@ -66,10 +66,10 @@ export const HeaderLeftSide = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    h3{
-      font-size:17px;
+    h3 {
+      font-size: 17px;
     }
-    select{
+    select {
       font-size: 13px;
     }
   }
@@ -92,5 +92,4 @@ export const HeaderRightSide = styled.div`
     width: 6.5em;
     color: #121629;
   }
-  
 `;
