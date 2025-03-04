@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Fjalla+One&display=swap");
+
 body {
   margin: 0;
   font-family:
@@ -8,6 +10,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* background: #b8c1ec; */
   box-sizing: border-box;
+  min-height: 100vh;
+  /* display: flex;
+  jusitfy-content: center; */
+  /* background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/38816/image-from-rawpixel-id-2210775-jpeg.jpg") center center no-repeat;
+  background-size: cover; */
 }
 
 code {

@@ -21,16 +21,23 @@ export const Nav = styled.header`
     text-align: center;
   }
 
-  div {
+  .home {
+    justify-self: flex-start;
+    align-self: flex-start;
+    margin-right: auto;
+  }
+
+  .authLinks {
     display: flex;
-    width: 100%;
-    justify-content: center;
+    gap: 4rem;
   }
 
   .authentication {
+    display: flex;
     gap: 2rem;
-    justify-content: flex-end;
-=  }
+    justify-content: space-between;
+    width: 100%;
+  }
 
   .link {
     appearance: none;

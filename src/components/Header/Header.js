@@ -6,12 +6,17 @@ const Header = () => {
   return (
     <Nav>
       <div className="authentication">
-        <Link className="link" to="/register">
-          Register
+        <Link className="link home" to="/">
+          Home
         </Link>
-        <Link className="link" to="/login">
-          Login
-        </Link>
+        <div className="authLinks">
+          <Link className="link" to="/register">
+            Register
+          </Link>
+          <Link className="link" to="/login">
+            Login
+          </Link>
+        </div>
       </div>
       <div>
         <h1>Book Tracker</h1>
