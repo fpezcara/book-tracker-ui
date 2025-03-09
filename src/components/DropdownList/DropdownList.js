@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import DropdownElement from "./DropdownElement/DropdownElement";
 import ConfirmationModal from "../Modal/ConfirmationModal";
 import useModal from "../../hooks/useModal";
+import { API_URL } from "../../constants";
+import useSearchChannel from "../../hooks/useSearchChannel";
 
 import { Table } from "../../styles/DropdownList.style";
-
-const apiKey = process.env.REACT_APP_API_KEY;
-const urlName = process.env.REACT_APP_TITLE_URL;
 
 const DropdownList = ({
   selectType,
@@ -15,27 +14,16 @@ const DropdownList = ({
   setTriggerSearch,
   searchInput,
 }) => {
-  const [typeSelected, setTypeSelected] = useState("");
   const [addedBook, setAddedBook] = useState([]);
-
   const { isVisible, toggleModal } = useModal();
 
-  useEffect(() => {
-    switch (selectType) {
-      case "author":
-        setTypeSelected("inauthor");
-        break;
-      case "isbn":
-        setTypeSelected("isbn");
-        break;
-      default:
-        setTypeSelected("intitle");
-    }
-  }, [selectType]);
-
   const { items } = useFetch(
-    `${urlName}${typeSelected}:${searchInput}&orderBy=relevance&key=${apiKey}`,
+    `${API_URL}/books/search`,
+    selectType,
+    searchInput,
   );
+
+  console.log("ITEMS: ", useSearchChannel(searchInput, selectType));
 
   return (
     <>
