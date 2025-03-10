@@ -5,6 +5,7 @@ import { API_URL } from "../../constants";
 import { AuthenticationContainer } from "../../styles/Authentication.style";
 
 const Registration = () => {
+  console.log("is it the right url", API_URL);
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
