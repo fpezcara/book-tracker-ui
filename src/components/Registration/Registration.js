@@ -6,6 +6,8 @@ import { AuthenticationContainer } from "../../styles/Authentication.style";
 
 const Registration = () => {
   console.log("is it the right url", API_URL);
+  console.log("explicit url", process.env.BOOK_TRACKER_API_PRODUCTION);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
