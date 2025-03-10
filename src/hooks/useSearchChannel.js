@@ -8,47 +8,64 @@ const useSearchChannel = (searchInput, selectType) => {
 
     if (!searchInput || !selectType) return;
     // todo: ensure to use wss for prod and ws for local dev
-    let wsApiUrl = "";
-    if (process.env.NODE_ENV === "production") {
-      wsApiUrl = API_URL.replace("https", "wss");
-    } else {
-      wsApiUrl = API_URL.replace("http", "ws");
-    }
 
-    console.log("ws irl", wsApiUrl);
-    const ws = new WebSocket(`${wsApiUrl}/cable`);
-
-    ws.onopen = () => {
-      console.log("Connected to WebSocket");
-      ws.send(
-        JSON.stringify({
-          command: "subscribe",
-          identifier: JSON.stringify({
-            // channel: `search_${searchInput}_${selectType}`,
-            channel: "SearchChannel",
+    const fetchData = async () => {
+      const response = await fetch("http://localhost:3001/books/search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          book: {
             query: searchInput,
             search_by: selectType,
-          }),
+          },
         }),
-      );
+        widthCredentials: true, // This ensures that cookies are included in the request
+      });
+
+      return response;
     };
 
-    ws.onmessage = (event) => {
-      console.log("event....", event);
-      try {
-        const data = JSON.parse(event.data);
-        if (
-          data?.message?.message?.data &&
-          Array.isArray(data.message.message.data)
-        ) {
-          console.log("DATA: ", data);
+    console.log("ws irl", WS_URL);
+    const ws = new WebSocket(`${WS_URL}/cable`);
+    fetchData()
+      .then((res) => res)
+      .then((res) => {
+        if (res.ok) {
+          ws.onopen = () => {
+            console.log("Connected to WebSocket");
+            ws.send(
+              JSON.stringify({
+                command: "subscribe",
+                identifier: JSON.stringify({
+                  // channel: `search_${searchInput}_${selectType}`,
+                  channel: "SearchChannel",
+                  query: searchInput,
+                  search_by: selectType,
+                }),
+              }),
+            );
+          };
 
-          setSearchResults(data.message.message.data);
+          ws.onmessage = (event) => {
+            console.log("event....", event);
+            try {
+              const data = JSON.parse(event.data);
+              if (
+                data?.message?.message?.data &&
+                Array.isArray(data.message.message.data)
+              ) {
+                console.log("Log DATA: ", data);
+
+                setSearchResults(data.message.message.data);
+              }
+            } catch (error) {
+              console.error("Error parsing WebSocket message:", error);
+            }
+          };
         }
-      } catch (error) {
-        console.error("Error parsing WebSocket message:", error);
-      }
-    };
+      });
 
     return () => {
       if (ws.readyState === WebSocket.OPEN) {
