@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { API_URL } from "../constants";
+import { WS_URL } from "../constants";
 const useSearchChannel = (searchInput, selectType) => {
   const [searchResults, setSearchResults] = useState([]);
 
@@ -7,7 +7,13 @@ const useSearchChannel = (searchInput, selectType) => {
     if (!searchInput) return;
 
     if (!searchInput || !selectType) return;
-    const wsApiUrl = API_URL.replace(/^https?/, "ws");
+    // todo: ensure to use wss for prod and ws for local dev
+    let wsApiUrl = "";
+    if (process.env.NODE_ENV === "production") {
+      wsApiUrl = API_URL.replace("https", "wss");
+    } else {
+      wsApiUrl = API_URL.replace("http", "ws");
+    }
 
     console.log("ws irl", wsApiUrl);
     const ws = new WebSocket(`${wsApiUrl}/cable`);
