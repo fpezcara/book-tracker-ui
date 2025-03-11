@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { WS_URL } from "../constants";
+import { WS_URL, API_URL } from "../constants";
 const useSearchChannel = (searchInput, selectType) => {
   const [searchResults, setSearchResults] = useState([]);
 
@@ -7,10 +7,9 @@ const useSearchChannel = (searchInput, selectType) => {
     if (!searchInput) return;
 
     if (!searchInput || !selectType) return;
-    // todo: ensure to use wss for prod and ws for local dev
 
     const fetchData = async () => {
-      const response = await fetch("http://localhost:3001/books/search", {
+      const response = await fetch(`${API_URL}/search`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
