@@ -9,7 +9,7 @@ const useSearchChannel = (searchInput, selectType) => {
     if (!searchInput || !selectType) return;
 
     const fetchData = async () => {
-      const response = await fetch(`${API_URL}/search`, {
+      const response = await fetch(`${API_URL}/books/search`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
