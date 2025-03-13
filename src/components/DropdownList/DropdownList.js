@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useFetch from "../../hooks/useFetch";
+// import useFetch from "../../hooks/useFetch";
 import DropdownElement from "./DropdownElement/DropdownElement";
 import ConfirmationModal from "../Modal/ConfirmationModal";
 import useModal from "../../hooks/useModal";
@@ -16,8 +16,8 @@ const DropdownList = ({
   const [addedBook, setAddedBook] = useState([]);
   const { isVisible, toggleModal } = useModal();
 
-  const { items } = useFetch(selectType, searchInput);
-
+  // const { items } = useFetch(selectType, searchInput);
+  const items = [];
   console.log("ITEMS: ", useSearchChannel(searchInput, selectType));
 
   return (
