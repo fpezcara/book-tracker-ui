@@ -4,10 +4,21 @@ const useSearchChannel = (searchInput, selectType) => {
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    if (!searchInput) return;
-
     if (!searchInput || !selectType) return;
+    const ws = new WebSocket(`${WS_URL}/cable`);
 
+    ws.onopen = () => {
+      console.log("Connected to WebSocket");
+      ws.send(
+        JSON.stringify({
+          command: "subscribe",
+          identifier: JSON.stringify({
+            // channel: `search_${searchInput}_${selectType}`,
+            channel: "SearchChannel",
+          }),
+        }),
+      );
+    };
     const fetchData = async () => {
       const response = await fetch(`${API_URL}/books/search`, {
         method: "POST",
@@ -27,28 +38,14 @@ const useSearchChannel = (searchInput, selectType) => {
     };
 
     console.log("ws irl", WS_URL);
-    const ws = new WebSocket(`${WS_URL}/cable`);
     fetchData()
       .then((res) => res)
       .then((res) => {
+        console.log("is res ok", res.ok);
         if (res.ok) {
-          ws.onopen = () => {
-            console.log("Connected to WebSocket");
-            ws.send(
-              JSON.stringify({
-                command: "subscribe",
-                identifier: JSON.stringify({
-                  // channel: `search_${searchInput}_${selectType}`,
-                  channel: "SearchChannel",
-                  query: searchInput,
-                  search_by: selectType,
-                }),
-              }),
-            );
-          };
-
           ws.onmessage = (event) => {
             console.log("event....", event);
+            console.log("DATA....", event.data);
             try {
               const data = JSON.parse(event.data);
               if (
