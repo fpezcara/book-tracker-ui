@@ -24,9 +24,7 @@ const DropdownElement = ({
               <img
                 alt={result.title}
                 src={
-                  result.imageLinks
-                    ? result.imageLinks.smallThumbnail
-                    : imageNotAvailable
+                  result.cover_image ? result.cover_image : imageNotAvailable
                 }
               />
             </td>
