@@ -16,9 +16,7 @@ const DropdownList = ({
   const [addedBook, setAddedBook] = useState([]);
   const { isVisible, toggleModal } = useModal();
 
-  // const { items } = useFetch(selectType, searchInput);
-  const items = [];
-  console.log("ITEMS: ", useSearchChannel(searchInput, selectType));
+  const items = useSearchChannel(searchInput, selectType);
 
   return (
     <>
@@ -27,7 +25,7 @@ const DropdownList = ({
           items &&
           items.map((result, i) => (
             <DropdownElement
-              result={result.volumeInfo}
+              result={result}
               searchInput={searchInput}
               showModal={toggleModal}
               setTriggerSearch={setTriggerSearch}

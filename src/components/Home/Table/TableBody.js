@@ -23,11 +23,7 @@ const TableBody = ({ showModal, setBookToDelete }) => {
           <tr key={book.infoLink}>
             <td>
               <img
-                src={
-                  book.imageLinks
-                    ? book.imageLinks.smallThumbnail
-                    : imageNotAvailable
-                }
+                src={book.cover_image ? book.cover_image : imageNotAvailable}
                 alt={book.title}
               />
             </td>
@@ -37,7 +33,7 @@ const TableBody = ({ showModal, setBookToDelete }) => {
                 ? book.authors.map((author, i) => (i ? ", " : "") + author)
                 : "N/A"}
             </td>
-            <td>{book.pageCount ? book.pageCount : "N/A"}</td>
+            <td>{book.page_count ? book.page_count : "N/A"}</td>
             <td onClick={() => handleDelete(book)}>
               <DeleteIcon />
             </td>
