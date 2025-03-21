@@ -5,7 +5,7 @@ import NotFound from "./components/NotFound";
 import Registration from "./components/Registration";
 import Login from "./components/Login";
 
-import { Outlet, Navigate } from "react-router-dom";
+import { Outlet, Navigate } from "react-router";
 
 const routesConfig = [
   {

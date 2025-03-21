@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, Navigate } from "react-router";
 
 import HomeHeader from "./Header/index.jsx";
 import Table from "./Table/index.jsx";

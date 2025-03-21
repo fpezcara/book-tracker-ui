@@ -4,7 +4,7 @@ import {
   ModalText,
   ModalButton,
 } from "../../styles/Modal.style";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import useUniqueBook from "../../hooks/useUniqueBook";
 
 import Button from "../Button";
