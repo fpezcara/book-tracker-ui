@@ -20,7 +20,7 @@ const TableBody = ({ showModal, setBookToDelete }) => {
     <tbody>
       {bookList.books.length > 0 ? (
         bookList.books.map((book) => (
-          <tr key={book.infoLink}>
+          <tr key={book.title}>
             <td>
               <img
                 src={book.cover_image ? book.cover_image : imageNotAvailable}
