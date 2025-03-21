@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import useFetch from "../../hooks/useFetch";
-import DropdownElement from "./DropdownElement/DropdownElement";
-import ConfirmationModal from "../Modal/ConfirmationModal";
+import DropdownElement from "./DropdownElement";
+import ConfirmationModal from "../ConfirmationModal";
 import useModal from "../../hooks/useModal";
 import useSearchChannel from "../../hooks/useSearchChannel";
 

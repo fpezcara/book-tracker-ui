@@ -1,6 +1,6 @@
 import React from "react";
-import Select from "../Select/Select";
-import Button from "../Button/Button";
+import Select from "../Select";
+import Button from "../Button";
 
 import { StyledForm } from "../../styles/Form.style";
 

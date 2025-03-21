@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { useParams, Navigate } from "react-router-dom";
 
-import HomeHeader from "./Header/HomeHeader";
-import Table from "./Table/Table";
-import BookTrackerContext from "../../context/book-tracker-context";
+import HomeHeader from "./Header/index.js";
+import Table from "./Table/index.js";
+import BookTrackerContext from "../../context/book-tracker-context.js";
 
 import { HomeContainer } from "../../styles/Home.style.js";
 

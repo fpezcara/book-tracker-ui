@@ -1,5 +1,5 @@
 import React from "react";
-import imageNotAvailable from "../../../assets/image-not-available.svg";
+import imageNotAvailable from "../../assets/image-not-available.svg";
 
 const DropdownElement = ({
   result,
