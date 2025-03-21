@@ -1,13 +1,12 @@
 import React from "react";
 import axios from "axios";
+import { useNavigate } from "react-router";
 import { API_URL } from "../../constants";
 
 import { AuthenticationContainer } from "../../styles/Authentication.style";
 
 const Registration = () => {
-  console.log("is it the right url", API_URL);
-  console.log("explicit url", process.env.BOOK_TRACKER_API_PRODUCTION);
-  console.log("process.env:", process.env);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +15,7 @@ const Registration = () => {
     const formValues = {
       email_address: formData.get("email"),
       password: formData.get("password"),
-      passwordConfirmation: formData.get("password-confirmation"),
+      password_confirmation: formData.get("password-confirmation"),
     };
 
     axios
@@ -25,7 +24,9 @@ const Registration = () => {
       })
       .then((response) => {
         // todo : i can't see the cookie, but i need to store that so i can make reqeusts to the api
-        console.log(response.json());
+        if (response.status === 201) {
+          navigate("/");
+        }
       })
       .catch((error) => {
         console.log(error);
