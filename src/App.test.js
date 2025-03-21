@@ -1,6 +1,6 @@
 import { render, screen, act } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
-import { RouterProvider, createMemoryRouter } from "react-router-dom";
+import { RouterProvider, createMemoryRouter } from "react-router";
 import routesConfig from "./routesConfig";
 import BookTrackerState from "./context/BookTrackerState";
 
