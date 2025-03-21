@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { useParams, Navigate } from "react-router-dom";
 
-import HomeHeader from "./Header/index.js";
-import Table from "./Table/index.js";
+import HomeHeader from "./Header/index.jsx";
+import Table from "./Table/index.jsx";
 import BookTrackerContext from "../../context/book-tracker-context.js";
 
 import { HomeContainer } from "../../styles/Home.style.js";
