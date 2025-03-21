@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import BookTrackerContext from "../../../context/book-tracker-context";
 
-import Select from "../../Select/Select";
+import Select from "../../Select";
 
 const BookListsSelect = ({ children, bookLists }) => {
   const { updateCurrentBookList } = useContext(BookTrackerContext);

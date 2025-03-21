@@ -7,7 +7,7 @@ import {
 import { useParams } from "react-router-dom";
 import useUniqueBook from "../../hooks/useUniqueBook";
 
-import Button from "../Button/Button";
+import Button from "../Button";
 
 import BookTrackerContext from "../../context/book-tracker-context";
 

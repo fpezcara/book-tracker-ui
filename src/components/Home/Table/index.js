@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
-import ConfirmationModal from "../../Modal/ConfirmationModal";
+import ConfirmationModal from "../../ConfirmationModal";
 import useModal from "../../../hooks/useModal";
 
 import { TableContainer } from "../../../styles/Table.style";

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Form from "../Form/Form";
-import DropdownList from "../DropdownList/DropdownList";
+import Form from "../Form";
+import DropdownList from "../DropdownList";
 
 import { AddBookWrapper, AddBookContainer } from "../../styles/AddBook.style";
 
