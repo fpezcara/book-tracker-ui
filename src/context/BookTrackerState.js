@@ -1,6 +1,9 @@
-import React, { useReducer, useEffect, useMemo } from "react";
+import React, { useReducer, useEffect, useMemo, useState } from "react";
 import BookTrackerContext from "./book-tracker-context";
 import BookTrackerReducer from "./book-tracker-reducer";
+import axios from "axios";
+import { API_URL } from "../constants";
+import Cookies from "js-cookie";
 
 import {
   ADD_BOOK,
@@ -10,6 +13,9 @@ import {
 
 const BookTrackerState = ({ children }) => {
   const { Provider } = BookTrackerContext;
+  const userId = Cookies.get("userId");
+  // todo: rename to bookLists
+  const [lists, setLists] = useState([]);
 
   const updateCurrentBookList = (selectedBookList) => {
     dispatch({
@@ -53,16 +59,24 @@ const BookTrackerState = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    try {
+      axios
+        .get(`${API_URL}/users/${userId}/lists`, { withCredentials: true })
+        .then((response) => setLists(response.data));
+    } catch (error) {
+      throw new Error(error);
+    }
     if (state !== initialState) {
       localStorage.setItem("state", JSON.stringify(state));
     }
-  }, [state, initialState]);
+  }, [state, initialState, userId]);
 
   const values = {
     state,
     addBook,
     deleteBook,
     updateCurrentBookList,
+    lists,
   };
 
   return <Provider value={values}>{children}</Provider>;

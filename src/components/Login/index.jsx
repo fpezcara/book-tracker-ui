@@ -25,8 +25,8 @@ const Login = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            widthCredentials: true,
           },
+          withCredentials: true,
         },
       )
       .then((response) => {
@@ -37,7 +37,6 @@ const Login = () => {
         ) {
           Cookies.set("userId", response.data.userId, {
             secure: true,
-            sameSite: "strict",
           });
 
           navigate("/");

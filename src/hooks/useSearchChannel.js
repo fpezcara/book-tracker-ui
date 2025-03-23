@@ -7,6 +7,7 @@ const useSearchChannel = (searchInput, selectType) => {
     if (!searchInput || !selectType) return;
     const ws = new WebSocket(`${WS_URL}/cable`);
 
+    // todo: dont connect to websocket if we're already connected...
     ws.onopen = () => {
       console.log("Connected to WebSocket");
       ws.send(

@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { API_URL } from "../../constants";
 
+import Cookies from "js-cookie";
+
 import { AuthenticationContainer } from "../../styles/Authentication.style";
 
 const Registration = () => {
@@ -25,6 +27,10 @@ const Registration = () => {
       .then((response) => {
         // todo : i can't see the cookie, but i need to store that so i can make reqeusts to the api
         if (response.status === 201) {
+          Cookies.set("userId", response.data.userId, {
+            secure: true,
+            sameSite: "strict",
+          });
           navigate("/");
         }
       })
