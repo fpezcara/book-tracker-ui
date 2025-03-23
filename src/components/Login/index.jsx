@@ -20,12 +20,11 @@ const Login = () => {
     axios
       .post(
         `${API_URL}/session`,
-        {
-          ...formValues,
-        },
+        { session: formValues },
         {
           headers: {
             "Content-Type": "application/json",
+            widthCredentials: true,
           },
         },
       )
