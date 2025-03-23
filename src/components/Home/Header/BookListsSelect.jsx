@@ -24,7 +24,7 @@ const BookListsSelect = ({ children, bookLists }) => {
       {children}
       <Select
         selectValue={children.props.children}
-        optionValue={bookListValue}
+        optionValues={bookListValue}
         onChangeHandler={bookListsHandler}
         dataTestId="booklist-select"
       />
