@@ -4,6 +4,7 @@ import { AuthenticationContainer } from "../../styles/Authentication.style";
 import { API_URL } from "../../constants";
 
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -29,7 +30,16 @@ const Login = () => {
         },
       )
       .then((response) => {
-        if (response.status === 200 || response.status === 204) {
+        if (
+          response.status === 200 ||
+          response.status === 204 ||
+          response.status === 201
+        ) {
+          Cookies.set("userId", response.data.userId, {
+            secure: true,
+            sameSite: "strict",
+          });
+
           navigate("/");
         }
         console.log(response);
