@@ -16,7 +16,7 @@ const TableBody = ({ showModal, setBookToDelete }) => {
     setBookToDelete(bookSelected);
     showModal();
   };
-  console.log(bookLists);
+
   return (
     <tbody>
       {bookList?.books.length > 0 ? (
