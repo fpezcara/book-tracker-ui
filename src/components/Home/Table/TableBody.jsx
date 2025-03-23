@@ -1,24 +1,25 @@
 import React, { useContext } from "react";
 import imageNotAvailable from "../../../assets/image-not-available.svg";
-
+import Cookies from "js-cookie";
 import BookTrackerContext from "../../../context/book-tracker-context";
 
 import { DeleteIcon } from "../../../styles/Table.style";
 
 const TableBody = ({ showModal, setBookToDelete }) => {
   const {
-    state: { bookLists, currentBookList },
+    state: { bookLists, currentBookList: oldCurrentBookList },
   } = useContext(BookTrackerContext);
 
-  const bookList = bookLists.find((bookL) => bookL.listUrl === currentBookList);
+  const currentBookList = Cookies.get("currentBookList");
+  const bookList = bookLists.find((book) => book.name === currentBookList);
   const handleDelete = (bookSelected) => {
     setBookToDelete(bookSelected);
     showModal();
   };
-
+  console.log(bookLists);
   return (
     <tbody>
-      {bookList.books.length > 0 ? (
+      {bookList?.books.length > 0 ? (
         bookList.books.map((book) => (
           <tr key={book.title}>
             <td>

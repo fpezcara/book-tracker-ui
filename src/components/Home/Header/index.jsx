@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import BookListsSelect from "./BookListsSelect";
 import Button from "../../Button";
 import BookTrackerContext from "../../../context/book-tracker-context";
@@ -12,20 +12,20 @@ import { API_URL } from "../../../constants";
 import Cookies from "js-cookie";
 
 const HomeHeader = () => {
+  const [bookLists, setBookLists] = useState([]);
   const {
-    state: { bookLists, currentBookList },
+    lists,
+    state: { bookLists: oldBookLists, currentBookList: oldCurrentBookList },
   } = useContext(BookTrackerContext);
   const userId = Cookies.get("userId");
-
-  axios
-    .get(`${API_URL}/users/${userId}/lists`, {
-      headers: {
-        "Content-Type": "application/json",
-        credentials: "include",
-      },
-    })
-    .then((response) => response.data);
-
+  const currentBookList = Cookies.get("currentBookList");
+  // const { bookLists: tryBooks } = await fetchBooks()
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/users/${userId}/lists`, { withCredentials: true })
+      .then((response) => setBookLists(response.data));
+  }, [userId]);
+  console.log("please wooooork", lists);
   return (
     <Header>
       <HeaderLeftSide>

@@ -1,26 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router";
+
+import Cookies from "js-cookie";
+
 import { Nav } from "../../styles/Header.style";
 
-const Header = () => (
-  <Nav>
-    <div className="authentication">
-      <Link className="link home" to="/">
-        Home
-      </Link>
-      <div className="authLinks">
-        <Link className="link" to="/register">
-          Register
+const Header = () => {
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const userId = Cookies.get("userId");
+
+  useEffect(() => {
+    setIsUserLoggedIn(!!userId);
+  }, [userId]);
+  return (
+    <Nav>
+      <div className="authentication">
+        <Link className="link home" to="/">
+          Home
         </Link>
-        <Link className="link" to="/login">
-          Login
-        </Link>
+
+        <div className="authLinks">
+          {isUserLoggedIn ? (
+            <Link className="link" to="/logout">
+              Logout
+            </Link>
+          ) : (
+            <>
+              <Link className="link" to="/register">
+                Register
+              </Link>
+              <Link className="link" to="/login">
+                Login
+              </Link>
+            </>
+          )}
+        </div>
       </div>
-    </div>
-    <div>
-      <h1>Book Tracker</h1>
-    </div>
-  </Nav>
-);
+      <div>
+        <h1>Book Tracker</h1>
+      </div>
+    </Nav>
+  );
+};
 
 export default Header;
