@@ -16,6 +16,8 @@ const BookTrackerState = ({ children }) => {
   const userId = Cookies.get("userId");
   // todo: rename to bookLists
   const [lists, setLists] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState({});
 
   const updateCurrentBookList = (selectedBookList) => {
     dispatch({
@@ -62,9 +64,13 @@ const BookTrackerState = ({ children }) => {
     try {
       axios
         .get(`${API_URL}/users/${userId}/lists`, { withCredentials: true })
-        .then((response) => setLists(response.data));
+        .then((response) => {
+          setLists(response.data);
+          setLoading(false);
+        });
     } catch (error) {
-      throw new Error(error);
+      setLoading(false);
+      setError(error);
     }
     if (state !== initialState) {
       localStorage.setItem("state", JSON.stringify(state));
@@ -77,6 +83,8 @@ const BookTrackerState = ({ children }) => {
     deleteBook,
     updateCurrentBookList,
     lists,
+    loading,
+    error,
   };
 
   return <Provider value={values}>{children}</Provider>;

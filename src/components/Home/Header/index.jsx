@@ -12,20 +12,13 @@ import { API_URL } from "../../../constants";
 import Cookies from "js-cookie";
 
 const HomeHeader = () => {
-  const [bookLists, setBookLists] = useState([]);
   const {
-    lists,
+    lists: bookLists,
     state: { bookLists: oldBookLists, currentBookList: oldCurrentBookList },
   } = useContext(BookTrackerContext);
-  const userId = Cookies.get("userId");
+
   const currentBookList = Cookies.get("currentBookList");
-  // const { bookLists: tryBooks } = await fetchBooks()
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/users/${userId}/lists`, { withCredentials: true })
-      .then((response) => setBookLists(response.data));
-  }, [userId]);
-  console.log("please wooooork", lists);
+
   return (
     <Header>
       <HeaderLeftSide>

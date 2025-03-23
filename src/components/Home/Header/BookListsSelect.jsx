@@ -11,7 +11,7 @@ const BookListsSelect = ({ children, bookLists }) => {
   const bookListValue = bookLists.map((list) => list.name);
 
   const bookListsHandler = ({ target }) => {
-    const newValue = target.value;
+    const newValue = target?.value.toLowerCase();
     updateCurrentBookList(newValue);
     Cookies.set("currentBookList", newValue, {
       secure: true,

@@ -4,12 +4,14 @@ import { useParams, Navigate } from "react-router";
 import HomeHeader from "./Header/index.jsx";
 import Table from "./Table/index.jsx";
 import BookTrackerContext from "../../context/book-tracker-context.js";
+import LoadingSpinner from "../LoadingSpinner";
 
 import { HomeContainer } from "../../styles/Home.style.js";
 
 const Home = () => {
   const { name } = useParams();
   const {
+    loading,
     state: { bookLists },
   } = useContext(BookTrackerContext);
 
