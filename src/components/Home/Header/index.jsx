@@ -7,11 +7,24 @@ import {
   HeaderLeftSide,
   HeaderRightSide,
 } from "../../../styles/Home.style";
+import axios from "axios";
+import { API_URL } from "../../../constants";
+import Cookies from "js-cookie";
 
 const HomeHeader = () => {
   const {
     state: { bookLists, currentBookList },
   } = useContext(BookTrackerContext);
+  const userId = Cookies.get("userId");
+
+  axios
+    .get(`${API_URL}/users/${userId}/lists`, {
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "include",
+      },
+    })
+    .then((response) => response.data);
 
   return (
     <Header>
