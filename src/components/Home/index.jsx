@@ -19,7 +19,9 @@ const Home = () => {
 
   return (
     <HomeContainer data-testid="home-container">
-      {linkMatches ? (
+      {loading ? (
+        <LoadingSpinner />
+      ) : linkMatches ? (
         <>
           <HomeHeader />
           <Table />
