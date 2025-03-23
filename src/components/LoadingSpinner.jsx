@@ -36,7 +36,7 @@ const StyledSpinner = styled.svg`
 
 const LoadingSpinner = () => {
   return (
-    <StyledSpinner viewBox="0 0 50 50">
+    <StyledSpinner viewBox="0 0 50 50" data-testid="loading-spinner">
       <circle
         className="path"
         cx="25"

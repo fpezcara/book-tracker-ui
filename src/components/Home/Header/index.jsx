@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import BookListsSelect from "./BookListsSelect";
 import Button from "../../Button";
 import BookTrackerContext from "../../../context/book-tracker-context";
@@ -7,15 +7,11 @@ import {
   HeaderLeftSide,
   HeaderRightSide,
 } from "../../../styles/Home.style";
-import axios from "axios";
-import { API_URL } from "../../../constants";
+
 import Cookies from "js-cookie";
 
 const HomeHeader = () => {
-  const {
-    lists: bookLists,
-    state: { bookLists: oldBookLists, currentBookList: oldCurrentBookList },
-  } = useContext(BookTrackerContext);
+  const { lists: bookLists } = useContext(BookTrackerContext);
 
   const currentBookList = Cookies.get("currentBookList");
 

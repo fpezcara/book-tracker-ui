@@ -6,9 +6,7 @@ import BookTrackerContext from "../../../context/book-tracker-context";
 import { DeleteIcon } from "../../../styles/Table.style";
 
 const TableBody = ({ showModal, setBookToDelete }) => {
-  const {
-    state: { bookLists, currentBookList: oldCurrentBookList },
-  } = useContext(BookTrackerContext);
+  const { lists: bookLists } = useContext(BookTrackerContext);
 
   const currentBookList = Cookies.get("currentBookList");
   const bookList = bookLists.find((book) => book.name === currentBookList);
