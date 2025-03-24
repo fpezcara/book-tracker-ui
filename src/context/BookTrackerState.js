@@ -62,12 +62,13 @@ const BookTrackerState = ({ children }) => {
 
   useEffect(() => {
     try {
-      axios
-        .get(`${API_URL}/users/${userId}/lists`, { withCredentials: true })
-        .then((response) => {
-          setLists(response.data);
-          setLoading(false);
-        });
+      userId &&
+        axios
+          .get(`${API_URL}/users/${userId}/lists`, { withCredentials: true })
+          .then((response) => {
+            setLists(response.data);
+            setLoading(false);
+          });
     } catch (error) {
       setLoading(false);
       setError(error);
