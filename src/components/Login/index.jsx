@@ -23,9 +23,6 @@ const Login = () => {
         `${API_URL}/session`,
         { session: formValues },
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
           withCredentials: true,
         },
       )

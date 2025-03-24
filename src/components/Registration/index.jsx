@@ -21,9 +21,13 @@ const Registration = () => {
     };
 
     axios
-      .post(`${API_URL}/users`, {
-        user: formValues,
-      })
+      .post(
+        `${API_URL}/users`,
+        {
+          user: formValues,
+        },
+        { withCredentials: true },
+      )
       .then((response) => {
         // todo : i can't see the cookie, but i need to store that so i can make reqeusts to the api
         if (response.status === 201) {
