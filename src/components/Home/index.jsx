@@ -26,7 +26,7 @@ const Home = () => {
     if (!userId) {
       navigate("/login");
     }
-  }, [userId]);
+  }, [userId, navigate]);
 
   return (
     <HomeContainer data-testid="home-container">
