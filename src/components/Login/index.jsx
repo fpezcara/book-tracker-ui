@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 
 const Login = () => {
   const navigate = useNavigate();
+  const currentBookList = Cookies.get("currentBookList") || "reading";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,6 +36,10 @@ const Login = () => {
           Cookies.set("userId", response.data.userId, {
             secure: true,
           });
+          Cookies.get("currentBookList") ||
+            Cookies.set("currentBookList", currentBookList, {
+              secure: true,
+            });
 
           navigate("/");
         }
