@@ -5,11 +5,12 @@ import {
   ModalButton,
 } from "../../styles/Modal.style";
 import { useParams } from "react-router";
-import useUniqueBook from "../../hooks/useUniqueBook";
+import { addBookToList } from "../../helpers/requests";
 
 import Button from "../Button";
 
 import BookTrackerContext from "../../context/book-tracker-context";
+import Cookies from "js-cookie";
 
 const ConfirmationModal = ({
   hideModal,
@@ -20,18 +21,25 @@ const ConfirmationModal = ({
   authors,
 }) => {
   const {
+    lists,
     updateCurrentBookList,
-    state: { currentBookList, bookLists },
+    state: { bookLists },
     addBook,
     deleteBook,
   } = useContext(BookTrackerContext);
 
   const { name } = useParams();
 
-  const isBookRepeated = useUniqueBook(bookLists, book, currentBookList);
+  const userId = Cookies.get("userId");
+  const currentBookList = Cookies.get("currentBookList");
+  const currentBookListId = lists.find(
+    (list) => list.name.toLowerCase() === currentBookList,
+  )?.id;
 
-  const onClickHandler = () => {
-    message === "add" && !isBookRepeated ? addBook(book) : deleteBook(book);
+  const onClickHandler = async () => {
+    message === "add"
+      ? await addBookToList(userId, currentBookListId, book)
+      : deleteBook(book);
     hideModal();
     updateCurrentBookList(name);
   };
