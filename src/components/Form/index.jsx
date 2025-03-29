@@ -43,7 +43,7 @@ const Form = ({
         <Select
           name="select"
           selectValue={selectType}
-          optionValue={searchBy.map(({ value }) => value)}
+          optionValues={searchBy.map(({ value }) => value)}
           onChangeHandler={onChangeHandler}
           dataTestId={"search-by-options-select"}
         />

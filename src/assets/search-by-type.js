@@ -5,5 +5,5 @@ export const searchBy = [
     apiSearch: "inauthor",
   },
 
-  { value: "isbn", apiSearch: "isbn" },
+  { value: "ISBN", apiSearch: "isbn" },
 ];
