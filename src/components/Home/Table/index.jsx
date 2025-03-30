@@ -6,15 +6,21 @@ import useModal from "../../../hooks/useModal";
 
 import { TableContainer } from "../../../styles/Table.style";
 
-const Table = () => {
+const Table = ({ bookLists }) => {
+  console.log("in table -- booklists", bookLists);
   const { isVisible, toggleModal } = useModal();
 
   const [bookToDelete, setBookToDelete] = useState([]);
+  console.log("booklistss in table", bookLists);
   return (
     <>
       <TableContainer>
         <TableHeader />
-        <TableBody showModal={toggleModal} setBookToDelete={setBookToDelete} />
+        <TableBody
+          showModal={toggleModal}
+          setBookToDelete={setBookToDelete}
+          bookLists={bookLists}
+        />
       </TableContainer>
       <ConfirmationModal
         message={isVisible && "delete"}
