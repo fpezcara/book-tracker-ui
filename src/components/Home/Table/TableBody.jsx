@@ -1,15 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 import imageNotAvailable from "../../../assets/image-not-available.svg";
 import Cookies from "js-cookie";
-import BookTrackerContext from "../../../context/book-tracker-context";
 
 import { DeleteIcon } from "../../../styles/Table.style";
 
-const TableBody = ({ showModal, setBookToDelete }) => {
-  const { lists: bookLists } = useContext(BookTrackerContext);
-
+const TableBody = ({ bookLists, showModal, setBookToDelete }) => {
   const currentBookList = Cookies.get("currentBookList");
-  const bookList = bookLists.find((book) => book.name === currentBookList);
+  const bookList = bookLists.find(
+    (book) => book.name.toLowerCase() === currentBookList,
+  );
+
   const handleDelete = (bookSelected) => {
     setBookToDelete(bookSelected);
     showModal();

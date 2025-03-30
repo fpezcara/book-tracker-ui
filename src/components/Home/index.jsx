@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { useParams, Navigate } from "react-router";
+import { Navigate } from "react-router";
 
 import HomeHeader from "./Header/index.jsx";
 import Table from "./Table/index.jsx";
@@ -11,16 +11,15 @@ import { useNavigate } from "react-router";
 import { HomeContainer } from "../../styles/Home.style.js";
 
 const Home = () => {
-  const { name } = useParams();
+  const currentBookList = Cookies.get("currentBookList");
   const userId = Cookies.get("userId");
   const navigate = useNavigate();
 
-  const {
-    loading,
-    state: { bookLists },
-  } = useContext(BookTrackerContext);
+  const { loading, lists } = useContext(BookTrackerContext);
 
-  const linkMatches = bookLists.some((item) => item.listUrl === name);
+  const linkMatches = lists.some(
+    (item) => item.name.toLowerCase() === currentBookList,
+  );
 
   useEffect(() => {
     if (!userId) {
@@ -35,7 +34,7 @@ const Home = () => {
       ) : linkMatches ? (
         <>
           <HomeHeader />
-          <Table />
+          <Table bookLists={lists} />
         </>
       ) : (
         <Navigate to="/404" />

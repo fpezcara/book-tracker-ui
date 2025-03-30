@@ -5,7 +5,7 @@ import {
   ModalButton,
 } from "../../styles/Modal.style";
 import { useParams } from "react-router";
-import { addBookToList } from "../../helpers/requests";
+import { addBookToList, removeBookFromList } from "../../helpers/requests";
 
 import Button from "../Button";
 
@@ -20,13 +20,8 @@ const ConfirmationModal = ({
   title,
   authors,
 }) => {
-  const {
-    lists,
-    updateCurrentBookList,
-    state: { bookLists },
-    addBook,
-    deleteBook,
-  } = useContext(BookTrackerContext);
+  const { lists, updateCurrentBookList, deleteBook } =
+    useContext(BookTrackerContext);
 
   const { name } = useParams();
 
@@ -39,7 +34,7 @@ const ConfirmationModal = ({
   const onClickHandler = async () => {
     message === "add"
       ? await addBookToList(userId, currentBookListId, book)
-      : deleteBook(book);
+      : await removeBookFromList(userId, currentBookListId, book.id);
     hideModal();
     updateCurrentBookList(name);
   };
