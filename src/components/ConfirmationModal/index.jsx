@@ -20,8 +20,7 @@ const ConfirmationModal = ({
   title,
   authors,
 }) => {
-  const { lists, updateCurrentBookList, deleteBook } =
-    useContext(BookTrackerContext);
+  const { lists, updateCurrentBookList } = useContext(BookTrackerContext);
 
   const { name } = useParams();
 

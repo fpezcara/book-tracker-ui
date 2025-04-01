@@ -26,6 +26,7 @@ const routesConfig = [
       { path: "/register", element: <Registration /> },
       { path: "/login", element: <Login /> },
       { path: "logout", element: <Logout /> },
+      { path: "*", element: <Navigate to="/404" /> },
     ],
   },
 ];

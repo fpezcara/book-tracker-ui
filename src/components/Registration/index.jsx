@@ -31,10 +31,7 @@ const Registration = () => {
       .then((response) => {
         // todo : i can't see the cookie, but i need to store that so i can make reqeusts to the api
         if (response.status === 201) {
-          Cookies.set("userId", response.data.userId, {
-            secure: true,
-            sameSite: "strict",
-          });
+          Cookies.set("userId", response.data.userId);
           navigate("/");
         }
       })

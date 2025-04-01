@@ -1,20 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import BookListsSelect from "./BookListsSelect";
 import Button from "../../Button";
-import BookTrackerContext from "../../../context/book-tracker-context";
+
 import {
   Header,
   HeaderLeftSide,
   HeaderRightSide,
 } from "../../../styles/Home.style";
 
-import Cookies from "js-cookie";
-
-const HomeHeader = () => {
-  const { lists: bookLists } = useContext(BookTrackerContext);
-
-  const currentBookList = Cookies.get("currentBookList");
-
+const HomeHeader = ({ bookLists, currentBookList }) => {
   return (
     <Header>
       <HeaderLeftSide>

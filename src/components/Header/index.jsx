@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router";
-
+import { Link, useNavigate } from "react-router";
 import Cookies from "js-cookie";
 
 import { Nav } from "../../styles/Header.style";
 
 const Header = () => {
+  const navigate = useNavigate();
+
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const userId = Cookies.get("userId");
 
@@ -15,10 +16,9 @@ const Header = () => {
   return (
     <Nav>
       <div className="authentication">
-        <Link className="link home" to="/">
+        <Link className="link home" onClick={() => navigate(-1)} to="/">
           Home
         </Link>
-
         <div className="authLinks">
           {isUserLoggedIn ? (
             <Link className="link" to="/logout">

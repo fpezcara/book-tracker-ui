@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App When user is logged in redirects to /reading on first render 1`] = `
+<div>
+  <header
+    class="sc-jOTjWM hMgtXy"
+  >
+    <div
+      class="authentication"
+    >
+      <a
+        class="link home"
+        data-discover="true"
+        href="/"
+      >
+        Home
+      </a>
+      <div
+        class="authLinks"
+      >
+        <a
+          class="link"
+          data-discover="true"
+          href="/logout"
+        >
+          Logout
+        </a>
+      </div>
+    </div>
+    <div>
+      <h1>
+        Book Tracker
+      </h1>
+    </div>
+  </header>
+  <main
+    class="sc-gnOvAp iUFPTw"
+    data-testid="home-container"
+  >
+    <div
+      class="sc-dQkurY bgnaKH"
+    >
+      <div
+        class="sc-glJfXD jVIZTa"
+      >
+        <h3>
+          reading
+        </h3>
+        <select
+          data-testid="booklist-select"
+        >
+          <option
+            value="reading"
+          >
+            Reading
+          </option>
+          <option
+            value="wishlist"
+          >
+            Wishlist
+          </option>
+          <option
+            value="finished"
+          >
+            Finished
+          </option>
+        </select>
+      </div>
+      <div
+        class="sc-dOfePm pRbiN"
+      >
+        <button
+          class="sc-VHjGu fcYvPT add-book"
+          data-testid="add-book-button"
+        >
+          Add book
+        </button>
+      </div>
+    </div>
+    <table
+      class="sc-jgmqJh gcmQwT"
+    >
+      <thead>
+        <tr>
+          <th>
+            Cover
+          </th>
+          <th>
+            Title
+          </th>
+          <th>
+            Author
+          </th>
+          <th>
+            Pages
+          </th>
+          <th />
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td
+            colspan="4"
+          >
+            No books have been added.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</div>
+`;
