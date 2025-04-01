@@ -26,7 +26,7 @@ export const removeBookFromList = async (userId, listId, bookId) => {
         headers: {
           "Content-Type": "application/json",
         },
-        withCredentials: true, // Ensure cookies are sent with the request
+        withCredentials: true,
       },
     );
   } catch (error) {

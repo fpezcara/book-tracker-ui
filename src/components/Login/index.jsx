@@ -33,13 +33,9 @@ const Login = () => {
           response.status === 204 ||
           response.status === 201
         ) {
-          Cookies.set("userId", response.data.userId, {
-            secure: true,
-          });
+          Cookies.set("userId", response.data.userId);
           Cookies.get("currentBookList") ||
-            Cookies.set("currentBookList", currentBookList, {
-              secure: true,
-            });
+            Cookies.set("currentBookList", currentBookList);
 
           navigate("/");
         }

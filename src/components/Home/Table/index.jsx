@@ -11,7 +11,7 @@ const Table = ({ bookLists }) => {
   const { isVisible, toggleModal } = useModal();
 
   const [bookToDelete, setBookToDelete] = useState([]);
-  console.log("booklistss in table", bookLists);
+
   return (
     <>
       <TableContainer>
