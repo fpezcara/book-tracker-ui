@@ -89,6 +89,7 @@ describe("App", () => {
       expect(bookList).toHaveTextContent(/reading/i);
       expect(screen.getByText(/no books have been added/i)).toBeInTheDocument();
       expect(router.state.location.pathname).toBe("/reading");
+
       expect(container).toMatchSnapshot();
     });
 
@@ -171,7 +172,6 @@ describe("App", () => {
           <RouterProvider router={router} />
         </BookTrackerState>,
       );
-      Cookies.set("currentBookList", "wishlist");
 
       await waitFor(() => {
         expect(
@@ -179,7 +179,7 @@ describe("App", () => {
         ).toBeInTheDocument();
       });
 
-      const homeButton = await screen.findByText("Home");
+      const homeButton = screen.getByText("Home");
 
       userEvent.click(homeButton);
 
@@ -189,6 +189,10 @@ describe("App", () => {
           screen.getByText(/no books have been added/i),
         ).toBeInTheDocument();
       });
+
+      const bookListHeading = screen.queryByRole("heading", { level: 3 });
+      expect(bookListHeading).toHaveTextContent(/wishlist/i);
+
       expect(router.state.location.pathname).toBe("/wishlist");
     });
   });
