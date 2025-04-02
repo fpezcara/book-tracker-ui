@@ -11,7 +11,7 @@ exports[`App When user is logged in redirects to /reading on first render 1`] = 
       <a
         class="link home"
         data-discover="true"
-        href="/"
+        href="/reading"
       >
         Home
       </a>

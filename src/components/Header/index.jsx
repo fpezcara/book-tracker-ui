@@ -9,6 +9,7 @@ const Header = () => {
 
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const userId = Cookies.get("userId");
+  const currentBookList = Cookies.get("currentBookList");
 
   useEffect(() => {
     setIsUserLoggedIn(!!userId);
@@ -16,7 +17,11 @@ const Header = () => {
   return (
     <Nav>
       <div className="authentication">
-        <Link className="link home" onClick={() => navigate(-1)} to="/">
+        <Link
+          className="link home"
+          onClick={() => navigate(-1)}
+          to={`/${currentBookList}`}
+        >
           Home
         </Link>
         <div className="authLinks">
