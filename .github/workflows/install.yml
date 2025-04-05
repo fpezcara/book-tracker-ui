@@ -9,8 +9,6 @@ on:
 jobs:
   install:
     runs-on: ubuntu-latest
-    outputs:
-      node_modules: ${{ steps.npm-install.outputs.node_modules }}
 
     steps:
       - name: Checkout repository
