@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Registration renders correctly 1`] = `
+<div>
+  <header
+    class="sc-jOTjWM hMgtXy"
+  >
+    <div
+      class="authentication"
+    >
+      <a
+        class="link home"
+        data-discover="true"
+        href="/undefined"
+      >
+        Home
+      </a>
+      <div
+        class="authLinks"
+      >
+        <a
+          class="link"
+          data-discover="true"
+          href="/register"
+        >
+          Register
+        </a>
+        <a
+          class="link"
+          data-discover="true"
+          href="/login"
+        >
+          Login
+        </a>
+      </div>
+    </div>
+    <div>
+      <h1>
+        Book Tracker
+      </h1>
+    </div>
+  </header>
+  <section
+    class="sc-enNhQL fUsIqC"
+  >
+    <div
+      class="wrapper"
+    >
+      <h2>
+        Register
+      </h2>
+      <form>
+        <input
+          name="email"
+          placeholder="Email address"
+          type="email"
+        />
+        <input
+          name="password"
+          placeholder="Password"
+          type="password"
+        />
+        <input
+          name="password-confirmation"
+          placeholder="Password Confirmation"
+          type="password"
+        />
+        <button
+          type="submit"
+        >
+          Register
+        </button>
+      </form>
+    </div>
+  </section>
+</div>
+`;
