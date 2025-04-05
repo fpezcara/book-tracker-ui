@@ -33,7 +33,7 @@ const Login = () => {
           response.status === 204 ||
           response.status === 201
         ) {
-          Cookies.set("userId", response.data.userId);
+          Cookies.set("userId", response.data.user_id);
           Cookies.get("currentBookList") ||
             Cookies.set("currentBookList", currentBookList);
 
