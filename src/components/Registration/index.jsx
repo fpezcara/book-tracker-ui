@@ -1,16 +1,20 @@
-import React from "react";
-import axios from "axios";
+import { useState } from "react";
 import { useNavigate } from "react-router";
-import { API_URL } from "../../constants";
+import { registerUser } from "../../utils/requests";
 
 import Cookies from "js-cookie";
 
-import { AuthenticationContainer } from "../../styles/Authentication.style";
+import {
+  AuthenticationContainer,
+  EmailTakenErrorMessage,
+  RegistrationForm,
+} from "../../styles/Authentication.style";
 
 const Registration = () => {
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
@@ -20,31 +24,35 @@ const Registration = () => {
       password_confirmation: formData.get("password-confirmation"),
     };
 
-    axios
-      .post(
-        `${API_URL}/users`,
-        {
-          user: formValues,
-        },
-        { withCredentials: true },
-      )
+    registerUser({ ...formValues })
       .then((response) => {
-        if (response.status === 201) {
-          Cookies.set("userId", response.data.user_id);
-          Cookies.get("currentBookList") ||
-            Cookies.set("currentBookList", "reading");
-          navigate("/");
-        }
+        Cookies.set("userId", response?.user_id);
+        Cookies.get("currentBookList") ||
+          Cookies.set("currentBookList", "reading");
+        navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        console.log("errorrr", error);
+        if (
+          error.response?.status === 400 &&
+          error.response?.data?.message.includes(
+            "Email address has already been taken",
+          )
+        ) {
+          setErrorMessage(
+            "Email address has already been taken. Please try again.",
+          );
+        } else {
+          console.error(error);
+        }
       });
   };
+
   return (
     <AuthenticationContainer>
       <div className="wrapper">
         <h2>Register</h2>
-        <form onSubmit={handleSubmit}>
+        <RegistrationForm onSubmit={handleSubmit}>
           <input type="email" name="email" placeholder="Email address" />
           <input type="password" name="password" placeholder="Password" />
           <input
@@ -52,8 +60,11 @@ const Registration = () => {
             name="password-confirmation"
             placeholder="Password Confirmation"
           />
+          {errorMessage && (
+            <EmailTakenErrorMessage>{errorMessage}</EmailTakenErrorMessage>
+          )}
           <button type="submit">Register</button>
-        </form>
+        </RegistrationForm>
       </div>
     </AuthenticationContainer>
   );

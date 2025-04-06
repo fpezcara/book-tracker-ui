@@ -57,7 +57,7 @@ export const AuthenticationContainer = styled.section`
 
   button {
     display: block;
-    margin: 0 auto;
+    margin: 1.5rem auto;
     line-height: 28pt;
     padding: 0 20px;
     background: #ffa580;
@@ -88,4 +88,15 @@ export const AuthenticationContainer = styled.section`
     -webkit-box-shadow: 0 0 0px 1000px #f8f4e5 inset;
     transition: background-color 5000s ease-in-out 0s;
   }
+`;
+
+export const RegistrationForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+export const EmailTakenErrorMessage = styled.span`
+  color: red;
+  font-size: 12px;
 `;

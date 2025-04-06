@@ -71,16 +71,57 @@ describe("Registration", () => {
       expect(Cookies.get("currentBookList")).toBe("reading");
     });
 
-    expect(axios.post).toHaveBeenCalledWith(
-      `${API_URL}/users`,
-      {
-        user: {
-          email_address: "test@example.com",
-          password: "password123",
-          password_confirmation: "password123",
+    expect(axios.post).toHaveBeenCalledWith(`${API_URL}/users`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      user: {
+        email_address: "test@example.com",
+        password: "password123",
+        password_confirmation: "password123",
+      },
+      withCredentials: true,
+    });
+  });
+
+  it.only("displays message in form if email address has already been taken", async () => {
+    axios.post.mockRejectedValue({
+      response: {
+        status: 400,
+        data: {
+          message: "Validation failed: Email address has already been taken",
         },
       },
-      { withCredentials: true },
+    });
+    console.log("first 0 location", router.state.location.pathname);
+
+    render(
+      <BookTrackerState>
+        <RouterProvider router={router}>
+          <Registration />
+        </RouterProvider>
+      </BookTrackerState>,
     );
+    console.log("location", router.state.location.pathname);
+    // Fill out the form
+    fireEvent.change(screen.getByPlaceholderText("Email address"), {
+      target: { value: "test@example.com" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Password"), {
+      target: { value: "password123" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Password Confirmation"), {
+      target: { value: "password123" },
+    });
+
+    // Submit the form
+    fireEvent.click(screen.getByRole("button", { name: /register/i }));
+
+    screen.debug();
+    await waitFor(async () => {
+      await expect(
+        await screen.findByText(/Please try again./i),
+      ).toBeInTheDocument();
+    });
   });
 });

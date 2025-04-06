@@ -3,7 +3,7 @@ import { API_URL } from "../constants";
 
 export const addBookToList = async (userId, listId, book) => {
   try {
-    return await axios.post(
+    const res = await axios.post(
       `${API_URL}/users/${userId}/lists/${listId}/add_book`,
       {
         book: book,
@@ -12,6 +12,10 @@ export const addBookToList = async (userId, listId, book) => {
         withCredentials: true,
       },
     );
+
+    if (res.ok) {
+      return res.data;
+    }
   } catch (error) {
     console.error(error);
   }
@@ -19,7 +23,7 @@ export const addBookToList = async (userId, listId, book) => {
 
 export const removeBookFromList = async (userId, listId, bookId) => {
   try {
-    return await axios.delete(
+    const res = await axios.delete(
       `${API_URL}/users/${userId}/lists/${listId}/remove_book`,
       {
         data: { book_id: bookId },
@@ -29,7 +33,33 @@ export const removeBookFromList = async (userId, listId, bookId) => {
         withCredentials: true,
       },
     );
+
+    if (res.ok) {
+      return res.data;
+    }
   } catch (error) {
     console.error(error);
+  }
+};
+
+export const registerUser = async ({
+  email_address,
+  password,
+  password_confirmation,
+}) => {
+  try {
+    const res = await axios.post(`${API_URL}/users`, {
+      user: { email_address, password, password_confirmation },
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    });
+
+    if (res.status === 201) {
+      return res?.data;
+    }
+  } catch (error) {
+    throw error;
   }
 };
