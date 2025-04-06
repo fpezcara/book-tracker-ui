@@ -5,7 +5,7 @@ import {
   ModalButton,
 } from "../../styles/Modal.style";
 import { useParams } from "react-router";
-import { addBookToList, removeBookFromList } from "../../helpers/requests";
+import { addBookToList, removeBookFromList } from "../../utils/requests";
 
 import Button from "../Button";
 

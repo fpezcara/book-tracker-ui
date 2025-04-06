@@ -29,8 +29,10 @@ const Home = () => {
   useEffect(() => {
     if (!userId) {
       navigate("/login");
+    } else {
+      navigate(`/${currentBookList}`);
     }
-  }, [userId, navigate]);
+  }, [userId, navigate, currentBookList]);
 
   return (
     <HomeContainer data-testid="home-container">
