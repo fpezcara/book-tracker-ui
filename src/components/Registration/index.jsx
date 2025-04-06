@@ -32,7 +32,6 @@ const Registration = () => {
         navigate("/");
       })
       .catch((error) => {
-        console.log("errorrr", error);
         if (
           error.response?.status === 400 &&
           error.response?.data?.message.includes(

@@ -15,11 +15,15 @@ jest.mock("../../constants", () => ({
 }));
 
 describe("Registration", () => {
-  const router = createMemoryRouter(routesConfig, {
-    initialEntries: ["/register"],
+  afterEach(() => {
+    Cookies.remove("userId");
   });
 
   it("renders correctly", async () => {
+    const router = createMemoryRouter(routesConfig, {
+      initialEntries: ["/register"],
+    });
+
     const { container } = render(
       <BookTrackerState>
         <RouterProvider router={router}>
@@ -32,6 +36,10 @@ describe("Registration", () => {
   });
 
   it("submits the form and sets cookie on success", async () => {
+    const router = createMemoryRouter(routesConfig, {
+      initialEntries: ["/register"],
+    });
+
     axios.post.mockResolvedValue({
       status: 201,
       data: { user_id: 9 },
@@ -84,7 +92,11 @@ describe("Registration", () => {
     });
   });
 
-  it.only("displays message in form if email address has already been taken", async () => {
+  it("displays message in form if email address has already been taken", async () => {
+    const router = createMemoryRouter(routesConfig, {
+      initialEntries: ["/register"],
+    });
+
     axios.post.mockRejectedValue({
       response: {
         status: 400,
@@ -93,7 +105,6 @@ describe("Registration", () => {
         },
       },
     });
-    console.log("first 0 location", router.state.location.pathname);
 
     render(
       <BookTrackerState>
@@ -102,7 +113,7 @@ describe("Registration", () => {
         </RouterProvider>
       </BookTrackerState>,
     );
-    console.log("location", router.state.location.pathname);
+
     // Fill out the form
     fireEvent.change(screen.getByPlaceholderText("Email address"), {
       target: { value: "test@example.com" },
@@ -117,7 +128,6 @@ describe("Registration", () => {
     // Submit the form
     fireEvent.click(screen.getByRole("button", { name: /register/i }));
 
-    screen.debug();
     await waitFor(async () => {
       await expect(
         await screen.findByText(/Please try again./i),
