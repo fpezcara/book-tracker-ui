@@ -1,7 +1,33 @@
-/// <reference types="cypress" />
+import { listsResponse } from "../support/mocks";
 
-describe("template spec", () => {
+describe("Registration flow", () => {
   it("allows user to register", () => {
+    cy.log("API URL:", Cypress.env("REACT_APP_BOOK_TRACKER_API")); //
+    cy.intercept(
+      {
+        method: "POST",
+        url: `${Cypress.env("REACT_APP_BOOK_TRACKER_API")}/users`,
+      },
+      (req) => {
+        req.reply({
+          statusCode: 201,
+          body: { user_id: 9 },
+        });
+      },
+    ).as("registerUser");
+    cy.intercept(
+      {
+        method: "GET",
+        url: `${Cypress.env("REACT_APP_BOOK_TRACKER_API")}/users/9/lists`,
+      },
+      (req) => {
+        req.reply({
+          statusCode: 200,
+          body: listsResponse,
+        });
+      },
+    ).as("registerUser");
+
     cy.visit("/register");
 
     cy.get("form").should("be.visible");
@@ -13,6 +39,19 @@ describe("template spec", () => {
 
     cy.get("button[type=submit]").click();
 
-    // todo: add api mock call to check if the user was created & redirected to Home
+    cy.wait("@registerUser").its("response.statusCode").should("eq", 201);
+
+    cy.url().should("include", "/");
+    cy.get("h1").should("contain", "Book Tracker");
+
+    cy.reload();
+
+    cy.get("h3").should("contain", /Reading/i);
+
+    // Cookies are set
+    cy.getCookie("userId").should("exist");
+    cy.getCookie("userId").should("have.property", "value", "9");
+    cy.getCookie("currentBookList").should("exist");
+    cy.getCookie("currentBookList").should("have.property", "value", "reading");
   });
 });
