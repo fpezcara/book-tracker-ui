@@ -79,17 +79,22 @@ describe("Registration", () => {
       expect(Cookies.get("currentBookList")).toBe("reading");
     });
 
-    expect(axios.post).toHaveBeenCalledWith(`${API_URL}/users`, {
-      headers: {
-        "Content-Type": "application/json",
+    expect(axios.post).toHaveBeenCalledWith(
+      `${API_URL}/users`,
+      {
+        user: {
+          email_address: "test@example.com",
+          password: "password123",
+          password_confirmation: "password123",
+        },
       },
-      user: {
-        email_address: "test@example.com",
-        password: "password123",
-        password_confirmation: "password123",
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
       },
-      withCredentials: true,
-    });
+    );
   });
 
   it("displays message in form if email address has already been taken", async () => {
