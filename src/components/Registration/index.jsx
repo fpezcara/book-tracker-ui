@@ -29,7 +29,10 @@ const Registration = () => {
         Cookies.set("userId", response?.user_id);
         Cookies.get("currentBookList") ||
           Cookies.set("currentBookList", "reading");
+
         navigate("/");
+
+        // window.location.reload();
       })
       .catch((error) => {
         if (

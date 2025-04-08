@@ -1,12 +1,11 @@
-import { listsResponse } from "../support/mocks";
+import { lists } from "../support/mocks/lists";
 
 describe("Registration flow", () => {
   it("allows user to register", () => {
-    cy.log("API URL:", Cypress.env("REACT_APP_BOOK_TRACKER_API")); //
     cy.intercept(
       {
         method: "POST",
-        url: `${Cypress.env("REACT_APP_BOOK_TRACKER_API")}/users`,
+        url: `**/users`,
       },
       (req) => {
         req.reply({
@@ -15,18 +14,19 @@ describe("Registration flow", () => {
         });
       },
     ).as("registerUser");
+
     cy.intercept(
       {
         method: "GET",
-        url: `${Cypress.env("REACT_APP_BOOK_TRACKER_API")}/users/9/lists`,
+        url: `**/users/9/lists`,
       },
       (req) => {
         req.reply({
           statusCode: 200,
-          body: listsResponse,
+          body: lists,
         });
       },
-    ).as("registerUser");
+    );
 
     cy.visit("/register");
 
@@ -43,8 +43,6 @@ describe("Registration flow", () => {
 
     cy.url().should("include", "/");
     cy.get("h1").should("contain", "Book Tracker");
-
-    cy.reload();
 
     cy.get("h3").should("contain", /Reading/i);
 

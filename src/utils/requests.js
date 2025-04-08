@@ -48,13 +48,16 @@ export const registerUser = async ({
   password_confirmation,
 }) => {
   try {
-    const res = await axios.post(`${API_URL}/users`, {
-      user: { email_address, password, password_confirmation },
-      headers: {
-        "Content-Type": "application/json",
+    const res = await axios.post(
+      `${API_URL}/users`,
+      { user: { email_address, password, password_confirmation } },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
       },
-      withCredentials: true,
-    });
+    );
 
     if (res.status === 201) {
       return res?.data;
