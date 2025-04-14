@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { WS_URL, API_URL } from "../constants";
+import { WS_URL, API_URL } from "../utils/constants";
 const useSearchChannel = (searchInput, selectType) => {
   const [searchResults, setSearchResults] = useState([]);
 

@@ -1,25 +1,24 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import axios from "axios";
-import { API_URL } from "../../constants";
 import Cookies from "js-cookie";
+import { logoutUser } from "../../utils/requests";
 
 const Logout = () => {
   const navigate = useNavigate();
-  Cookies.remove("_book_tracker_session");
   Cookies.remove("userId");
 
-  axios
-    .delete(`${API_URL}/session`, { withCredentials: true })
-    .then((res) => {
-      if (res.status === 204) {
-        return;
-      }
-    })
-    .catch((err) => console.log(err));
-
   useEffect(() => {
-    navigate("/login");
+    const performLogout = async () => {
+      try {
+        await logoutUser();
+
+        navigate("/login");
+      } catch (error) {
+        console.error("Logout failed:", error);
+      }
+    };
+
+    performLogout();
   }, [navigate]);
 };
 

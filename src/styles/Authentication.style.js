@@ -94,6 +94,7 @@ export const RegistrationForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  max-width: 18rem;
 `;
 
 export const EmailTakenErrorMessage = styled.span`
