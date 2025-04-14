@@ -4,12 +4,17 @@ import { RouterProvider, createMemoryRouter } from "react-router";
 import routesConfig from "./routesConfig";
 import BookTrackerState from "./context/BookTrackerState";
 import Cookies from "js-cookie";
-import axios from "axios";
-import { mockBookLists } from "./tests/mocks/bookListsMock";
+import { mockBookLists } from "../test/mocks/mockBookLists";
 
-jest.mock("axios");
+jest.mock("./utils/constants", () => ({
+  API_URL: "book-tracker-api.com",
+}));
 
 describe("App", () => {
+  beforeEach(() => {
+    fetch.resetMocks();
+  });
+
   describe("When user is logged out", () => {
     test("redirects to /login", () => {
       const router = createMemoryRouter(routesConfig, {
@@ -30,7 +35,7 @@ describe("App", () => {
     beforeEach(() => {
       Cookies.set("userId", "9");
 
-      axios.get.mockResolvedValue({ data: mockBookLists });
+      fetch.mockResponse(JSON.stringify(mockBookLists));
     });
 
     afterEach(() => {

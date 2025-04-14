@@ -1,16 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { AuthenticationContainer } from "../../styles/Authentication.style";
-import { API_URL } from "../../constants";
+import { loginUser } from "../../utils/requests";
 
-import axios from "axios";
 import Cookies from "js-cookie";
 
 const Login = () => {
   const navigate = useNavigate();
   const currentBookList = Cookies.get("currentBookList") || "reading";
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
@@ -19,31 +18,22 @@ const Login = () => {
       password: formData.get("password"),
     };
 
-    axios
-      .post(
-        `${API_URL}/session`,
-        { session: formValues },
-        {
-          withCredentials: true,
-        },
-      )
-      .then((response) => {
-        if (
-          response.status === 200 ||
-          response.status === 204 ||
-          response.status === 201
-        ) {
-          Cookies.set("userId", response.data.user_id);
-          Cookies.get("currentBookList") ||
-            Cookies.set("currentBookList", currentBookList);
+    try {
+      const response = await loginUser({ ...formValues });
 
-          navigate("/");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      if (response?.user_id) {
+        Cookies.set("userId", response?.user_id);
+        Cookies.get("currentBookList") ||
+          Cookies.set("currentBookList", currentBookList);
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
+
+  useEffect(() => {}, [navigate]);
+
   return (
     <AuthenticationContainer>
       <div className="wrapper">

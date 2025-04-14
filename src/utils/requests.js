@@ -1,20 +1,25 @@
-import axios from "axios";
-import { API_URL } from "../constants";
+// import axios from "axios";
+import { API_URL } from "./constants";
 
 export const addBookToList = async (userId, listId, book) => {
   try {
-    const res = await axios.post(
+    const res = await fetch(
       `${API_URL}/users/${userId}/lists/${listId}/add_book`,
       {
-        book: book,
-      },
-      {
-        withCredentials: true,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          book: book,
+        }),
       },
     );
 
     if (res.ok) {
-      return res.data;
+      const data = await res.json();
+      return data;
     }
   } catch (error) {
     console.error(error);
@@ -23,19 +28,23 @@ export const addBookToList = async (userId, listId, book) => {
 
 export const removeBookFromList = async (userId, listId, bookId) => {
   try {
-    const res = await axios.delete(
+    const res = await fetch(
       `${API_URL}/users/${userId}/lists/${listId}/remove_book`,
       {
-        data: { book_id: bookId },
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        withCredentials: true,
+        credentials: "include",
+        body: JSON.stringify({
+          book_id: bookId,
+        }),
       },
     );
 
     if (res.ok) {
-      return res.data;
+      const data = await res.json();
+      return data;
     }
   } catch (error) {
     console.error(error);
@@ -47,22 +56,59 @@ export const registerUser = async ({
   password,
   password_confirmation,
 }) => {
-  try {
-    const res = await axios.post(
-      `${API_URL}/users`,
-      { user: { email_address, password, password_confirmation } },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      },
-    );
+  console.log("Sending request to:", `${API_URL}/users`);
+  console.log("Request body:", {
+    user: { email_address, password, password_confirmation },
+  });
+  const res = await fetch(`${API_URL}/users`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify({
+      user: { email_address, password, password_confirmation },
+    }),
+  });
 
-    if (res.status === 201) {
-      return res?.data;
-    }
-  } catch (error) {
-    throw error;
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw data;
   }
+
+  return data;
+};
+
+export const logoutUser = async () => {
+  const res = await fetch(`${API_URL}/session`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    throw res;
+  }
+
+  return res.json();
+};
+
+export const loginUser = async ({ email_address, password }) => {
+  const res = await fetch(`${API_URL}/session`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify({ session: { email_address, password } }),
+  });
+
+  if (!res.ok) {
+    throw res;
+  }
+
+  return res.json();
 };

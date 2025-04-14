@@ -1,8 +1,8 @@
 import React, { useReducer, useEffect, useMemo, useState } from "react";
 import BookTrackerContext from "./book-tracker-context";
 import BookTrackerReducer from "./book-tracker-reducer";
-import axios from "axios";
-import { API_URL } from "../constants";
+
+import { API_URL } from "../utils/constants";
 import Cookies from "js-cookie";
 
 import {
@@ -63,16 +63,25 @@ const BookTrackerState = ({ children }) => {
   useEffect(() => {
     try {
       userId &&
-        axios
-          .get(`${API_URL}/users/${userId}/lists`, { withCredentials: true })
-          .then((response) => {
-            setLists(response.data);
+        fetch(`${API_URL}/users/${userId}/lists`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Fetched data:", data);
+            setLists(data);
             setLoading(false);
           });
     } catch (error) {
-      setLoading(false);
+      console.error("Error fetching book lists:", error);
       setError(error);
+      setLoading(false);
     }
+
     if (state !== initialState) {
       localStorage.setItem("state", JSON.stringify(state));
     }

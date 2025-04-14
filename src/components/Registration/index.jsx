@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { registerUser } from "../../utils/requests";
 
@@ -24,31 +24,40 @@ const Registration = () => {
       password_confirmation: formData.get("password-confirmation"),
     };
 
-    registerUser({ ...formValues })
-      .then((response) => {
-        Cookies.set("userId", response?.user_id);
-        Cookies.get("currentBookList") ||
-          Cookies.set("currentBookList", "reading");
+    try {
+      const response = await registerUser({ ...formValues });
 
-        navigate("/");
+      Cookies.set("userId", response?.user_id);
+      Cookies.get("currentBookList") ||
+        Cookies.set("currentBookList", "reading");
 
-        // window.location.reload();
-      })
-      .catch((error) => {
-        if (
-          error.response?.status === 400 &&
-          error.response?.data?.message.includes(
-            "Email address has already been taken",
-          )
-        ) {
-          setErrorMessage(
-            "Email address has already been taken. Please try again.",
-          );
-        } else {
-          console.error(error);
-        }
-      });
+      navigate("/");
+    } catch (error) {
+      if (
+        error?.message?.includes(
+          "Validation failed: Email address has already been taken",
+        )
+      ) {
+        setErrorMessage(
+          "The email address is already in use. Please choose a different email.",
+        );
+      } else if (
+        error?.message?.includes(
+          "Validation failed: Password confirmation doesn't match Password",
+        )
+      ) {
+        setErrorMessage(
+          "Password and password confirmation do not match. Please try again.",
+        );
+      } else {
+        setErrorMessage(
+          "An error occurred during registration. Please try again.",
+        );
+      }
+    }
   };
+
+  useEffect(() => {}, [navigate]);
 
   return (
     <AuthenticationContainer>
