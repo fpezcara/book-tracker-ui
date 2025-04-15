@@ -2,53 +2,51 @@
 import { API_URL } from "./constants";
 
 export const addBookToList = async (userId, listId, book) => {
-  try {
-    const res = await fetch(
-      `${API_URL}/users/${userId}/lists/${listId}/add_book`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          book: book,
-        }),
+  const res = await fetch(
+    `${API_URL}/users/${userId}/lists/${listId}/add_book`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      credentials: "include",
+      body: JSON.stringify({
+        book: book,
+      }),
+    },
+  );
 
-    if (res.ok) {
-      const data = await res.json();
-      return data;
-    }
-  } catch (error) {
-    console.error(error);
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw data;
   }
+
+  return data;
 };
 
 export const removeBookFromList = async (userId, listId, bookId) => {
-  try {
-    const res = await fetch(
-      `${API_URL}/users/${userId}/lists/${listId}/remove_book`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          book_id: bookId,
-        }),
+  const res = await fetch(
+    `${API_URL}/users/${userId}/lists/${listId}/remove_book`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      credentials: "include",
+      body: JSON.stringify({
+        book_id: bookId,
+      }),
+    },
+  );
 
-    if (res.ok) {
-      const data = await res.json();
-      return data;
-    }
-  } catch (error) {
-    console.error(error);
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw res;
   }
+
+  return data;
 };
 
 export const registerUser = async ({
