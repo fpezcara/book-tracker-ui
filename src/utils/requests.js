@@ -54,10 +54,6 @@ export const registerUser = async ({
   password,
   password_confirmation,
 }) => {
-  console.log("Sending request to:", `${API_URL}/users`);
-  console.log("Request body:", {
-    user: { email_address, password, password_confirmation },
-  });
   const res = await fetch(`${API_URL}/users`, {
     method: "POST",
     headers: {
