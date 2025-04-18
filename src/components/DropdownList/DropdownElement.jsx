@@ -18,7 +18,10 @@ const DropdownElement = ({
   return (
     <>
       {searchInput !== "" && id < 8 && (
-        <tbody onClick={selectBookHandler}>
+        <tbody
+          onClick={selectBookHandler}
+          data-cy={`dropdown-element-${result.title}`}
+        >
           <tr>
             <td>
               <img
