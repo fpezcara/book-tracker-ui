@@ -22,10 +22,8 @@ jobs:
       - name: Run pact tests
         run: npm run pact:test
 
-      - name: Publish pacts
-        run: |
-          npx pact-broker publish ./pact/pacts \
-            --consumer-app-version=${{ github.sha }} \
-            --broker-base-url=${{ secrets.PACT_BROKER_URL }} \
-            --broker-token=${{ secrets.PACT_BROKER_TOKEN }} \
-            --branch=${{ github.ref_name }}
+      - name: Upload pact file as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pact-contracts
+          path: ./pact/pacts
