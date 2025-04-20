@@ -26,7 +26,7 @@ pactWith(
             method: "POST",
             body: {
               user: {
-                email_address: like("fake@email.com"),
+                email_address: "fake@email.com",
                 password: like("fakePassword"),
                 password_confirmation: like("fakePassword"),
               },
