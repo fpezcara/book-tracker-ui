@@ -38,7 +38,7 @@ pactWith(
           willRespondWith: {
             status: 201,
             headers: {
-              "Content-Type": "application/json",
+              "Content-Type": "application/json; charset=utf-8",
             },
             body: {
               user_id: integer(9),
