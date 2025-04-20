@@ -22,8 +22,11 @@ jobs:
       - name: Run pact tests
         run: npm run pact:test
 
-      - name: Upload pact file as artifact
-        uses: actions/upload-artifact@v4
+      - name: Create release
+        uses: softprops/action-gh-release@v1
         with:
-          name: pact-contracts
-          path: ./pact/pacts
+          name: "Pact Release"
+          tag_name: pact-latest
+          files: ./pact/pacts/*.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
