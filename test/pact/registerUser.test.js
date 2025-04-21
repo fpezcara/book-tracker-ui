@@ -1,6 +1,6 @@
 const { registerUser } = require("../../src/utils/requests");
 const { pactWith } = require("jest-pact");
-const { Pact, Matchers } = require("@pact-foundation/pact");
+const { Matchers } = require("@pact-foundation/pact");
 const { integer, like } = Matchers;
 import "./setup";
 
@@ -12,21 +12,17 @@ pactWith(
     pactfileWriteMode: "merge",
   },
   (provider) => {
-    describe.only("Register user", () => {
-      beforeAll(async () => {
-        await provider.setup();
-      });
-
+    describe("New user", () => {
       beforeEach(async () => {
         await provider.addInteraction({
-          state: "a user is registered",
+          state: "a user does not exist",
           uponReceiving: "a request to register a user",
           withRequest: {
             path: "/users",
             method: "POST",
             body: {
               user: {
-                email_address: "fake@email.com",
+                email_address: like("fake@email.com"),
                 password: like("fakePassword"),
                 password_confirmation: like("fakePassword"),
               },
@@ -37,9 +33,7 @@ pactWith(
           },
           willRespondWith: {
             status: 201,
-            headers: {
-              "Content-Type": "application/json; charset=utf-8",
-            },
+
             body: {
               user_id: integer(9),
             },
@@ -47,7 +41,7 @@ pactWith(
         });
       });
 
-      it("returns a created user_id", async () => {
+      it("returns successfully", async () => {
         const responseData = await registerUser({
           email_address: "fake@email.com",
           password: "fakePassword",
@@ -59,6 +53,49 @@ pactWith(
             user_id: expect.any(Number),
           }),
         );
+      });
+    });
+
+    describe("Existing user", () => {
+      beforeEach(async () => {
+        await provider.addInteraction({
+          state: "a user exists",
+          uponReceiving: "a request to register a user",
+          withRequest: {
+            path: "/users",
+            method: "POST",
+            body: {
+              user: {
+                email_address: "user@exists.com",
+                password: "fakePassword",
+                password_confirmation: "fakePassword",
+              },
+            },
+            headers: {
+              "Content-Type": "application/json",
+            },
+          },
+          willRespondWith: {
+            status: 400,
+            body: {
+              error: { message: "Email has already been taken" },
+            },
+          },
+        });
+      });
+
+      it("raises error", async () => {
+        await expect(
+          registerUser({
+            email_address: "user@exists.com",
+            password: "fakePassword",
+            password_confirmation: "fakePassword",
+          }),
+        ).rejects.toEqual({
+          error: expect.objectContaining({
+            message: expect.any(String),
+          }),
+        });
       });
     });
   },
