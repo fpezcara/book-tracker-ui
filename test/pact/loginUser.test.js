@@ -1,4 +1,4 @@
-const { registerUser } = require("../../src/utils/requests");
+const { loginUser } = require("../../src/utils/requests");
 const { pactWith } = require("jest-pact");
 const { Matchers } = require("@pact-foundation/pact");
 const { integer, like } = Matchers;
@@ -16,19 +16,18 @@ pactWith(
       await new Promise((resolve) => setTimeout(resolve, 1100)); // Wait for keep-alive socket to die
     });
 
-    describe("Existing user", () => {
+    describe("Unauthorized user", () => {
       beforeEach(async () => {
         await provider.addInteraction({
-          state: "a user exists",
-          uponReceiving: "a request to register a user",
+          state: "a user does not exist",
+          uponReceiving: "a request to login a user",
           withRequest: {
-            path: "/users",
+            path: "/session",
             method: "POST",
             body: {
-              user: {
-                email_address: "user@exists.com",
-                password: "fakePassword",
-                password_confirmation: "fakePassword",
+              session: {
+                email_address: like("fake@email.com"),
+                password: like("fakePassword"),
               },
             },
             headers: {
@@ -36,45 +35,33 @@ pactWith(
             },
           },
           willRespondWith: {
-            status: 400,
-            headers: {
-              "Content-Type": "application/json; charset=utf-8",
-            },
-            body: {
-              message: like(
-                "Validation failed: Email address has already been taken",
-              ),
-            },
+            status: 401,
           },
         });
       });
 
       it("raises error", async () => {
         await expect(
-          registerUser({
-            email_address: "user@exists.com",
+          loginUser({
+            email_address: "fake@email.com",
             password: "fakePassword",
-            password_confirmation: "fakePassword",
           }),
-        ).rejects.toEqual({
-          message: expect.any(String),
-        });
+        ).rejects.toMatchObject({ status: 401 });
       });
     });
 
-    describe("New user", () => {
+    describe("Logs user in", () => {
       beforeEach(async () => {
         await provider.addInteraction({
-          state: "a user does not exist",
-          uponReceiving: "a request to register a user",
+          state: "a user exists",
+          uponReceiving: "a request to login a user",
           withRequest: {
-            path: "/users",
+            path: "/session",
             method: "POST",
             body: {
-              user: {
-                email_address: like("fake@email.com"),
-                password: like("fakePassword"),
-                password_confirmation: like("fakePassword"),
+              session: {
+                email_address: "user@exists.com",
+                password: "fakePassword",
               },
             },
             headers: {
@@ -87,17 +74,16 @@ pactWith(
               "Content-Type": "application/json; charset=utf-8",
             },
             body: {
-              user_id: like(9),
+              user_id: like(4),
             },
           },
         });
       });
 
       it("returns successfully", async () => {
-        const responseData = await registerUser({
-          email_address: "fake@email.com",
+        const responseData = await loginUser({
+          email_address: "user@exists.com",
           password: "fakePassword",
-          password_confirmation: "fakePassword",
         });
 
         expect(responseData).toEqual(
