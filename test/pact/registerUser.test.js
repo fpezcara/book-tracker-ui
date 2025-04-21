@@ -41,7 +41,7 @@ pactWith(
               "Content-Type": "application/json; charset=utf-8",
             },
             body: {
-              user_id: integer(9),
+              user_id: like(9),
             },
           },
         });
@@ -87,7 +87,9 @@ pactWith(
               "Content-Type": "application/json; charset=utf-8",
             },
             body: {
-              error: { message: "Email has already been taken" },
+              message: like(
+                "Validation failed: Email address has already been taken",
+              ),
             },
           },
         });
@@ -101,9 +103,7 @@ pactWith(
             password_confirmation: "fakePassword",
           }),
         ).rejects.toEqual({
-          error: expect.objectContaining({
-            message: expect.any(String),
-          }),
+          message: expect.any(String),
         });
       });
     });
