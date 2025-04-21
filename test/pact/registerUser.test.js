@@ -12,6 +12,10 @@ pactWith(
     pactfileWriteMode: "merge",
   },
   (provider) => {
+    afterEach(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1100)); // Wait for keep-alive socket to die
+    });
+
     describe("New user", () => {
       beforeEach(async () => {
         await provider.addInteraction({
@@ -33,7 +37,9 @@ pactWith(
           },
           willRespondWith: {
             status: 201,
-
+            headers: {
+              "Content-Type": "application/json; charset=utf-8",
+            },
             body: {
               user_id: integer(9),
             },
@@ -77,6 +83,9 @@ pactWith(
           },
           willRespondWith: {
             status: 400,
+            headers: {
+              "Content-Type": "application/json; charset=utf-8",
+            },
             body: {
               error: { message: "Email has already been taken" },
             },
