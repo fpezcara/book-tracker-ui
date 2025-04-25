@@ -32,7 +32,7 @@ const useSearchChannel = (searchInput, selectType) => {
             search_by: selectType,
           },
         }),
-        widthCredentials: true, // This ensures that cookies are included in the request
+        widthCredentials: true,
       });
 
       return response;
