@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import useFetch from "../../hooks/useFetch";
 import DropdownElement from "./DropdownElement";
 import ConfirmationModal from "../ConfirmationModal";
 import useModal from "../../hooks/useModal";
