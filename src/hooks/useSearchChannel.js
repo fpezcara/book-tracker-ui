@@ -42,7 +42,6 @@ const useSearchChannel = (searchInput, selectType) => {
     fetchData()
       .then((res) => res)
       .then((res) => {
-        console.log("is res ok", res.ok);
         if (res.ok) {
           ws.onmessage = (event) => {
             console.log("event....", event);
