@@ -98,6 +98,8 @@ describe("Add Book", () => {
       console.log("WebSocket before mocking:", win.WebSocket);
     });
 
+    cy.intercept("POST", "**/books/search").as("searchBooks");
+
     // // Mock the search API to return results directly
     cy.intercept("POST", "**/add_book", {
       statusCode: 200,
@@ -129,6 +131,11 @@ describe("Add Book", () => {
   it("add a book to a list", () => {
     cy.get('[data-testid="search-by-input"]').type("Test Book");
     // // Verify the search input has the correct value
+
+    cy.wait("@searchBooks").then((interception) => {
+      assert.isNotEmpty(interception.response.body);
+    });
+
     cy.get("[data-testid='dropdown-element-0']", { timeout: 20000 }).should(
       "be.visible",
     );
