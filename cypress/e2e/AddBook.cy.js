@@ -131,7 +131,7 @@ describe("Add Book", () => {
   it("add a book to a list", () => {
     cy.get('[data-testid="search-by-input"]').type("Test Book");
     // // Verify the search input has the correct value
-
+    cy.wait(5000);
     cy.wait("@searchBooks").then((interception) => {
       assert.isNotEmpty(interception.response.body);
     });
