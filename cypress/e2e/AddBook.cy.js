@@ -88,7 +88,6 @@ let ws;
 describe("Add Book", () => {
   beforeEach(() => {
     cy.setCookie("userId", "100");
-    //   // Mock the lists API
     cy.intercept("GET", "**/lists", {
       statusCode: 200,
       body: lists,
@@ -97,16 +96,6 @@ describe("Add Book", () => {
     cy.window().then((win) => {
       console.log("WebSocket before mocking:", win.WebSocket);
     });
-
-    // cy.intercept("POST", "**/books/search").as("searchBooks");
-
-    // // Mock the search API to return results directly
-    // cy.intercept("POST", "**/add_book", {
-    //   statusCode: 200,
-    //   body: {
-    //     ...mockAddBookResponse,
-    //   },
-    // }).as("addBook");
 
     // Mock the WebSocket connection
     cy.mockWebSocket("ws://localhost:3001/cable", {
@@ -124,43 +113,44 @@ describe("Add Book", () => {
         ws = mockedWs; // Store the mocked WebSocket instance
       });
 
-    //   // Visit the add book page
+    // Visit the add book page
     cy.visit("/finished/add-book");
   });
 
   it("add a book to a list", () => {
     cy.intercept("POST", "**/books/search").as("searchBooks");
-    cy.log("Starting search input");
+
     cy.get('[data-testid="search-by-input"]').type("Test Book");
 
-    cy.log("Waiting for search API");
     cy.wait("@searchBooks").then((interception) => {
       cy.log("Search response received");
       assert.isNotEmpty(interception.response.body);
     });
 
+    // Ensure the dropdown is visible before interaction
     cy.get("[data-testid='dropdown-element-0']", { timeout: 20000 })
       .should("be.visible")
+      .click({ force: true })
       .then(() => {
-        cy.log("Dropdown is visible");
+        cy.log("Dropdown item selected");
       });
 
-    cy.get('[data-testid="dropdown-element-0"]', { timeout: 20000 })
-      .click({
-        force: true,
-      })
-      .then(() => {
-        cy.log("Clicked on dropdown");
-      });
+    // Wait for the confirmation modal to appear
     cy.get("[data-testid='confirmation-modal']").should("exist");
+
+    // Confirm adding the book
     cy.get("[data-testid='confirmation-modal-accept-button']").click();
+
+    // Intercept the add book API call and mock its response
     cy.intercept("POST", "**/add_book", {
       statusCode: 200,
-      body: {
-        ...mockAddBookResponse,
-      },
+      body: mockAddBookResponse,
     }).as("addBook");
+
+    // Wait for the add book API call and check its status code
     cy.wait("@addBook").its("response.statusCode").should("eq", 200);
+
+    // Verify that the confirmation modal disappears after adding the book
     cy.get("[data-testid='confirmation-modal']").should("not.exist");
   });
 });
