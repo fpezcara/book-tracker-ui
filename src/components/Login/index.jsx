@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { AuthenticationContainer } from "../../styles/Authentication.style";
 import { loginUser } from "../../utils/requests";
@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 const Login = () => {
   const navigate = useNavigate();
   const currentBookList = Cookies.get("currentBookList") || "reading";
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +33,7 @@ const Login = () => {
     }
   };
 
-  useEffect(() => {}, [navigate]);
+  useEffect(() => {}, [Cookies.get("userId")]);
 
   return (
     <AuthenticationContainer>

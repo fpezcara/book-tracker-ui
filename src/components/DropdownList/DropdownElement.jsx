@@ -18,26 +18,17 @@ const DropdownElement = ({
   return (
     <>
       {searchInput !== "" && id < 8 && (
-        <tbody
-          onClick={selectBookHandler}
-          data-cy={`dropdown-element-${result.title}`}
-        >
-          <tr>
-            <td>
-              <img
-                alt={result.title}
-                src={
-                  result.cover_image ? result.cover_image : imageNotAvailable
-                }
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span>{result.title}</span>
-            </td>
-          </tr>
-        </tbody>
+        <tr onClick={selectBookHandler}>
+          <td>
+            <img
+              alt={result.title}
+              src={result.cover_image ? result.cover_image : imageNotAvailable}
+            />
+          </td>
+          <td>
+            <span>{result.title}</span>
+          </td>
+        </tr>
       )}
     </>
   );
