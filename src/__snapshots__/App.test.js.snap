@@ -97,7 +97,9 @@ exports[`App When user is logged in redirects to /reading on first render 1`] = 
           <th />
         </tr>
       </thead>
-      <tbody>
+      <tbody
+        data-testid="book-list-table"
+      >
         <tr>
           <td
             colspan="4"

@@ -18,6 +18,8 @@
     "vercel": "^41.6.1"
   },
   "scripts": {
+    "e2e": "cypress open --e2e --browser chrome",
+    "cypress:open": "cypress open",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -57,6 +59,7 @@
     "babel-jest": "^29.7.0",
     "check-outdated": "^2.13.0",
     "cypress": "^14.3.1",
+    "cypress-mock-websocket-plugin": "^2.0.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "husky": "^9.1.7",
     "jest-fetch-mock": "^3.0.3",

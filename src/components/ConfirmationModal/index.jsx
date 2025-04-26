@@ -42,7 +42,7 @@ const ConfirmationModal = ({
     <>
       {isVisible && (
         <ModalContainer>
-          <div>
+          <div data-testid="confirmation-modal">
             <ModalText>
               <span className="message"> Do you want to {message}:</span>
               <span className="title"> {title}?</span>

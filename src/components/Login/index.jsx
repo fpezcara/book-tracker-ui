@@ -12,6 +12,7 @@ const Login = () => {
   const navigate = useNavigate();
   const currentBookList = Cookies.get("currentBookList") || "reading";
   const [errorMessage, setErrorMessage] = useState("");
+  const userId = Cookies.get("userId");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,7 +41,7 @@ const Login = () => {
     }
   };
 
-  useEffect(() => {}, [Cookies.get("userId")]);
+  useEffect(() => {}, [userId]);
 
   return (
     <AuthenticationContainer>
