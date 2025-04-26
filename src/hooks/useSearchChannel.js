@@ -32,7 +32,7 @@ const useSearchChannel = (searchInput, selectType) => {
             search_by: selectType,
           },
         }),
-        widthCredentials: true, // This ensures that cookies are included in the request
+        widthCredentials: true,
       });
 
       return response;
@@ -42,7 +42,6 @@ const useSearchChannel = (searchInput, selectType) => {
     fetchData()
       .then((res) => res)
       .then((res) => {
-        console.log("is res ok", res.ok);
         if (res.ok) {
           ws.onmessage = (event) => {
             console.log("event....", event);
