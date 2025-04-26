@@ -14,6 +14,7 @@ const Header = () => {
   useEffect(() => {
     setIsUserLoggedIn(!!userId);
   }, [userId]);
+
   return (
     <Nav>
       <div className="authentication">

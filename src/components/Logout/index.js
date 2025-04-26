@@ -10,9 +10,9 @@ const Logout = () => {
   useEffect(() => {
     const performLogout = async () => {
       try {
-        await logoutUser();
-
         navigate("/login");
+
+        await logoutUser();
       } catch (error) {
         console.error("Logout failed:", error);
       }

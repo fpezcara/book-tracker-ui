@@ -29,7 +29,8 @@ const Login = () => {
         Cookies.set("userId", response?.user_id);
         Cookies.get("currentBookList") ||
           Cookies.set("currentBookList", currentBookList);
-        navigate("/");
+
+        navigate(`/${currentBookList}`);
       }
     } catch (error) {
       console.error("Login failed:", error);
