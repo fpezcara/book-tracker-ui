@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 
 import {
   AuthenticationContainer,
-  EmailTakenErrorMessage,
+  ErrorMessage,
   RegistrationForm,
 } from "../../styles/Authentication.style";
 
@@ -71,9 +71,7 @@ const Registration = () => {
             name="password-confirmation"
             placeholder="Password Confirmation"
           />
-          {errorMessage && (
-            <EmailTakenErrorMessage>{errorMessage}</EmailTakenErrorMessage>
-          )}
+          {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
           <button type="submit">Register</button>
         </RegistrationForm>
       </div>
