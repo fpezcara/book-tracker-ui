@@ -1,7 +1,7 @@
 import { lists } from "../support/mocks/lists";
 
 const bookMock = {
-  title: "Test Book",
+  title: "Book used for testing",
   authors: ["Test Author"],
   publisher: "Test Publisher",
   published_date: "2024",
@@ -30,61 +30,113 @@ const bookMock = {
   canonical_volume_link: "https://test.com/volume",
 };
 
+const mockWebSocketMessages = [
+  {
+    identifier: JSON.stringify({ channel: "SearchChannel" }),
+    type: "confirm_subscription",
+  },
+  {
+    identifier: JSON.stringify({ channel: "SearchChannel" }),
+    message: {
+      message: {
+        data: [
+          {
+            title: "Evelyn Waugh",
+            authors: ["Frances Donaldson"],
+            published_date: "2011-09-28",
+            page_count: 111,
+          },
+          {
+            title: "The Diary of John Evelyn",
+            authors: ["John Evelyn"],
+            published_date: "2023-11-21",
+          },
+          {
+            title: "The Diaries of Evelyn Waugh",
+            authors: ["Evelyn Waugh"],
+            published_date: "1976",
+          },
+        ],
+      },
+    },
+  },
+];
+
+const mockAddBookResponse = {
+  id: "6e2875b7-dcec-4e63-b586-6dc071aba2c6",
+  name: "Fiction",
+  user_id: 100,
+  created_at: "2025-04-23T20:12:35.104Z",
+  updated_at: "2025-04-23T20:12:35.104Z",
+  books: [
+    {
+      id: "6c69a78c-0b5e-4ccc-bdff-f98e35df75e0",
+      title: "The Great Gatsby",
+      authors: ["F. Scott Fitzgerald"],
+      isbn: "9780743273565",
+      page_count: 234,
+      cover_image:
+        "http://books.google.com/books/content?id=8drgDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+      created_at: "2025-04-23T20:10:35.443Z",
+      updated_at: "2025-04-23T20:10:35.443Z",
+    },
+  ],
+};
+
+let ws;
+
 describe("Add Book", () => {
   beforeEach(() => {
-    // Mock the lists API
+    cy.setCookie("userId", "100");
+    //   // Mock the lists API
     cy.intercept("GET", "**/lists", {
       statusCode: 200,
       body: lists,
     }).as("getLists");
 
-    // Mock the search API to return results directly
-    cy.intercept("POST", "**/books/search", {
+    cy.window().then((win) => {
+      console.log("WebSocket before mocking:", win.WebSocket);
+    });
+
+    // // Mock the search API to return results directly
+    cy.intercept("POST", "**/add_book", {
       statusCode: 200,
       body: {
-        message: "Search initiated successfully",
-        results: [bookMock], // Return the mock book directly
+        ...mockAddBookResponse,
       },
-    }).as("bookSearch");
+    }).as("addBook");
 
-    // Mock the search results API
-    cy.intercept("GET", "**/books/search_results", {
-      statusCode: 200,
-      body: {
-        results: [bookMock],
-      },
-    }).as("searchResults");
+    // Mock the WebSocket connection
+    cy.mockWebSocket("ws://localhost:3001/cable", {
+      webSocketCtorName: "MockedWebSocket", // Use a custom WebSocket constructor name
+      connectionResponseMessage: mockWebSocketMessages[0], // Send subscription confirmation on connection
+    })
+      .registerSocketRequestResponse(
+        {
+          command: "subscribe",
+          identifier: JSON.stringify({ channel: "SearchChannel" }),
+        },
+        mockWebSocketMessages[1], // Send search results after subscription
+      )
+      .then((mockedWs) => {
+        ws = mockedWs; // Store the mocked WebSocket instance
+      });
 
-    // Visit the add book page
+    //   // Visit the add book page
     cy.visit("/finished/add-book");
   });
 
-  it("should search for a book", () => {
-    // Type in the search input
+  it("add a book to a list", () => {
     cy.get('[data-testid="search-by-input"]').type("Test Book");
-
-    // Wait for the search API to be called
-    cy.wait("@bookSearch");
-
-    // Verify the search input has the correct value
-    cy.get('[data-testid="search-by-input"]').should("have.value", "Test Book");
-  });
-
-  it("should select a book from the dropdown", () => {
-    // Type in the search input
-    cy.get('[data-testid="search-by-input"]').type("Test Book");
-
-    // Wait for the search API to be called
-    cy.wait("@bookSearch");
-
-    // Since we can't easily test the WebSocket functionality,
-    // we'll just verify that the search input works correctly
-    cy.get('[data-testid="search-by-input"]').should("have.value", "Test Book");
-
-    // Verify the search type is set correctly
-    cy.get('[data-testid="search-by-options-select"]').should(
-      "have.value",
-      "title",
+    // // Verify the search input has the correct value
+    cy.get("[data-testid='dropdown-element-0']", { timeout: 20000 }).should(
+      "be.visible",
     );
+    cy.get("[data-testid='dropdown-element-0']").click();
+
+    cy.get("[data-testid='confirmation-modal']").should("exist");
+    cy.get("[data-testid='confirmation-modal-accept-button']").click();
+    cy.wait("@addBook").its("response.statusCode").should("eq", 200);
+    cy.get("[data-testid='confirmation-modal']").should("not.exist");
   });
 });

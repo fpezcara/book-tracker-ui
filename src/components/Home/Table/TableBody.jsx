@@ -16,9 +16,9 @@ const TableBody = ({ bookLists, showModal, setBookToDelete }) => {
   };
 
   return (
-    <tbody>
+    <tbody data-testid="book-list-table">
       {bookList?.books.length > 0 ? (
-        bookList.books.map((book) => (
+        bookList.books.map((book, i) => (
           <tr key={book.title}>
             <td>
               <img

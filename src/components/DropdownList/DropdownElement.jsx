@@ -17,8 +17,8 @@ const DropdownElement = ({
 
   return (
     <>
-      {searchInput !== "" && id < 8 && (
-        <tr onClick={selectBookHandler}>
+      {searchInput !== "" && id < 10 && (
+        <tr onClick={selectBookHandler} data-testid={`dropdown-element-${id}`}>
           <td>
             <img
               alt={result.title}
