@@ -39,13 +39,11 @@ export const removeBookFromList = async (userId, listId, bookId) => {
     },
   );
 
-  const data = await res.json();
-
   if (!res.ok) {
     throw res;
   }
 
-  return data;
+  return res;
 };
 
 export const registerUser = async ({
