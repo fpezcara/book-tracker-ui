@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { AuthenticationContainer } from "../../styles/Authentication.style";
+import {
+  AuthenticationContainer,
+  ErrorMessage,
+} from "../../styles/Authentication.style";
 import { loginUser } from "../../utils/requests";
 
 import Cookies from "js-cookie";
@@ -8,7 +11,7 @@ import Cookies from "js-cookie";
 const Login = () => {
   const navigate = useNavigate();
   const currentBookList = Cookies.get("currentBookList") || "reading";
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +33,9 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Login failed:", error);
+      if (error.status === 401) {
+        setErrorMessage("Invalid email or password. Please try again.");
+      }
     }
   };
 
@@ -42,6 +48,7 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           <input type="email" name="email" placeholder="Email address" />
           <input type="password" name="password" placeholder="Password" />
+          {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
           <button type="submit">Login</button>
         </form>
       </div>

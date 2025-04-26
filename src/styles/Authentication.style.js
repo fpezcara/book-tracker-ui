@@ -97,7 +97,7 @@ export const RegistrationForm = styled.form`
   max-width: 18rem;
 `;
 
-export const EmailTakenErrorMessage = styled.span`
+export const ErrorMessage = styled.span`
   color: red;
   font-size: 12px;
 `;
