@@ -19,7 +19,7 @@ pactWith(
     const listId = "6e2875b7-dcec-4e63-b586-6dc071aba2c6";
     const bookId = "41111ea4-91d5-4e53-be43-7b1d76d0392b";
 
-    describe.only("Add new book to list", () => {
+    describe("Add new book to list", () => {
       beforeEach(async () => {
         await provider.addInteraction({
           state: "a user is logged in",
