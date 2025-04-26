@@ -98,15 +98,15 @@ describe("Add Book", () => {
       console.log("WebSocket before mocking:", win.WebSocket);
     });
 
-    cy.intercept("POST", "**/books/search").as("searchBooks");
+    // cy.intercept("POST", "**/books/search").as("searchBooks");
 
     // // Mock the search API to return results directly
-    cy.intercept("POST", "**/add_book", {
-      statusCode: 200,
-      body: {
-        ...mockAddBookResponse,
-      },
-    }).as("addBook");
+    // cy.intercept("POST", "**/add_book", {
+    //   statusCode: 200,
+    //   body: {
+    //     ...mockAddBookResponse,
+    //   },
+    // }).as("addBook");
 
     // Mock the WebSocket connection
     cy.mockWebSocket("ws://localhost:3001/cable", {
@@ -129,20 +129,37 @@ describe("Add Book", () => {
   });
 
   it("add a book to a list", () => {
+    cy.intercept("POST", "**/books/search").as("searchBooks");
+    cy.log("Starting search input");
     cy.get('[data-testid="search-by-input"]').type("Test Book");
-    // // Verify the search input has the correct value
-    cy.wait(5000);
+
+    cy.log("Waiting for search API");
     cy.wait("@searchBooks").then((interception) => {
+      cy.log("Search response received");
       assert.isNotEmpty(interception.response.body);
     });
 
-    cy.get("[data-testid='dropdown-element-0']", { timeout: 20000 }).should(
-      "be.visible",
-    );
-    cy.get("[data-testid='dropdown-element-0']").click();
+    cy.get("[data-testid='dropdown-element-0']", { timeout: 20000 })
+      .should("be.visible")
+      .then(() => {
+        cy.log("Dropdown is visible");
+      });
 
+    cy.get('[data-testid="dropdown-element-0"]', { timeout: 20000 })
+      .click({
+        force: true,
+      })
+      .then(() => {
+        cy.log("Clicked on dropdown");
+      });
     cy.get("[data-testid='confirmation-modal']").should("exist");
     cy.get("[data-testid='confirmation-modal-accept-button']").click();
+    cy.intercept("POST", "**/add_book", {
+      statusCode: 200,
+      body: {
+        ...mockAddBookResponse,
+      },
+    }).as("addBook");
     cy.wait("@addBook").its("response.statusCode").should("eq", 200);
     cy.get("[data-testid='confirmation-modal']").should("not.exist");
   });
