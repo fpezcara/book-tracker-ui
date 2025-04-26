@@ -10,15 +10,13 @@ export const Table = styled.table`
   border-radius: 3em;
 
   tbody {
-    display: flex;
     font-size: 12px;
     padding: 0;
     margin: 0;
     border: none;
     background-color: #fffffe;
     width: 29.9em;
-    height: 5em;
-    overflow: hidden;
+    overflowy: auto;
 
     tr img {
       display: flex;
@@ -26,6 +24,7 @@ export const Table = styled.table`
       align-self: flex-end;
       height: auto;
     }
+
     tr span {
       display: flex;
       justify-content: flex-start;

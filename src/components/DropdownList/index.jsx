@@ -20,19 +20,21 @@ const DropdownList = ({
   return (
     <>
       <Table>
-        {triggerSearch &&
-          items &&
-          items.map((result, i) => (
-            <DropdownElement
-              result={result}
-              searchInput={searchInput}
-              showModal={toggleModal}
-              setTriggerSearch={setTriggerSearch}
-              setAddedBook={setAddedBook}
-              key={i}
-              id={i}
-            />
-          ))}
+        {triggerSearch && items && items.length > 0 && (
+          <tbody>
+            {items.map((result, i) => (
+              <DropdownElement
+                result={result}
+                searchInput={searchInput}
+                showModal={toggleModal}
+                setTriggerSearch={setTriggerSearch}
+                setAddedBook={setAddedBook}
+                key={i}
+                id={i}
+              />
+            ))}
+          </tbody>
+        )}
       </Table>
       {addedBook.map((book, i) => (
         <ConfirmationModal
