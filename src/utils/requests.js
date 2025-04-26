@@ -84,7 +84,7 @@ export const logoutUser = async () => {
     throw res;
   }
 
-  return res.json();
+  return res;
 };
 
 export const loginUser = async ({ email_address, password }) => {
