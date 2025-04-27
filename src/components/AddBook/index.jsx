@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import Form from "../Form";
 import DropdownList from "../DropdownList";
@@ -11,10 +11,13 @@ const AddBook = () => {
   const [triggerSearch, setTriggerSearch] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
+  const userId = Cookies.get("userId");
 
-  if (!Cookies.get("userId")) {
-    navigate("/login");
-  }
+  useEffect(() => {
+    if (!userId) {
+      navigate("/login");
+    }
+  }, [userId, navigate]);
 
   return (
     <AddBookWrapper>

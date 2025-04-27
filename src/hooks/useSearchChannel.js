@@ -33,7 +33,7 @@ const useSearchChannel = (searchInput, selectType) => {
             search_by: selectType,
           },
         }),
-        widthCredentials: true,
+        withCredentials: true,
       });
 
       return response;

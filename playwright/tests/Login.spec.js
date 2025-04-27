@@ -10,9 +10,11 @@ test.describe("Login flow", () => {
     });
 
     await page.route("*/**/users/9/lists", async (route) => {
-      const json = { lists: lists };
+      const json = JSON.stringify(lists);
 
-      await route.fulfill({ json });
+      await route.fulfill({
+        body: json,
+      });
     });
   });
 
@@ -29,6 +31,7 @@ test.describe("Login flow", () => {
     await page.waitForURL("/reading");
 
     expect(page.url()).toContain("/reading");
+    expect(page.getByText("Reading")).toBeTruthy();
 
     const cookies = await page.context().cookies();
     expect(cookies).toHaveLength(2);
