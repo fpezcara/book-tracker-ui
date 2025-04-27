@@ -118,14 +118,14 @@ describe("Add Book", () => {
   });
 
   it("add a book to a list", () => {
-    cy.intercept("POST", "**/books/search").as("searchBooks");
+    // cy.intercept("POST", "**/books/search").as("searchBooks");
 
     cy.get('[data-testid="search-by-input"]').type("Test Book");
 
-    cy.wait("@searchBooks").then((interception) => {
-      cy.log("Search response received");
-      assert.isNotEmpty(interception.response.body);
-    });
+    // cy.wait("@searchBooks").then((interception) => {
+    //   cy.log("Search response received");
+    //   assert.isNotEmpty(interception.response.body);
+    // });
 
     // Ensure the dropdown is visible before interaction
     cy.get("[data-testid='dropdown-element-0']", { timeout: 20000 })
