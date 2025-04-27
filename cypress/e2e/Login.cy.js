@@ -1,4 +1,4 @@
-import { lists } from "../support/mocks/lists";
+import { lists } from "../../playwright/support/mocks/lists";
 
 describe("Login flow", () => {
   it("allows user to log in", () => {
