@@ -19,15 +19,15 @@ test.describe("Login flow", () => {
   test("user successfully logs in", async ({ page }) => {
     await page.goto("/login");
 
-    // Expect a title "to contain" a substring.
     await expect(page).toHaveTitle(/book tracker/i);
-    // await page.getByRole('input', { name: /email address/i }).fill('test@email.com')
+
     await page.getByPlaceholder("Email address").fill("email@test.com");
     await page.getByPlaceholder("Password").fill("password");
 
     await page.getByRole("button", { name: "Login" }).click();
 
     await page.waitForURL("/reading");
+
     expect(page.url()).toContain("/reading");
 
     const cookies = await page.context().cookies();
