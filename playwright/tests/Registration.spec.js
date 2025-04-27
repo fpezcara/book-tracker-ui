@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { lists } from "../support/mocks/lists";
 
-test.describe("Login flow", () => {
+test.describe("Registration flow", () => {
   test.beforeEach(async ({ page }) => {
-    await page.route("*/**/session", async (route) => {
+    await page.route("*/**/users", async (route) => {
       const json = { user_id: 9 };
 
       await route.fulfill({ json });
@@ -16,16 +16,21 @@ test.describe("Login flow", () => {
     });
   });
 
-  test("user successfully logs in", async ({ page }) => {
-    await page.goto("/login");
+  test("user successfully registers", async ({ page }) => {
+    await page.goto("/register");
 
     // Expect a title "to contain" a substring.
     await expect(page).toHaveTitle(/book tracker/i);
     // await page.getByRole('input', { name: /email address/i }).fill('test@email.com')
     await page.getByPlaceholder("Email address").fill("email@test.com");
-    await page.getByPlaceholder("Password").fill("password");
+    await page
+      .getByRole("textbox", { name: "Password", exact: true })
+      .fill("password");
+    await page
+      .getByRole("textbox", { name: "Password Confirmation", exact: true })
+      .fill("password");
 
-    await page.getByRole("button", { name: "Login" }).click();
+    await page.getByRole("button", { name: "Register" }).click();
 
     await page.waitForURL("/reading");
     expect(page.url()).toContain("/reading");
