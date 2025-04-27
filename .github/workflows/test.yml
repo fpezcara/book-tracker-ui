@@ -39,3 +39,14 @@ jobs:
           start: npm start
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
+          command: npx cypress run --headed --browser chrome
+          record: true
+        env:
+          CYPRESS_DEBUG: true
+
+      - name: Upload Cypress artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-artifacts
+          path: cypress/screenshots
