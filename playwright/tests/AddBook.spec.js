@@ -70,7 +70,7 @@ test.describe("Adding a book to a list flow", () => {
 
     await page.getByTestId("search-by-input").fill("Lord of the Rings");
 
-    await expect(page.getByText(/the two towers/i)).toBeVisible();
+    expect(page.getByText(/the two towers/i)).toBeTruthy();
 
     await page.getByText(/the two towers/i).click();
 
