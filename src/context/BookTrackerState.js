@@ -72,12 +72,10 @@ const BookTrackerState = ({ children }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log("Fetched data:", data);
             setLists(data);
             setLoading(false);
           });
     } catch (error) {
-      console.error("Error fetching book lists:", error);
       setError(error);
       setLoading(false);
     }
