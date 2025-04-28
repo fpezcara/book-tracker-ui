@@ -98,9 +98,9 @@ test.describe("Adding a book to a list flow", () => {
 
     await page.getByTestId("search-by-input").fill("lord of the rings");
 
-    expect(page.getByText(/lord of the rings: the two towers/i)).toBeTruthy();
-
-    await page.getByTestId("dropdown-element-1").waitFor();
+    await expect(
+      page.getByText(/lord of the rings: the two towers/i),
+    ).toBeVisible();
 
     await page.getByTestId("dropdown-element-1").click();
 
