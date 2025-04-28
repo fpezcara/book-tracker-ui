@@ -19,8 +19,6 @@
   },
   "scripts": {
     "e2e": "cypress open --e2e --browser chrome",
-    "cy:open": "cypress open",
-    "cy:run": "npx cypress run  --spec 'cypress/e2e'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
