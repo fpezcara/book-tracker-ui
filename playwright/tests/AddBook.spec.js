@@ -100,7 +100,7 @@ test.describe("Adding a book to a list flow", () => {
 
     expect(page.getByText(/lord of the rings: the two towers/i)).toBeTruthy();
 
-    await expect(page.getByTestId("dropdown-element-1")).toBeVisible();
+    await page.getByTestId("dropdown-element-1").waitFor();
 
     await page.getByTestId("dropdown-element-1").click();
 
