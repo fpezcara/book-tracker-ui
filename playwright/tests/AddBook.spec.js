@@ -45,7 +45,6 @@ test.describe("Adding a book to a list flow", () => {
       ];
 
       ws.onMessage((message) => {
-        console.log("WebSocket message received:", message);
         ws.send(
           JSON.stringify({
             message: {
@@ -55,6 +54,35 @@ test.describe("Adding a book to a list flow", () => {
             },
           }),
         );
+      });
+    });
+
+    // todo: when user adds a book to the list, the table knows because /lists gets called again and by then the list contains this new book there...see how best to do this - shall i then mock it again?
+
+    await page.route("*/**/add_book", async (route) => {
+      const json = JSON.stringify({
+        id: "6e2875b7-dcec-4e63-b586-6dc071aba2c6",
+        name: "Finished",
+        user_id: 100,
+        created_at: "2025-04-23T20:12:35.104Z",
+        updated_at: "2025-04-23T20:12:35.104Z",
+        books: [
+          {
+            id: "6c69a78c-0b5e-4ccc-bdff-f98e35df75e0",
+            title: "Lord of the Rings: The Two Towers",
+            authors: ["J. R. R. Tolkien"],
+            isbn: "9780743273565",
+            page_count: 234,
+            cover_image:
+              "http://books.google.com/books/content?id=8drgDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+            created_at: "2025-04-23T20:10:35.443Z",
+            updated_at: "2025-04-23T20:10:35.443Z",
+          },
+        ],
+      });
+
+      await route.fulfill({
+        body: json,
       });
     });
   });
@@ -68,18 +96,43 @@ test.describe("Adding a book to a list flow", () => {
 
     await page.waitForURL("**/finished/add-book");
 
-    await page.getByTestId("search-by-input").fill("Lord of the Rings");
+    await page.getByTestId("search-by-input").fill("lord of the rings");
 
-    expect(page.getByText(/the two towers/i)).toBeTruthy();
+    expect(page.getByText(/lord of the rings: the two towers/i)).toBeTruthy();
 
-    await page.getByText(/the two towers/i).click();
+    await expect(page.getByTestId("dropdown-element-1")).toBeVisible();
 
-    expect(page.getByTestId("confirmation-modal")).toBeTruthy();
+    await page.getByTestId("dropdown-element-1").click();
 
     await page.getByTestId("confirmation-modal-accept-button").click();
 
+    await page.route("*/**/users/9/lists", async (route) => {
+      const updatedLists = JSON.parse(JSON.stringify(lists));
+      const finishedList = updatedLists.find(
+        (list) => list.name === "Finished",
+      );
+      finishedList.books.push({
+        id: "new-book-id",
+        title: "Lord of the Rings: The Two Towers",
+        authors: ["J. R. R. Tolkien"],
+        published_date: "2023-11-21",
+        isbn: "9780743273565",
+        page_count: 234,
+        cover_image:
+          "http://books.google.com/books/content?id=8drgDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      });
+
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify(updatedLists),
+      });
+    });
+
     await page.waitForURL("**/finished");
 
-    expect(page.getByText(/the two towers/i)).toBeTruthy();
+    await expect(page.getByText(/the two towers/i)).toBeVisible();
   });
 });
