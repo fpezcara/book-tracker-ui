@@ -25,6 +25,8 @@ test.describe("Adding a book to a list flow", () => {
     });
 
     await page.routeWebSocket("ws://localhost:3001/cable", (ws) => {
+      console.log("WebSocket connection established");
+
       const json = [
         {
           title: "Lord of the Rings: The Fellowship of the Ring",
@@ -45,6 +47,8 @@ test.describe("Adding a book to a list flow", () => {
       ];
 
       ws.onMessage((message) => {
+        console.log("WebSocket message received:", message);
+
         ws.send(
           JSON.stringify({
             message: {
@@ -101,6 +105,8 @@ test.describe("Adding a book to a list flow", () => {
     await expect(page.getByTestId("dropdown-element-1")).toBeVisible({
       timeout: 30000,
     });
+
+    page.on("console", (msg) => console.log(msg.text()));
 
     await page.getByTestId("dropdown-element-1").click();
 
