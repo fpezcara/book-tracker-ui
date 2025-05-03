@@ -18,6 +18,8 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
+        env:
+          REACT_APP_WS_URL: ws://localhost:3000/cable
         run: npm run pw:run
       - name: Fail if tests fail
         if: failure()

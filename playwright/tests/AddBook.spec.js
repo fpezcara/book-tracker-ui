@@ -21,11 +21,16 @@ test.describe("Adding a book to a list flow", () => {
     });
 
     await page.route("*/**/books/search", async (route) => {
-      await route.fulfill();
+      await route.fulfill({
+        status: 200,
+        body: JSON.stringify({ message: "Search initiated successfully" }),
+      });
     });
 
-    await page.routeWebSocket("ws://localhost:3001/cable", (ws) => {
+    await page.routeWebSocket("**/cable", (ws) => {
       console.log("WebSocket connection established");
+
+      console.log(`WebSocket opened - FIRST: ${ws.url()}`);
 
       const json = [
         {
@@ -104,14 +109,13 @@ test.describe("Adding a book to a list flow", () => {
 
     page.on("websocket", (ws) => {
       console.log(`WebSocket opened: ${ws.url()}`);
+      //   console.log(`WebSocket opened websocket route: ${webSocketRoute.url()}`);
     });
 
     await expect(page.getByTestId("dropdown-element-1")).toBeVisible({
       timeout: 30000,
     });
-
-    page.on("console", (msg) => console.log(msg.text()));
-    await page.waitForLoadState("networkidle");
+    // await page.waitForLoadState("networkidle");
     await page.getByTestId("dropdown-element-1").click();
 
     await page.getByTestId("confirmation-modal-accept-button").click();
