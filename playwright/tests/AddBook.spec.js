@@ -102,12 +102,16 @@ test.describe("Adding a book to a list flow", () => {
 
     await page.getByTestId("search-by-input").fill("lord of the rings");
 
+    page.on("websocket", (ws) => {
+      console.log(`WebSocket opened: ${ws.url()}`);
+    });
+
     await expect(page.getByTestId("dropdown-element-1")).toBeVisible({
       timeout: 30000,
     });
 
     page.on("console", (msg) => console.log(msg.text()));
-
+    await page.waitForLoadState("networkidle");
     await page.getByTestId("dropdown-element-1").click();
 
     await page.getByTestId("confirmation-modal-accept-button").click();
