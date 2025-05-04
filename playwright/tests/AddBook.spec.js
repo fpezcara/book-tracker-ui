@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { lists } from "../support/mocks/lists";
 
 test.describe("Adding a book to a list flow", () => {
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, context }) => {
     await page.context().addCookies([
       { name: "userId", value: "9", url: "http://localhost:3000" },
       {
@@ -27,7 +27,7 @@ test.describe("Adding a book to a list flow", () => {
       });
     });
 
-    await page.routeWebSocket("**/cable", (ws) => {
+    await context.routeWebSocket("**/cable", (ws) => {
       console.log("WebSocket connection established");
 
       console.log(`WebSocket opened - FIRST: ${ws.url()}`);
