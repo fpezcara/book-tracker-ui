@@ -28,10 +28,6 @@ test.describe("Adding a book to a list flow", () => {
     });
 
     await context.routeWebSocket("**/cable", (ws) => {
-      console.log("WebSocket connection established");
-
-      console.log(`WebSocket opened - FIRST: ${ws.url()}`);
-
       const json = [
         {
           title: "Lord of the Rings: The Fellowship of the Ring",
@@ -65,8 +61,6 @@ test.describe("Adding a book to a list flow", () => {
         );
       });
     });
-
-    // todo: when user adds a book to the list, the table knows because /lists gets called again and by then the list contains this new book there...see how best to do this - shall i then mock it again?
 
     await page.route("*/**/add_book", async (route) => {
       const json = JSON.stringify({
@@ -107,15 +101,10 @@ test.describe("Adding a book to a list flow", () => {
 
     await page.getByTestId("search-by-input").fill("lord of the rings");
 
-    page.on("websocket", (ws) => {
-      console.log(`WebSocket opened: ${ws.url()}`);
-      //   console.log(`WebSocket opened websocket route: ${webSocketRoute.url()}`);
-    });
-
     await expect(page.getByTestId("dropdown-element-1")).toBeVisible({
       timeout: 30000,
     });
-    // await page.waitForLoadState("networkidle");
+
     await page.getByTestId("dropdown-element-1").click();
 
     await page.getByTestId("confirmation-modal-accept-button").click();
