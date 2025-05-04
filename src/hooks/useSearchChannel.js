@@ -7,7 +7,7 @@ const useSearchChannel = (searchInput, selectType) => {
   useEffect(() => {
     if (!searchInput || !selectType) return;
     const ws = new WebSocket(`${WS_URL}/cable`);
-    console.log("ws", ws);
+
     // todo: dont connect to websocket if we're already connected...
     ws.onopen = () => {
       console.log("Connected to WebSocket");
@@ -39,7 +39,6 @@ const useSearchChannel = (searchInput, selectType) => {
       return response;
     };
 
-    console.log("ws irl", WS_URL);
     fetchData()
       .then((res) => res)
       .then((res) => {
