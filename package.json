@@ -30,12 +30,6 @@
     "format": "prettier --check .",
     "pact:test": "rm -f pact/pacts/* && REACT_APP_BOOK_TRACKER_API='http://localhost:4015' jest --runInBand --testPathPattern 'test/pact' --testPathIgnorePatterns=[''] && prettier --write 'pact/pacts/*'"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -60,7 +54,7 @@
     "@testing-library/user-event": "^14.6.1",
     "babel-jest": "^29.7.0",
     "check-outdated": "^2.13.0",
-    "eslint": "^9.25.1",
+    "eslint": "^9.27.0",
     "husky": "^9.1.7",
     "jest-fetch-mock": "^3.0.3",
     "jest-pact": "^0.11.3",
