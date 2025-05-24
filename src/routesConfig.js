@@ -5,6 +5,7 @@ import NotFound from "./components/NotFound";
 import Registration from "./components/Registration";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
+import ResetPassword from "./components/ResetPassword";
 
 import { Outlet, Navigate } from "react-router";
 
@@ -26,6 +27,7 @@ const routesConfig = [
       { path: "/register", element: <Registration /> },
       { path: "/login", element: <Login /> },
       { path: "logout", element: <Logout /> },
+      { path: "/reset-password", element: <ResetPassword /> },
       { path: "*", element: <Navigate to="/404" /> },
     ],
   },

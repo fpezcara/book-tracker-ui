@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const AuthenticationContainer = styled.section`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,6 +17,7 @@ export const AuthenticationContainer = styled.section`
     box-shadow:
       15px 15px 1px #ffa580,
       15px 15px 1px 2px black;
+    max-width: 26rem;
   }
 
   .loginbackground {
@@ -100,4 +102,16 @@ export const RegistrationForm = styled.form`
 export const ErrorMessage = styled.span`
   color: red;
   font-size: 12px;
+  word-break: break-all;
+`;
+
+export const SuccessMessage = styled.span`
+  color: green;
+  font-size: 12px;
+  word-break: break-all;
+`;
+
+export const SmallText = styled.p`
+  font-size: 12px;
+  margin-top: 0.5rem;
 `;

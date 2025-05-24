@@ -103,3 +103,21 @@ export const loginUser = async ({ email_address, password }) => {
 
   return res.json();
 };
+
+export const resetPassword = async ({ email_address }) => {
+  console.log("email address", email_address);
+  const res = await fetch(`${API_URL}/passwords`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify({ user: { email_address } }),
+  });
+
+  if (!res.ok) {
+    throw res;
+  }
+
+  return res.json();
+};

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import {
   AuthenticationContainer,
   ErrorMessage,
+  SmallText,
 } from "../../styles/Authentication.style";
 import { loginUser } from "../../utils/requests";
 
@@ -53,6 +54,13 @@ const Login = () => {
           {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
           <button type="submit">Login</button>
         </form>
+        <SmallText>
+          Don't have an account? <Link to="/register">Register</Link>
+        </SmallText>
+        <SmallText>
+          Don't remember your password?{" "}
+          <Link to="/reset-password">Reset your password</Link>
+        </SmallText>
       </div>
     </AuthenticationContainer>
   );
