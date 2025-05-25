@@ -1,0 +1,4 @@
+- [ ] Control all inputs - should I use react-hook-form? Probs
+- [ ] Add integration test for resetting password
+- [ ] Allow for user to display password
+- [ ] Finish writing integration test for resetting password
