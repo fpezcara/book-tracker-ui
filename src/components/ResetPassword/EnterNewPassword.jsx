@@ -13,7 +13,7 @@ const EnterNewPassword = ({ token, setSuccessMessage, setErrorMessage }) => {
       password: formData.get("password"),
       password_confirmation: formData.get("password_confirmation"),
     };
-    console.log("Form Values:", formValues);
+
     if (formValues.password === formValues.password_confirmation) {
       updatePassword({ token, ...formValues })
         .then((response) => {
