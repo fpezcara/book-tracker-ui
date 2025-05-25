@@ -1,62 +1,42 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   AuthenticationContainer,
   SuccessMessage,
   ErrorMessage,
 } from "../../styles/Authentication.style";
-import { resetPassword } from "../../utils/requests";
+import { useSearchParams } from "react-router";
+import EnterUsername from "./EnterUsername";
+import EnterNewPassword from "./EnterNewPassword";
 
 const ResetPassword = () => {
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [token, setToken] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const [searchParams] = useSearchParams();
 
-    const formData = new FormData(e.target);
-
-    const formValues = {
-      email_address: formData.get("email"),
-    };
-
-    resetPassword({ ...formValues })
-      .then((response) => {
-        console.log("Password reset email sent successfully:", response);
-        setSuccessMessage(response.message);
-        // Optionally, redirect or show a success message
-      })
-      .catch((error) => {
-        console.error("Error sending password reset email:", error);
-        if (error.status === 404) {
-          setErrorMessage("Email address not found. Please try again.");
-        } else {
-          setErrorMessage(
-            "An unexpected error occurred. Please try again later.",
-          );
-        }
-      });
-  };
+  useEffect(() => {
+    setToken(searchParams.get("token") || "");
+  }, [searchParams]);
 
   return (
     <AuthenticationContainer>
       <div className="wrapper">
         <h2>Reset Password</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            onChange={(e) => setIsButtonDisabled(!e.target.value.length > 0)}
-            type="email"
-            name="email"
-            placeholder="Email address"
+        {token ? (
+          <EnterNewPassword
+            setSuccessMessage={setSuccessMessage}
+            setErrorMessage={setErrorMessage}
+            token={token}
           />
-          <SuccessMessage>{successMessage}</SuccessMessage>
-          <ErrorMessage>{errorMessage}</ErrorMessage>
-          {/* <input type="password" name="password" placeholder="Password" />
-          <input type="password" name="password-confirmation" placeholder="Password Confirmation" /> */}
-          <button type="submit" disabled={isButtonDisabled}>
-            Continue
-          </button>
-        </form>
+        ) : (
+          <EnterUsername
+            setSuccessMessage={setSuccessMessage}
+            setErrorMessage={setErrorMessage}
+          />
+        )}
+        <SuccessMessage>{successMessage}</SuccessMessage>
+        <ErrorMessage>{errorMessage}</ErrorMessage>
       </div>
     </AuthenticationContainer>
   );

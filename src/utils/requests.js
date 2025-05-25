@@ -121,3 +121,24 @@ export const resetPassword = async ({ email_address }) => {
 
   return res.json();
 };
+
+export const updatePassword = async ({
+  token,
+  password,
+  password_confirmation,
+}) => {
+  const res = await fetch(`${API_URL}/passwords/${token}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify({ user: { password, password_confirmation } }),
+  });
+
+  if (!res.ok) {
+    throw res;
+  }
+
+  return res.json();
+};
