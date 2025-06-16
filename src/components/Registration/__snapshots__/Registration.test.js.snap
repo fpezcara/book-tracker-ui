@@ -3,7 +3,7 @@
 exports[`Registration renders correctly 1`] = `
 <div>
   <header
-    class="sc-llIIlC jgDYxq"
+    class="sc-lgpSej hHfxWL"
   >
     <div
       class="authentication"
@@ -41,7 +41,7 @@ exports[`Registration renders correctly 1`] = `
     </div>
   </header>
   <section
-    class="sc-dHKmnV hWMYLz"
+    class="sc-dNdcvo HWlhE"
   >
     <div
       class="wrapper"
@@ -50,7 +50,7 @@ exports[`Registration renders correctly 1`] = `
         Register
       </h2>
       <form
-        class="sc-frmfij fujpJJ"
+        class="sc-fbQrwq ikfUKJ"
       >
         <input
           name="email"

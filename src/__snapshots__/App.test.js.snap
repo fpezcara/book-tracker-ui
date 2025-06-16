@@ -3,7 +3,7 @@
 exports[`App When user is logged in redirects to /reading on first render 1`] = `
 <div>
   <header
-    class="sc-llIIlC jgDYxq"
+    class="sc-lgpSej hHfxWL"
   >
     <div
       class="authentication"
@@ -34,14 +34,14 @@ exports[`App When user is logged in redirects to /reading on first render 1`] = 
     </div>
   </header>
   <main
-    class="sc-hKDTPf eydscy"
+    class="sc-hvigdm jBvBX"
     data-testid="home-container"
   >
     <div
-      class="sc-fmZSGO JKDkD"
+      class="sc-fhHczv jJzVWh"
     >
       <div
-        class="sc-gwsNht fFITZe"
+        class="sc-ggWZvA duREYY"
       >
         <h3>
           reading
@@ -67,10 +67,10 @@ exports[`App When user is logged in redirects to /reading on first render 1`] = 
         </select>
       </div>
       <div
-        class="sc-dYOLZc fWNHgJ"
+        class="sc-dTvVRJ eCBbED"
       >
         <button
-          class="sc-bXdtCk kxetdV add-book"
+          class="sc-bRKDuR kQIrHC add-book"
           data-testid="add-book-button"
         >
           Add book
@@ -78,7 +78,7 @@ exports[`App When user is logged in redirects to /reading on first render 1`] = 
       </div>
     </div>
     <table
-      class="sc-jMpmlX hzmNJk"
+      class="sc-jwTyAe fWGETP"
     >
       <thead>
         <tr>
