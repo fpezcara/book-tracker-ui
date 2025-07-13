@@ -15,7 +15,7 @@
     "react-scripts": "^5.0.1",
     "styled-components": "^6.1.19",
     "styled-icons": "^10.35.0",
-    "vercel": "^44.2.7"
+    "vercel": "^44.4.1"
   },
   "scripts": {
     "e2e": "cypress open --e2e --browser chrome",
