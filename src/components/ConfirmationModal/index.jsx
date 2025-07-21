@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext, useState } from "react";
 import {
   ModalContainer,
   ModalText,
@@ -9,19 +9,11 @@ import { addBookToList, removeBookFromList } from "../../utils/requests";
 
 import Button from "../Button";
 
-import BookTrackerContext from "../../context/book-tracker-context";
+import BookTrackerContext from "../../context/BookTrackerContext";
 import Cookies from "js-cookie";
 
-const ConfirmationModal = ({
-  hideModal,
-  isVisible,
-  message,
-  book,
-  title,
-  authors,
-}) => {
+const ConfirmationModal = ({ hideModal, isVisible = false, message, book }) => {
   const { lists, updateCurrentBookList } = useContext(BookTrackerContext);
-
   const { name } = useParams();
 
   const userId = Cookies.get("userId");
@@ -45,10 +37,10 @@ const ConfirmationModal = ({
           <div data-testid="confirmation-modal">
             <ModalText>
               <span className="message"> Do you want to {message}:</span>
-              <span className="title"> {title}?</span>
-              {authors && (
+              <span className="title"> {book?.title}?</span>
+              {book?.authors && (
                 <span className="author">
-                  by {authors.map((author, i) => (i ? ", " : "") + author)}
+                  by {book.authors.map((author, i) => (i ? ", " : "") + author)}
                 </span>
               )}
             </ModalText>

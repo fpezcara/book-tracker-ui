@@ -39,10 +39,8 @@ const DropdownList = ({
       {addedBook.map((book, i) => (
         <ConfirmationModal
           key={i}
-          message={"add"}
+          message="add"
           book={book}
-          title={book.title}
-          authors={book.authors}
           hideModal={toggleModal}
           isVisible={isVisible}
         />

@@ -1,9 +1,8 @@
-import React from "react";
 import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { RouterProvider, createMemoryRouter } from "react-router";
 import routesConfig from "../../routesConfig";
 import Cookies from "js-cookie";
-import BookTrackerState from "../../context/BookTrackerState";
+import BookTrackerProvider from "../../context/BookTrackerProvider";
 import { API_URL } from "../../utils/constants";
 import Registration from "./";
 
@@ -50,11 +49,11 @@ describe("Registration", () => {
     });
 
     const { container } = render(
-      <BookTrackerState>
+      <BookTrackerProvider>
         <RouterProvider router={router}>
           <Registration />
         </RouterProvider>
-      </BookTrackerState>,
+      </BookTrackerProvider>,
     );
 
     expect(container).toMatchSnapshot();
@@ -73,11 +72,11 @@ describe("Registration", () => {
     });
 
     render(
-      <BookTrackerState>
+      <BookTrackerProvider>
         <RouterProvider router={router}>
           <Registration />
         </RouterProvider>
-      </BookTrackerState>,
+      </BookTrackerProvider>,
     );
 
     submitForm(bodyPayload);
@@ -119,11 +118,11 @@ describe("Registration", () => {
     );
 
     render(
-      <BookTrackerState>
+      <BookTrackerProvider>
         <RouterProvider router={router}>
           <Registration />
         </RouterProvider>
-      </BookTrackerState>,
+      </BookTrackerProvider>,
     );
 
     submitForm(bodyPayload);
@@ -147,11 +146,11 @@ describe("Registration", () => {
     });
 
     render(
-      <BookTrackerState>
+      <BookTrackerProvider>
         <RouterProvider router={router}>
           <Registration />
         </RouterProvider>
-      </BookTrackerState>,
+      </BookTrackerProvider>,
     );
 
     submitForm(bodyPayload);
@@ -169,11 +168,11 @@ describe("Registration", () => {
     });
 
     render(
-      <BookTrackerState>
+      <BookTrackerProvider>
         <RouterProvider router={router}>
           <Registration />
         </RouterProvider>
-      </BookTrackerState>,
+      </BookTrackerProvider>,
     );
 
     submitForm(bodyPayload);

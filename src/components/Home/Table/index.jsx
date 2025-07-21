@@ -22,10 +22,8 @@ const Table = ({ bookLists }) => {
         />
       </TableContainer>
       <ConfirmationModal
-        message={isVisible && "delete"}
+        message="delete"
         book={bookToDelete}
-        title={bookToDelete.title}
-        authors={bookToDelete.authors}
         hideModal={toggleModal}
         isVisible={isVisible}
       />

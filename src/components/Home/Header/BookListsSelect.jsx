@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from "react";
 import { useNavigate } from "react-router";
-import BookTrackerContext from "../../../context/book-tracker-context";
+import BookTrackerContext from "../../../context/BookTrackerContext";
 import Cookies from "js-cookie";
 
 import Select from "../../Select";

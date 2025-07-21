@@ -2,9 +2,9 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { RouterProvider, createMemoryRouter } from "react-router";
 import routesConfig from "./routesConfig";
-import BookTrackerState from "./context/BookTrackerState";
+import BookTrackerState from "./context/BookTrackerProvider";
 import Cookies from "js-cookie";
-import { mockBookLists } from "../test/mocks/mockBookLists";
+import { mockBookLists } from "../test/mocks/bookListsMock";
 
 jest.mock("./utils/constants", () => ({
   API_URL: "book-tracker-api.com",

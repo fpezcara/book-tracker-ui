@@ -3,7 +3,7 @@ import { Navigate, useParams } from "react-router";
 
 import HomeHeader from "./Header/index.jsx";
 import Table from "./Table/index.jsx";
-import BookTrackerContext from "../../context/book-tracker-context.js";
+import BookTrackerContext from "../../context/BookTrackerContext.js";
 import LoadingSpinner from "../LoadingSpinner";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
