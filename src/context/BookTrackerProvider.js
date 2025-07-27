@@ -19,25 +19,20 @@ const BookTrackerState = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState({});
 
-  const updateCurrentBookList = (selectedBookList) => {
-    dispatch({
-      type: CURRENT_BOOKLIST,
-      payload: selectedBookList,
-    });
-  };
-
   const addBook = (book) => {
     dispatch({
       type: ADD_BOOK,
       payload: book,
     });
   };
+
   const deleteBook = (book) => {
     dispatch({
       type: DELETE_BOOK,
       payload: book,
     });
   };
+
   const initialState = useMemo(() => {
     return {
       bookLists: [
@@ -89,7 +84,6 @@ const BookTrackerState = ({ children }) => {
     state,
     addBook,
     deleteBook,
-    updateCurrentBookList,
     lists,
     loading,
     error,

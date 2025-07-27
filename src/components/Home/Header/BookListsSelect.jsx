@@ -6,7 +6,6 @@ import Cookies from "js-cookie";
 import Select from "../../Select";
 
 const BookListsSelect = ({ children, bookLists }) => {
-  const { updateCurrentBookList } = useContext(BookTrackerContext);
   const navigate = useNavigate();
   const bookListsValues = useMemo(
     () => bookLists.map((list) => list.name),
@@ -16,7 +15,6 @@ const BookListsSelect = ({ children, bookLists }) => {
   const bookListsHandler = ({ target }) => {
     const newValue = target?.value.toLowerCase();
 
-    updateCurrentBookList(newValue);
     Cookies.set("currentBookList", newValue);
 
     navigate(`/${newValue}`);

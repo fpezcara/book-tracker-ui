@@ -27,7 +27,6 @@ const ConfirmationModal = ({ hideModal, isVisible = false, message, book }) => {
       ? await addBookToList(userId, currentBookListId, book)
       : await removeBookFromList(userId, currentBookListId, book.id);
     hideModal();
-    updateCurrentBookList(name);
   };
 
   return (
