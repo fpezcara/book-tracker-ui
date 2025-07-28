@@ -13,7 +13,7 @@ import BookTrackerContext from "../../context/BookTrackerContext";
 import Cookies from "js-cookie";
 
 const ConfirmationModal = ({ hideModal, isVisible = false, message, book }) => {
-  const { lists, updateCurrentBookList } = useContext(BookTrackerContext);
+  const { lists } = useContext(BookTrackerContext);
   const { name } = useParams();
 
   const userId = Cookies.get("userId");

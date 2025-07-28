@@ -2,3 +2,4 @@
 - [ ] Add integration test for resetting password
 - [ ] Allow for user to display password
 - [ ] Finish writing integration test for resetting password
+- [ ] Make better use of react-router by using `loader` option: https://medium.com/@ignatovich.dm/react-router-7-vs-6-whats-new-and-should-you-upgrade-93bba58576a8
