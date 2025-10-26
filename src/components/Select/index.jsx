@@ -1,10 +1,17 @@
 import React from "react";
 
-const Select = ({ selectValue, optionValues, onChangeHandler, dataTestId }) => (
+const Select = ({
+  selectValue,
+  optionValues,
+  onChangeHandler,
+  dataTestId,
+  ...args
+}) => (
   <select
     value={selectValue?.toLowerCase()}
     onChange={onChangeHandler}
     data-testid={dataTestId}
+    {...args}
   >
     {optionValues &&
       optionValues.map((optionAvailable, i) => (

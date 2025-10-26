@@ -6,8 +6,8 @@ export const AuthenticationContainer = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/38816/image-from-rawpixel-id-2210775-jpeg.jpg")
-    center center no-repeat !important;
+  //background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/38816/image-from-rawpixel-id-2210775-jpeg.jpg")
+  //  center center no-repeat !important;
   background-size: cover;
   .wrapper {
     margin: 2em;
@@ -31,11 +31,11 @@ export const AuthenticationContainer = styled.section`
       rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
   }
 
-  body {
-    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/38816/image-from-rawpixel-id-2210775-jpeg.jpg")
-      center center no-repeat !important;
-    background-size: cover;
-  }
+  //body {
+  //  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/38816/image-from-rawpixel-id-2210775-jpeg.jpg")
+  //    center center no-repeat !important;
+  //  background-size: cover;
+  //}
 
   input {
     display: block;

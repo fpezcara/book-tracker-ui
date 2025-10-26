@@ -18,27 +18,29 @@ const Header = () => {
   return (
     <Nav>
       <div className="authentication">
-        <Link
-          className="link home"
-          onClick={() => navigate(-1)}
-          to={`/${currentBookList}`}
-        >
-          Home
-        </Link>
+        {isUserLoggedIn && (
+          <Link
+            className="link home"
+            onClick={() => navigate(-1)}
+            to={`/${currentBookList}`}
+          >
+            Home
+          </Link>
+        )}
         <div className="authLinks">
           {isUserLoggedIn ? (
             <Link className="link" to="/logout">
               Logout
             </Link>
           ) : (
-            <>
+            <div className="registerOrLogin">
               <Link className="link" to="/register">
                 Register
               </Link>
               <Link className="link" to="/login">
                 Login
               </Link>
-            </>
+            </div>
           )}
         </div>
       </div>

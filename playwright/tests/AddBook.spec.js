@@ -4,7 +4,11 @@ import { lists } from "../support/mocks/lists";
 test.describe("Adding a book to a list flow", () => {
   test.beforeEach(async ({ page, context }) => {
     await page.context().addCookies([
-      { name: "userId", value: "9", url: "http://localhost:3000" },
+      {
+        name: "userId",
+        value: "9",
+        url: "http://localhost:3000",
+      },
       {
         name: "currentBookList",
         value: "finished",

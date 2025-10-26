@@ -3,7 +3,7 @@
 exports[`App When user is logged in redirects to /reading on first render 1`] = `
 <div>
   <header
-    class="sc-lgpSej hHfxWL"
+    class="sc-lgpSej feeIQH"
   >
     <div
       class="authentication"

@@ -112,7 +112,7 @@ describe("ConfirmationModal", () => {
 
       await userEvent.click(acceptButton);
 
-      waitFor(() => {
+      await waitFor(() => {
         expect(removeBookFromList).toHaveBeenCalledWith(
           mockBookLists[0].user_id.toString(),
           mockBookLists[0].id,

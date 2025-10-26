@@ -31,21 +31,26 @@ const Form = ({
         dataTestId="go-back-button"
       /> */}
       <StyledForm>
-        <input
-          type="text"
-          name="input"
-          onChange={onChangeHandler}
-          value={searchInput}
-          placeholder="Search by Title, Author or ISBN. . ."
-          data-testid="search-by-input"
-        />
-
+        {/*TODO: add an actual label - think of what to add */}
+        <label htmlFor="searchInput">
+          <input
+            type="text"
+            name="input"
+            onChange={onChangeHandler}
+            value={searchInput}
+            placeholder="Search by Title, Author or ISBN. . ."
+            data-testid="search-by-input"
+            id="searchInput"
+          />
+        </label>
+        <label htmlFor="searchDropdown">Choose an option:</label>
         <Select
           name="select"
           selectValue={selectType}
           optionValues={searchBy.map(({ value }) => value)}
           onChangeHandler={onChangeHandler}
           dataTestId={"search-by-options-select"}
+          id="searchDropdown"
         />
       </StyledForm>
     </>

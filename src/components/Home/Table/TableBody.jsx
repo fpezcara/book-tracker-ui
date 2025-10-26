@@ -1,4 +1,3 @@
-import React from "react";
 import imageNotAvailable from "../../../assets/image-not-available.svg";
 import Cookies from "js-cookie";
 
