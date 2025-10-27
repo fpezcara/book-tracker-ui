@@ -10,13 +10,13 @@ import {
   DELETE_BOOK,
   CURRENT_BOOKLIST,
 } from "./book-tracker-actions";
+import { getLists } from "../utils/requests";
+import { useQuery } from "@tanstack/react-query";
 
-const BookTrackerState = ({ children }) => {
+const BookTrackerProvider = ({ children }) => {
   const { Provider } = BookTrackerContext;
   const userId = Cookies.get("userId");
   // todo: rename to bookLists
-  const [lists, setLists] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState({});
 
   const addBook = (book) => {
@@ -55,41 +55,22 @@ const BookTrackerState = ({ children }) => {
     }
   }, []);
 
-  useEffect(() => {
-    try {
-      userId &&
-        fetch(`${API_URL}/users/${userId}/lists`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            setLists(data);
-            setLoading(false);
-          });
-    } catch (error) {
-      setError(error);
-      setLoading(false);
-    }
-
-    if (state !== initialState) {
-      localStorage.setItem("state", JSON.stringify(state));
-    }
-  }, [state, initialState, userId]);
+  const { isPending, data } = useQuery({
+    queryKey: ["lists"],
+    queryFn: () => getLists(userId),
+    enabled: !!userId,
+  });
 
   const values = {
     state,
     addBook,
     deleteBook,
-    lists,
-    loading,
+    lists: data || [],
+    isPending,
     error,
   };
 
   return <Provider value={values}>{children}</Provider>;
 };
 
-export default BookTrackerState;
+export default BookTrackerProvider;

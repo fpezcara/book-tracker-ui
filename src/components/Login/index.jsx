@@ -6,8 +6,8 @@ import {
   SmallText,
 } from "../../styles/Authentication.style";
 import { loginUser } from "../../utils/requests";
-
 import Cookies from "js-cookie";
+import { useQuery } from "@tanstack/react-query";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -33,6 +33,7 @@ const Login = () => {
           Cookies.set("currentBookList", currentBookList);
 
         navigate(`/${currentBookList}`);
+        // window.location.reload();
       }
     } catch (error) {
       console.error("Login failed:", error);

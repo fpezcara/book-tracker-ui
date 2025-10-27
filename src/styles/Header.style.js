@@ -30,18 +30,18 @@ export const Nav = styled.header`
   .authLinks {
     display: flex;
     gap: 4rem;
-    background: blue;
   }
 
   .registerOrLogin {
+    display: flex;
     gap: 4rem;
-    background: purple;
+    width: auto;
   }
 
   .authentication {
     display: flex;
     gap: 2rem;
-    justify-content: space-between;
+    justify-content: flex-end;
     width: 100%;
   }
 

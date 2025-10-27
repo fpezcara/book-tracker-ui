@@ -12,6 +12,7 @@ const Select = ({
     onChange={onChangeHandler}
     data-testid={dataTestId}
     {...args}
+    id={`${dataTestId?.toLowerCase()}`}
   >
     {optionValues &&
       optionValues.map((optionAvailable, i) => (

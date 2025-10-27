@@ -2,7 +2,7 @@ import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { RouterProvider, createMemoryRouter } from "react-router";
 import routesConfig from "../../routesConfig";
 import Cookies from "js-cookie";
-import BookTrackerProvider from "../../context/BookTrackerProvider";
+import BookTrackerContextMock from "../../../test/utils/BookTrackerContextMock";
 import { API_URL } from "../../utils/constants";
 import Registration from "./";
 
@@ -24,6 +24,16 @@ const submitForm = (bodyPayload) => {
 
   // Submit the form
   fireEvent.click(screen.getByRole("button", { name: /register/i }));
+};
+
+const renderComponent = (router) => {
+  return render(
+    <BookTrackerContextMock>
+      <RouterProvider router={router}>
+        <Registration />
+      </RouterProvider>
+    </BookTrackerContextMock>,
+  );
 };
 
 describe("Registration", () => {
@@ -48,13 +58,7 @@ describe("Registration", () => {
       initialEntries: ["/register"],
     });
 
-    const { container } = render(
-      <BookTrackerProvider>
-        <RouterProvider router={router}>
-          <Registration />
-        </RouterProvider>
-      </BookTrackerProvider>,
-    );
+    const { container } = renderComponent(router);
 
     expect(container).toMatchSnapshot();
   });
@@ -71,13 +75,7 @@ describe("Registration", () => {
       initialEntries: ["/register"],
     });
 
-    render(
-      <BookTrackerProvider>
-        <RouterProvider router={router}>
-          <Registration />
-        </RouterProvider>
-      </BookTrackerProvider>,
-    );
+    renderComponent(router);
 
     submitForm(bodyPayload);
 
@@ -117,13 +115,7 @@ describe("Registration", () => {
       new Error("Validation failed: Email address has already been taken"),
     );
 
-    render(
-      <BookTrackerProvider>
-        <RouterProvider router={router}>
-          <Registration />
-        </RouterProvider>
-      </BookTrackerProvider>,
-    );
+    renderComponent(router);
 
     submitForm(bodyPayload);
 
@@ -145,13 +137,7 @@ describe("Registration", () => {
       initialEntries: ["/register"],
     });
 
-    render(
-      <BookTrackerProvider>
-        <RouterProvider router={router}>
-          <Registration />
-        </RouterProvider>
-      </BookTrackerProvider>,
-    );
+    renderComponent(router);
 
     submitForm(bodyPayload);
 
@@ -167,13 +153,7 @@ describe("Registration", () => {
       initialEntries: ["/register"],
     });
 
-    render(
-      <BookTrackerProvider>
-        <RouterProvider router={router}>
-          <Registration />
-        </RouterProvider>
-      </BookTrackerProvider>,
-    );
+    renderComponent(router);
 
     submitForm(bodyPayload);
 

@@ -142,3 +142,20 @@ export const updatePassword = async ({
 
   return res.json();
 };
+
+export const getLists = async (userId) => {
+  if (!userId) return;
+
+  const res = await fetch(`${API_URL}/users/${userId}/lists`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    throw res;
+  }
+
+  return res.json();
+};
