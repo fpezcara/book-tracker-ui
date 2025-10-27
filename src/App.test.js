@@ -2,9 +2,20 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { RouterProvider, createMemoryRouter } from "react-router";
 import routesConfig from "./routesConfig";
-import BookTrackerState from "./context/BookTrackerProvider";
+import BookTrackerProvider from "./context/BookTrackerProvider";
 import Cookies from "js-cookie";
 import { mockBookLists } from "../test/mocks/bookListsMock";
+import QueryProviderMock from "../test/utils/QueryProviderMock";
+
+const renderComponent = (router) => {
+  return render(
+    <QueryProviderMock>
+      <BookTrackerProvider value={{ isPending: false }}>
+        <RouterProvider router={router} />
+      </BookTrackerProvider>
+    </QueryProviderMock>,
+  );
+};
 
 jest.mock("./utils/constants", () => ({
   API_URL: "book-tracker-api.com",
@@ -21,11 +32,7 @@ describe("App", () => {
         initialEntries: ["/reading"],
       });
 
-      render(
-        <BookTrackerState>
-          <RouterProvider router={router} />
-        </BookTrackerState>,
-      );
+      renderComponent(router);
 
       expect(router.state.location.pathname).toBe("/login");
     });
@@ -51,11 +58,7 @@ describe("App", () => {
       });
       Cookies.set("currentBookList", "reading");
 
-      const { container } = render(
-        <BookTrackerState>
-          <RouterProvider router={router} />
-        </BookTrackerState>,
-      );
+      const { container } = renderComponent(router);
 
       await waitFor(() => {
         screen.queryByTestId("booklist-select");
@@ -78,11 +81,7 @@ describe("App", () => {
       });
       Cookies.set("currentBookList", "reading");
 
-      render(
-        <BookTrackerState>
-          <RouterProvider router={router} />
-        </BookTrackerState>,
-      );
+      renderComponent(router);
 
       await waitFor(() => {
         expect(screen.getByTestId("booklist-select")).toBeInTheDocument();
@@ -104,19 +103,18 @@ describe("App", () => {
 
     test("shows page not found when page does not exist", async () => {
       const router = createMemoryRouter(routesConfig, {
-        initialEntries: ["/random"],
+        initialEntries: ["/random/random"],
       });
 
-      render(
-        <BookTrackerState>
-          <RouterProvider router={router} />
-        </BookTrackerState>,
-      );
+      renderComponent(router);
 
       const goHomeText = await screen.findByText(/go home/i);
 
       expect(goHomeText).toBeInTheDocument();
       expect(screen.getByAltText("page not found")).toBeVisible();
+      await waitFor(() => {
+        expect(router.state.location.pathname).toBe("/not-found");
+      });
     });
 
     test("clicking on Add Book button navigates to /add-book", async () => {
@@ -125,11 +123,7 @@ describe("App", () => {
       });
       Cookies.set("currentBookList", "finished");
 
-      render(
-        <BookTrackerState>
-          <RouterProvider router={router} />
-        </BookTrackerState>,
-      );
+      renderComponent(router);
 
       const addBookButton = await screen.findByTestId("add-book-button");
       userEvent.click(addBookButton);
@@ -146,11 +140,7 @@ describe("App", () => {
       });
       Cookies.set("currentBookList", "wishlist");
 
-      render(
-        <BookTrackerState>
-          <RouterProvider router={router} />
-        </BookTrackerState>,
-      );
+      renderComponent(router);
 
       await waitFor(() => {
         expect(

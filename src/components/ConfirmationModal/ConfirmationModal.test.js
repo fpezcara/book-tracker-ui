@@ -2,13 +2,13 @@ import { render, waitFor } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 
 import ConfirmationModal from ".";
-import BookTrackerProvider from "../../context/BookTrackerProvider";
 import { MemoryRouter, Route, Routes } from "react-router";
 import Cookies from "js-cookie";
 
 import { mockBookLists } from "../../../test/mocks/bookListsMock";
 import { bookMock } from "../../../test/mocks/bookMock";
 import { addBookToList, removeBookFromList } from "../../utils/requests";
+import BookTrackerContextMock from "../../../test/utils/BookTrackerContextMock";
 
 jest.mock("../../utils/requests", () => ({
   addBookToList: jest.fn(),
@@ -21,7 +21,7 @@ const renderComponent = ({ isVisible = false, message }) => {
   fetch.mockResponse(JSON.stringify(mockBookLists));
 
   return render(
-    <BookTrackerProvider value={{ lists: mockBookLists }}>
+    <BookTrackerContextMock values={{ lists: mockBookLists }}>
       <MemoryRouter initialEntries={["/reading"]}>
         <Routes>
           <Route
@@ -37,7 +37,7 @@ const renderComponent = ({ isVisible = false, message }) => {
           />
         </Routes>
       </MemoryRouter>
-    </BookTrackerProvider>,
+    </BookTrackerContextMock>,
   );
 };
 

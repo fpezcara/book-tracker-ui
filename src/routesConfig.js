@@ -21,14 +21,14 @@ const routesConfig = [
     errorElement: <NotFound />,
     children: [
       { path: "/", element: <Navigate to="/reading" /> },
-      { path: "/404", element: <NotFound /> },
+      { path: "/not-found", element: <NotFound /> },
       { path: "/:name", element: <Home /> },
       { path: "/:name/add-book", element: <AddBook /> },
       { path: "/register", element: <Registration /> },
       { path: "/login", element: <Login /> },
-      { path: "logout", element: <Logout /> },
+      { path: "/logout", element: <Logout /> },
       { path: "/reset-password", element: <ResetPassword /> },
-      { path: "*", element: <Navigate to="/404" /> },
+      { path: "*", element: <Navigate to="/not-found" replace /> },
     ],
   },
 ];

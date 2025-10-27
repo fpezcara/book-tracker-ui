@@ -16,30 +16,34 @@ const Home = () => {
   const userId = Cookies.get("userId");
   const navigate = useNavigate();
 
-  const { loading, lists } = useContext(BookTrackerContext);
+  const { isPending, lists } = useContext(BookTrackerContext);
+  // console.log("is it loading", isPending);
+  // console.log("is it lists", lists);
+  const isValidBookListUrl =
+    lists &&
+    lists?.some((item) => item.name.toLowerCase() === name?.toLowerCase());
 
-  const isValidBookListUrl = lists.some(
-    (item) => item.name.toLowerCase() === name?.toLowerCase(),
-  );
-
-  const isValidBookListCookie = lists.some(
-    (item) => item.name.toLowerCase() === currentBookList?.toLowerCase(),
-  );
+  const isValidBookListCookie =
+    lists &&
+    lists?.some(
+      (item) => item.name.toLowerCase() === currentBookList?.toLowerCase(),
+    );
 
   useEffect(() => {
+    console.log(userId);
     if (!userId) {
       navigate("/login");
     } else {
       navigate(`/${currentBookList}`);
     }
-  }, [userId, navigate, currentBookList]);
+  }, [userId, navigate, currentBookList, lists]);
 
   return (
     <HomeContainer data-testid="home-container">
-      {loading ? (
+      {isPending ? (
         <LoadingSpinner />
       ) : !isValidBookListUrl || !isValidBookListCookie ? (
-        <Navigate to="/404" />
+        <Navigate to="/not-found" />
       ) : (
         <>
           <HomeHeader bookLists={lists} currentBookList={currentBookList} />

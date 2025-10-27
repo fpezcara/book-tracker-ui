@@ -9,7 +9,7 @@ const Header = () => {
 
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const userId = Cookies.get("userId");
-  const currentBookList = Cookies.get("currentBookList");
+  const currentBookList = Cookies.get("currentBookList") || "reading";
 
   useEffect(() => {
     setIsUserLoggedIn(!!userId);
