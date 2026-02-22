@@ -12,19 +12,19 @@ import { HomeContainer } from "../../styles/Home.style.js";
 
 const Home = () => {
   const { name } = useParams();
+  console.log("route param name:", name);
   const currentBookList = Cookies.get("currentBookList");
   const userId = Cookies.get("userId");
   const navigate = useNavigate();
 
   const { isPending, lists } = useContext(BookTrackerContext);
-  // console.log("is it loading", isPending);
-  // console.log("is it lists", lists);
+
   const isValidBookListUrl =
-    lists &&
-    lists?.some((item) => item.name.toLowerCase() === name?.toLowerCase());
+    lists.length > 0 &&
+    lists.some((item) => item.name.toLowerCase() === name?.toLowerCase());
 
   const isValidBookListCookie =
-    lists &&
+    lists.length > 0 &&
     lists?.some(
       (item) => item.name.toLowerCase() === currentBookList?.toLowerCase(),
     );
@@ -37,7 +37,7 @@ const Home = () => {
       navigate(`/${currentBookList}`);
     }
   }, [userId, navigate, currentBookList, lists]);
-
+  console.log("is it pending", isPending);
   return (
     <HomeContainer data-testid="home-container">
       {isPending ? (

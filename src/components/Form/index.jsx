@@ -14,6 +14,8 @@ const Form = ({
   setSearchInput,
 }) => {
   const onChangeHandler = ({ target: { value, name } }) => {
+    // TODO: should I instead pass the function instead of the setter here &
+    // TODO: should I be setting triggerSearch to false somewhere else?
     if (name === "input") {
       setSearchInput(value);
       setTriggerSearch(true);

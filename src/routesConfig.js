@@ -6,6 +6,7 @@ import Registration from "./components/Registration";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import ResetPassword from "./components/ResetPassword";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import { Outlet, Navigate } from "react-router";
 
@@ -22,8 +23,22 @@ const routesConfig = [
     children: [
       { path: "/", element: <Navigate to="/reading" /> },
       { path: "/not-found", element: <NotFound /> },
-      { path: "/:name", element: <Home /> },
-      { path: "/:name/add-book", element: <AddBook /> },
+      {
+        path: "/:name",
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/:name/add-book",
+        element: (
+          <ProtectedRoute>
+            <AddBook />
+          </ProtectedRoute>
+        ),
+      },
       { path: "/register", element: <Registration /> },
       { path: "/login", element: <Login /> },
       { path: "/logout", element: <Logout /> },

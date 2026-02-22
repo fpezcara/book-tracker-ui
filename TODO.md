@@ -3,3 +3,6 @@
 - [ ] Allow for user to display password
 - [ ] Finish writing integration test for resetting password
 - [ ] Make better use of react-router by using `loader` option: https://medium.com/@ignatovich.dm/react-router-7-vs-6-whats-new-and-should-you-upgrade-93bba58576a8
+- [ ] Add debouncing for the search bar - should this be done from FE or BE as well?
+- [ ] Ensure page reloads after action (after adding a new book or signing in the fetch is done right as rn it hangs on loading state) - it used to work, now it doesn't work after adding OR deleting a book
+- [ ] If book has already been added show a pop up to let the user know?

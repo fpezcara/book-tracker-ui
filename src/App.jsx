@@ -1,6 +1,7 @@
 import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router";
 import BookTrackerProvider from "./context/BookTrackerProvider";
+import AuthProvider from "./context/AuthProvider";
 import routes from "./routesConfig";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -18,14 +19,16 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <BookTrackerProvider>
-        <RouterProvider
-          router={router}
-          future={{
-            v7_startTransition: true,
-          }}
-        />
-      </BookTrackerProvider>
+      <AuthProvider>
+        <BookTrackerProvider>
+          <RouterProvider
+            router={router}
+            future={{
+              v7_startTransition: true,
+            }}
+          />
+        </BookTrackerProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 };

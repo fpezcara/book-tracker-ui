@@ -1,6 +1,7 @@
-import React, { useReducer, useEffect, useMemo, useState } from "react";
+import React, { useReducer, useEffect, useMemo, useContext } from "react";
 import BookTrackerContext from "./BookTrackerContext";
 import BookTrackerReducer from "./book-tracker-reducer";
+import { AuthContext } from "./AuthProvider";
 
 import { API_URL } from "../utils/constants";
 import Cookies from "js-cookie";
@@ -14,10 +15,9 @@ import { getLists } from "../utils/requests";
 import { useQuery } from "@tanstack/react-query";
 
 const BookTrackerProvider = ({ children }) => {
+  const { userId } = useContext(AuthContext);
   const { Provider } = BookTrackerContext;
-  const userId = Cookies.get("userId");
   // todo: rename to bookLists
-  const [error, setError] = useState({});
 
   const addBook = (book) => {
     dispatch({
@@ -54,11 +54,17 @@ const BookTrackerProvider = ({ children }) => {
       });
     }
   }, []);
-
-  const { isPending, data } = useQuery({
-    queryKey: ["lists"],
+  console.log(userId);
+  const {
+    isPending,
+    isError,
+    error: queryError,
+    data,
+  } = useQuery({
+    queryKey: ["lists", userId],
     queryFn: () => getLists(userId),
     enabled: !!userId,
+    retry: false,
   });
 
   const values = {
@@ -67,7 +73,7 @@ const BookTrackerProvider = ({ children }) => {
     deleteBook,
     lists: data || [],
     isPending,
-    error,
+    error: queryError,
   };
 
   return <Provider value={values}>{children}</Provider>;

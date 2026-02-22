@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router";
 import {
   AuthenticationContainer,
@@ -7,13 +7,13 @@ import {
 } from "../../styles/Authentication.style";
 import { loginUser } from "../../utils/requests";
 import Cookies from "js-cookie";
-import { useQuery } from "@tanstack/react-query";
+import { AuthContext } from "../../context/AuthProvider";
 
 const Login = () => {
   const navigate = useNavigate();
   const currentBookList = Cookies.get("currentBookList") || "reading";
   const [errorMessage, setErrorMessage] = useState("");
-  const userId = Cookies.get("userId");
+  const { login } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,13 +28,12 @@ const Login = () => {
       const response = await loginUser({ ...formValues });
 
       if (response?.user_id) {
-        Cookies.set("userId", response?.user_id);
+        login(response.user_id);
         Cookies.get("currentBookList") ||
           Cookies.set("currentBookList", currentBookList);
-
-        navigate(`/${currentBookList}`);
-        // window.location.reload();
       }
+
+      navigate(`/${currentBookList}`);
     } catch (error) {
       console.error("Login failed:", error);
       if (error.status === 401) {
@@ -42,8 +41,6 @@ const Login = () => {
       }
     }
   };
-
-  useEffect(() => {}, [userId]);
 
   return (
     <AuthenticationContainer>
